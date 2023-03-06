@@ -33,3 +33,16 @@
 .footer{
     text-align: center;
 }
+
+button {
+  border: none;
+  background-color: white;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.link-button {
+  background: none;
+  color: white;
+  text-decoration: underline;
+}

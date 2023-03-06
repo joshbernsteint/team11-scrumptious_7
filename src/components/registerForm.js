@@ -221,9 +221,9 @@ export default function RegisterForm() {
     }
 
     return (
-        <form onSubmit={handleRegister} className="form">
-            <div className='form-body'>
-                <div>
+        <div className='register-container'>
+            <form onSubmit={handleRegister} className="form">
+                <div className='form-body'>
                     <label className='label'>First Name</label>
                     <p className='error'>{errors.firstName}</p>
                     <input
@@ -312,7 +312,8 @@ export default function RegisterForm() {
                     />
                 </div>
                 <button>Register</button>
-            </div>
-        </form>
+            </form>
+            <button className="link-button">Already have an account? Sign in here</button>
+        </div>
     )
 }

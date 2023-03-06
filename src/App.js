@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import Navigation from "./components/Navigation";
 import CameraAccess from "./components/CameraAccess";
 import RegisterForm from "./components/RegisterForm"
+import Login from './components/loginForm';
 import React, { useState } from "react";
 function App() {
   const [showNav, setShowNav] = useState(false);
@@ -25,6 +26,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="form" element={<CameraAccess />} />
             <Route path="register" element={<RegisterForm/>}/>
+            <Route path="login" element={<Login/>}/>
+
           </Routes>
         </main>
       </Router>
