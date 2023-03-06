@@ -19,6 +19,11 @@ const Navigation = () => {
             Form
           </NavLink>
         </li>
+        <li>
+          <NavLink to='/register'>
+            Register
+          </NavLink>
+        </li>
       </ul>
     </nav>
   );
