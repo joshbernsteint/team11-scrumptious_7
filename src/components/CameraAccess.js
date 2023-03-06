@@ -102,6 +102,7 @@ function CameraAccess() {
         <button id="cameraRequest" onClick={clickHandler}>
           {cameraRequest}
         </button>
+        {cameraRequest === 'close camera' ? <span className="message">Close camera before leaving page.</span>: <></>}
       </div>
       <div className={"result" + (hasPhoto ? "hasPhoto" : "")}>
         <canvas ref={photoRef}></canvas>
