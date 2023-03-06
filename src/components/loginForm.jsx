@@ -5,7 +5,7 @@ import {signInWithEmailAndPassword} from "firebase/auth"
 
 //used youtube video https://www.youtube.com/watch?v=Vv_Oi7zPPTw
 
-export default function Login () {
+export default function Login (props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -39,7 +39,7 @@ export default function Login () {
                     <button type="submit">Sign In</button>
                 </div>
             </form>
-            <button>Not already a user? Register an account here.</button>
+            <button className="link-button">Not already a user? Register an account here.</button>
         </div>
     );
 };
