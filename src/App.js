@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import Navigation from "./components/Navigation";
 import CameraAccess from "./components/CameraAccess";
+import RegisterForm from "./components/RegisterForm"
 import React, { useState } from "react";
 function App() {
   const [showNav, setShowNav] = useState(false);
@@ -24,6 +25,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="form" element={<CameraAccess />} />
+            <Route path="register" element={<RegisterForm/>}/>
           </Routes>
         </main>
       </Router>
