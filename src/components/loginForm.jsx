@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import './style.css'
 import {auth} from '../firebase';
 import {signInWithEmailAndPassword} from "firebase/auth"
+import '../App.css'
 
 //used youtube video https://www.youtube.com/watch?v=Vv_Oi7zPPTw
 
@@ -23,7 +23,7 @@ export default function Login (props) {
         <div className='login-container'>
             <form className='form' onSubmit={signIn}>
                 <div className='form-body'>
-                    <h1>Sign In</h1>
+                    <h1 className='h1-signIn'>Sign In</h1>
                     <input
                         type='email'
                         placeholder="Enter your Email"
@@ -39,7 +39,7 @@ export default function Login (props) {
                     <button type="submit">Sign In</button>
                 </div>
             </form>
-            <button className="link-button">Not already a user? Register an account here.</button>
+            <a href="/register">Not already a user? Register an account here.</a>
         </div>
     );
 };

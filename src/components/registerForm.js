@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import './style.css'
-
+import '../App.css'
 import {user_database} from '../firebase'
 import {ref,push,child,update} from "firebase/database";
 
@@ -223,7 +222,7 @@ export default function RegisterForm() {
     return (
         <div className='register-container'>
             <form onSubmit={handleRegister} className="form">
-                <div className='form-body'>
+                <div>
                     <label className='label'>First Name</label>
                     <p className='error'>{errors.firstName}</p>
                     <input
