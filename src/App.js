@@ -1,13 +1,14 @@
+import logo from './logo.svg';
 import './App.css';
-import CameraAccess from './components/CameraAccess';
 import MaterialNotification from './components/MaterialNotification';
+import RequirePhotos from './components/RequirePhotos';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <CameraAccess></CameraAccess>
         <MaterialNotification></MaterialNotification>
+        <RequirePhotos></RequirePhotos>
       </header>
     </div>
   );
