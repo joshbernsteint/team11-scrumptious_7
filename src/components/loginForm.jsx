@@ -41,7 +41,7 @@ export default function Login () {
                     <button type="submit">Sign In</button>
                 </div>
             </form>
-            <a className="link-button" href="#">Not already a user? Register an account here.</a>
+            <a className="link-button" href="/login">Not already a user? Register an account here.</a>
         </div>
     );
 };
