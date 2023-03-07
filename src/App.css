@@ -9,7 +9,7 @@
   flex-direction: column;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .App-link {
@@ -34,10 +34,10 @@
 .video {
   display: flex;
   position: fixed;
-  top: 10%;
+  top: 40%;
   left: 100px;
-  width: 76.92%;
-  height: 66.67%;
+  width: 56.92%;
+  height: 36.67%;
   flex-direction: row;
   align-items: stretch;
   justify-content: flex-end;
@@ -49,7 +49,7 @@
 
 .resulthasPhoto {
   position: absolute;
-  top: 10%;
+  top: 40%;
   right: 0px;
   display: flex;
   float: right;
@@ -249,4 +249,25 @@
   justify-content: space-between;
   align-items: center;
   font-size: 1rem;
+}
+.authDetails p {
+  font-size: small;
+}
+header h1 {
+  color: aliceblue
+}
+
+.require-div {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+}
+
+.temp-div {
+  position: relative;
+  left: 80%;
+}
+
+.h2-v1 {
+  color: #282c34;
 }
