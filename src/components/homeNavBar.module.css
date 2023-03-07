@@ -19,9 +19,9 @@
 .navLink{
     color: black;
     transition: translate ease-in-out 100ms;
-    height: 45px;
+    height: 40px;
     font-weight: 200;
-    font-size: x-large;
+    font-size: large;
 }
 
 .navLink:hover,.navLink:focus{
