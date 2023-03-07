@@ -8,12 +8,14 @@ import '../App.css'
 export default function Login (props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [message, setMessage] = useState("")
 
     const signIn = (e) => {
         e.preventDefault();
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 console.log(userCredential);
+                setMessage("Success!")
             }).catch((error) => {
                 console.log(error);
             });
@@ -21,6 +23,7 @@ export default function Login (props) {
 
     return (
         <div className='login-container'>
+            {message && <p>{message}</p>}
             <form className='form' onSubmit={signIn}>
                 <div className='form-body'>
                     <h1 className='h1-signIn'>Sign In</h1>
