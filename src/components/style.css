@@ -1,0 +1,50 @@
+.form{
+    background-color: rgb(0, 0, 0);
+    border-radius: 5px;
+    width: 550px;
+    margin: 20px auto;
+    padding: 20px;
+    /* height: 600px; */
+}
+
+.form-body{
+    text-align: left;
+    padding: 20px 10px;
+}
+
+.form-body > *{
+    padding: 5px;
+}
+
+.error{
+    font-size: 15px;
+    color: red;
+}
+
+.label{
+    color: white;
+    font-size: 20px
+}
+
+.input{
+    width: 90%;
+}
+
+.footer{
+    text-align: center;
+}
+
+button {
+  border: none;
+  background-color: white;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.link-button {
+  cursor: pointer;
+  background: none;
+  color: white;
+  text-decoration: underline;
+  font-size: 16px;
+}
