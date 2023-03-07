@@ -4,7 +4,7 @@ import Home from "./components/Home";
 import Navigation from "./components/Navigation";
 import CameraForm from "./components/CameraForm";
 import RegisterForm from "./components/RegisterForm";
-import Login from "./components/loginForm";
+import Login from "./components/LoginForm";
 import AuthDetails from "./components/AuthDetails";
 import MaterialNotification from "./components/MaterialNotification";
 import React, { useState } from "react";
