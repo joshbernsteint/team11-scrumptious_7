@@ -306,7 +306,7 @@ export default function RegisterForm() {
                 </div>
                 <button>Register</button>
             </form>
-            <button className="link-button">Already have an account? Sign in here</button>
+            <a className="link-button" href="#">Already have an account? Sign in here</a>
         </div>
     )
 }

@@ -42,7 +42,9 @@ button {
 }
 
 .link-button {
+  cursor: pointer;
   background: none;
   color: white;
   text-decoration: underline;
+  font-size: 16px;
 }

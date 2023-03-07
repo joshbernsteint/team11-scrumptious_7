@@ -3,9 +3,9 @@ import './style.css'
 import {auth} from '../firebase';
 import {signInWithEmailAndPassword} from "firebase/auth"
 
-//used youtube video https://www.youtube.com/watch?v=Vv_Oi7zPPTw
+//used youtube video for authentication https://www.youtube.com/watch?v=Vv_Oi7zPPTw
 
-export default function Login (props) {
+export default function Login () {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -23,14 +23,16 @@ export default function Login (props) {
         <div className='login-container'>
             <form className='form' onSubmit={signIn}>
                 <div className='form-body'>
-                    <h1>Sign In</h1>
+                    <h2>Sign In</h2>
                     <input
+                        className='input'
                         type='email'
                         placeholder="Enter your Email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     ></input>
                     <input
+                        className='input'
                         type='password'
                         placeholder="Enter your Password"
                         value={password}
@@ -39,7 +41,7 @@ export default function Login (props) {
                     <button type="submit">Sign In</button>
                 </div>
             </form>
-            <button className="link-button">Not already a user? Register an account here.</button>
+            <a className="link-button" href="#">Not already a user? Register an account here.</a>
         </div>
     );
 };
