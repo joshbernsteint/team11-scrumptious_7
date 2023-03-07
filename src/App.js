@@ -10,6 +10,8 @@ import MaterialNotification from "./components/MaterialNotification";
 import React, { useState } from "react";
 import NotificationBar from './components/NotificationBar'
 import { HomeNavBar } from "./components/homeNavBar";
+import { Stack, Row,Col } from 'react-bootstrap';
+import { alignProperty } from "@mui/material/styles/cssUtils";
 function App() {
   const [showNav, setShowNav] = useState(false);
 
@@ -32,6 +34,10 @@ function App() {
         <Route path="*" element={<Navigate to ="/" />} /> 
       </Routes>
     </Router>
+    <div className="notification">
+      <MaterialNotification/>
+    </div>
+    <AuthDetails/>
     </div>
   );
 }

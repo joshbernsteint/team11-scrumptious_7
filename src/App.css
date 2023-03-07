@@ -271,3 +271,8 @@ header h1 {
 .h2-v1 {
   color: #282c34;
 }
+
+.notification{
+  right: 0;
+  position: absolute;
+}
