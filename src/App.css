@@ -4,7 +4,7 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,40 +16,175 @@
 .App-link {
   color: #61dafb;
 }
+
 .camera {
   display: flex;
-  align-items: center;
 }
+
 .cameraPower {
   position: absolute;
   bottom: 10%;
-  left: 50%;
+  left: 40%;
   display: flex;
 }
 #cameraRequest {
-  right: 50%;
+  right: 40%;
   font-size: 20px;
 }
+
 .video {
+  display: flex;
+  position: fixed;
+  top: 10%;
+  left: 100px;
   width: 76.92%;
   height: 66.67%;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-end;
 }
+
 .video video {
   display: flex;
 }
-.resultHasPhoto {
+
+.resulthasPhoto {
+  position: absolute;
+  top: 10%;
+  right: 0px;
+  display: flex;
   float: right;
   max-width: 20%;
-}
-
-.resultHasPhoto button {
-  right:0;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .takePhoto {
   position: absolute;
-  top: 10%;
-  left: 18%;
-  width: 100%;
+  bottom: 0%;
+  float: right;
+}
+
+.navBar {
+  position: fixed;
+  top: 3px;
+  left: 0px;
+  height: auto;
+  z-index: 25;
+}
+.navBar button{
+  position: fixed;
+  left: 0%;
+  font-size: 16px;
+  z-index: 26;
+  border-style: none;
+  padding-right: 24px;
+  background-color: rgb(198, 203, 203);
+}
+
+.navigation {
+  position: fixed;
+  margin: 0px;
+  left: 0;
+  background-color: rgb(198, 203, 203);
+  padding-top: 40px;
+  padding-right: 30px;
+  padding-bottom: 100px;
+}
+
+.navigation ul {
+  list-style: none;
+  padding-left: 15px;
+  align-items: center;
+}
+
+.navigation li {
+  padding-top: 7px;
+}
+
+.message {
+  color: rgb(45, 50, 54);
+  padding-left: 10px;
+  padding-top: 3px;
+}
+
+.taskStatus {
+  top: 10px;
+  float: top;
+}
+
+.mainShifted {
+  top:0;
+  margin-left: 25%;
+}
+
+.mainDefault {
+  top: 0;
+}
+
+#completedTasks {
+  list-style: none;
+  align-items: left;
+  
+}
+#completedTasks button {
+  margin-left: 15px;
+}
+.form{
+  background-color: rgb(0, 0, 0);
+  border-radius: 5px;
+  width: 550px;
+  margin: 20px auto;
+  padding: 20px;
+  /* height: 600px; */
+}
+
+.form-body{
+  text-align: left;
+  padding: 20px 10px;
+}
+
+.form-body > *{
+  padding: 5px;
+}
+
+.error{
+  font-size: 15px;
+  color: red;
+}
+
+.label{
+  color: white;
+  font-size: 20px
+}
+
+.input{
+  width: 90%;
+}
+
+.footer{
   text-align: center;
+}
+
+button {
+border: solid;
+background-color: white;
+padding: 10px;
+cursor: pointer;
+}
+
+.link-button {
+background: none;
+color: white;
+text-decoration: underline;
+}
+
+.h1-signIn {
+  color:rgb(198, 203, 203)
+}
+
+.card-btn {
+  border: none;
+  background-color:rgb(198, 203, 203);
 }

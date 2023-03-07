@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import './style.css'
 import {auth} from '../firebase';
 import {signInWithEmailAndPassword} from "firebase/auth"
+import '../App.css'
 
 //used youtube video for authentication https://www.youtube.com/watch?v=Vv_Oi7zPPTw
 

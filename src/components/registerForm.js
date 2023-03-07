@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import './style.css'
-
+import '../App.css'
 import {user_database} from '../firebase'
 import {ref,push,child,update} from "firebase/database";
 
@@ -34,6 +33,13 @@ export default function RegisterForm() {
             event.preventDefault();
             setErrors(validate(user));
         } else {
+            errors.firstName = "";
+            errors.lastName = "";
+            errors.username = "";
+            errors.userType = "";
+            errors.email = "";
+            errors.password = "";
+            errors.passwordConfirm = "";
             event.preventDefault();
             let obj = {};
             obj.firstName = user.firstName;
@@ -172,7 +178,7 @@ export default function RegisterForm() {
 
         let valid_lower_characters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
         let valid_upper_characters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-        let valid_nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        let valid_nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
         let valid_special_characters = ['$', '&', '%', '#', '*', '@', '!', '(', ')', ':'];
 
         let has_lower = false;
@@ -216,7 +222,7 @@ export default function RegisterForm() {
     return (
         <div className='register-container'>
             <form onSubmit={handleRegister} className="form">
-                <div className='form-body'>
+                <div>
                     <label className='label'>First Name</label>
                     <p className='error'>{errors.firstName}</p>
                     <input
