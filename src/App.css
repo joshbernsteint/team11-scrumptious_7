@@ -7,7 +7,6 @@
   height: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
@@ -187,4 +186,28 @@ text-decoration: underline;
 .card-btn {
   border: none;
   background-color:rgb(198, 203, 203);
+}
+
+.link-button {
+  cursor: pointer;
+  background: none;
+  color: white;
+  text-decoration: underline;
+  font-size: 16px;
+}
+
+h2 {
+    color: aliceblue;
+}
+
+.authDetails {
+  position: absolute;
+  right: 5%;
+}
+.title {
+  position: relative;
+  align-items: center;
+}
+.authDetails p {
+  font-size: small;
 }
