@@ -2,12 +2,11 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import Navigation from "./components/Navigation";
-import CameraAccess from "./components/CameraAccess";
-import MaterialNotification from './components/MaterialNotification';
-import RequirePhotos from "./components/RequirePhotos";
+import CameraForm from "./components/CameraForm";
 import RegisterForm from "./components/RegisterForm";
-import Login from "./components/loginForm";
+import Login from "./components/LoginForm";
 import AuthDetails from "./components/AuthDetails";
+import MaterialNotification from "./components/MaterialNotification";
 import React, { useState } from "react";
 function App() {
   const [showNav, setShowNav] = useState(false);
@@ -34,14 +33,15 @@ function App() {
         <main className={showNav ? "mainShifted" : "mainDefault"}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="form" element={<CameraAccess />} />
+            <Route path="form" element={<CameraForm />} />
             <Route path="register" element={<RegisterForm />} />
             <Route path="login" element={<Login />} />
           </Routes>
         </main>
       </Router>
-      <MaterialNotification></MaterialNotification>
-        <RequirePhotos></RequirePhotos>
+      <div className="temp-div">
+        <MaterialNotification></MaterialNotification>
+      </div>
     </div>
   );
 }
