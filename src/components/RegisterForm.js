@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import './style.css'
-
+import '../App.css'
 import {user_database} from '../firebase'
+import {auth} from '../firebase';
 import {ref,push,child,update} from "firebase/database";
-
+import {createUserWithEmailAndPassword } from 'firebase/auth';
 var CryptoJS = require("crypto-js");
 
 export default function RegisterForm() {
@@ -18,7 +18,7 @@ export default function RegisterForm() {
             passwordConfirm: ""}
     );
     const [errors, setErrors] = useState({});
-
+    const [message, setMessage] = useState("");
     function handleChange(event){
         const {name, value} = event.target
         setUser(prevUserData => {
@@ -51,21 +51,44 @@ export default function RegisterForm() {
 
             const secretPass = "secretKey";
 
-            obj.password = CryptoJS.AES.encrypt(JSON.stringify(user.password), secretPass).toString();
+            let userCredential = createUserWithEmailAndPassword(
+              auth,
+              user.email,
+              user.password
+            ).then((userCredential) => {
+                setMessage("Success!")
+                obj.password = CryptoJS.AES.encrypt(
+                  JSON.stringify(user.password),
+                  secretPass
+                ).toString();
+                let temp = {
+                  firstName: "",
+                  lastName: "",
+                  username: "",
+                  userType: "",
+                  email: "",
+                  password: "",
+                  passwordConfirm: "",
+                };
+                setUser(temp);
+                /*
+                    decrypt password:
 
-            let temp = {firstName: "", lastName: "", username: "", userType: "", email: "", password: "", passwordConfirm: ""};
-            setUser(temp);
-            /*
-            decrypt password:
+                    var bytes = CryptoJS.AES.decrypt(obj.password, secretPass);
+                    var decryptedPassword = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+                */
 
-            var bytes = CryptoJS.AES.decrypt(obj.password, secretPass);
-            var decryptedPassword = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-            */
+                const newUser = push(child(ref(user_database), "users")).key;
+                const updates = {};
+                updates["/" + newUser] = obj;
+                return update(ref(user_database), updates);
+              }).catch((err) => {
+                console.log(err);
+              });
+                //const user = userCredential.user;
+         
 
-            const newUser = push(child(ref(user_database), 'users')).key;
-            const updates = {};
-            updates['/' + newUser] = obj;
-            return update(ref(user_database), updates);
+      
         }
     }
 
@@ -221,8 +244,9 @@ export default function RegisterForm() {
     }
 
     return (
-        <form onSubmit={handleRegister} className="form">
-            <div className='form-body'>
+        <div className='register-container'>
+            {message && <p>{message}</p>}
+            <form onSubmit={handleRegister} className="form">
                 <div>
                     <label className='label'>First Name</label>
                     <p className='error'>{errors.firstName}</p>
@@ -312,7 +336,8 @@ export default function RegisterForm() {
                     />
                 </div>
                 <button>Register</button>
-            </div>
-        </form>
+            </form>
+            <a href="/login">Already have an account? Sign in here</a>
+        </div>
     )
 }
