@@ -1,0 +1,32 @@
+
+
+.brand{
+    font-size: xx-large;
+    font-weight: 400;
+}
+.bar{
+    background-color: rgb(11, 165, 42);
+    padding-left: 2%;
+    padding-right: 2%;
+}
+.nav{
+    background-color: rgb(11, 165, 42);
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+    max-height: 35px;
+}
+
+.navLink{
+    color: black;
+    transition: translate ease-in-out 100ms;
+    height: 45px;
+    font-weight: 200;
+    font-size: x-large;
+}
+
+.navLink:hover,.navLink:focus{
+    border-bottom: 1px solid white;
+    color: rgb(255, 255, 255);
+    translate: 0 -3px;
+}
+
