@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import Navigation from "./components/Navigation";
 import CameraAccess from "./components/CameraAccess";
+import MaterialNotification from './components/MaterialNotification';
+import RequirePhotos from "./components/RequirePhotos";
 import RegisterForm from "./components/RegisterForm";
 import Login from "./components/loginForm";
 import AuthDetails from "./components/AuthDetails";
@@ -38,6 +40,8 @@ function App() {
           </Routes>
         </main>
       </Router>
+      <MaterialNotification></MaterialNotification>
+        <RequirePhotos></RequirePhotos>
     </div>
   );
 }
