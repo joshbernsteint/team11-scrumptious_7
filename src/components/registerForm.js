@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import './style.css'
-
+import '../App.css'
 import {user_database} from '../firebase'
 import {ref,push,child,update} from "firebase/database";
 
@@ -221,8 +220,8 @@ export default function RegisterForm() {
     }
 
     return (
-        <form onSubmit={handleRegister} className="form">
-            <div className='form-body'>
+        <div className='register-container'>
+            <form onSubmit={handleRegister} className="form">
                 <div>
                     <label className='label'>First Name</label>
                     <p className='error'>{errors.firstName}</p>
@@ -312,7 +311,8 @@ export default function RegisterForm() {
                     />
                 </div>
                 <button>Register</button>
-            </div>
-        </form>
+            </form>
+            <a className="link-button" href="#">Already have an account? Sign in here</a>
+        </div>
     )
 }

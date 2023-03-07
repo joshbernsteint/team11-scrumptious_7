@@ -48,7 +48,7 @@ function TaskStatus() {
               </CardContent>
             </CardActionArea>
             <CardActions>
-              <button
+              <button className="card-btn"
                 onClick={() => {
                   if (task.id) handleClick(task.id);
                 }}
