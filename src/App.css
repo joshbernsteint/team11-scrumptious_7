@@ -1,3 +1,7 @@
+/* ------------------------------------------------------------------
+    Global App
+------------------------------------------------------------------ */
+
 .App {
   text-align: center;
 }
@@ -17,6 +21,17 @@
   color: #61dafb;
 }
 
+button {
+  border: none;
+  background-color: #37424a;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  color: white;
+}
+/* ------------------------------------------------------------------
+    Camera Access Page
+------------------------------------------------------------------ */
 .camera {
   display: flex;
 }
@@ -66,6 +81,15 @@
   float: right;
 }
 
+.message {
+  color: rgb(45, 50, 54);
+  padding-left: 10px;
+  padding-top: 3px;
+}
+
+/* ------------------------------------------------------------------
+    Navigation
+------------------------------------------------------------------ */
 .navBar {
   position: fixed;
   top: 3px;
@@ -103,12 +127,9 @@
   padding-top: 7px;
 }
 
-.message {
-  color: rgb(45, 50, 54);
-  padding-left: 10px;
-  padding-top: 3px;
-}
-
+/* ------------------------------------------------------------------
+    Task Status
+------------------------------------------------------------------ */
 .taskStatus {
   top: 10px;
   float: top;
@@ -131,6 +152,15 @@
 #completedTasks button {
   margin-left: 15px;
 }
+
+.card-btn {
+  border: none;
+  background-color:rgb(198, 203, 203);
+}
+
+/* ------------------------------------------------------------------
+    Sign In/Register Pages
+------------------------------------------------------------------ */
 .form{
   background-color: rgb(0, 0, 0);
   border-radius: 5px;
@@ -167,24 +197,15 @@
   text-align: center;
 }
 
-button {
-border: solid;
-background-color: white;
-padding: 10px;
-cursor: pointer;
-}
-
 .link-button {
-background: none;
-color: white;
-text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  color: black;
+  text-decoration: underline;
+  font-size: 16px;
 }
 
-.h1-signIn {
-  color:rgb(198, 203, 203)
-}
+/* ------------------------------------------------------------------
+    uhhh
+------------------------------------------------------------------ */
 
-.card-btn {
-  border: none;
-  background-color:rgb(198, 203, 203);
-}
