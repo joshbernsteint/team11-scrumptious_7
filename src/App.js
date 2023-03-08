@@ -10,6 +10,7 @@ import MaterialNotification from "./components/MaterialNotification";
 import React, { useState } from "react";
 import NotificationBar from './components/NotificationBar'
 import { HomeNavBar } from "./components/homeNavBar";
+import SendContract from "./components/SendContract";
 function App() {
   const [showNav, setShowNav] = useState(false);
 
@@ -29,6 +30,7 @@ function App() {
         <Route path="/login/:id" element={<h1>Sup</h1>}>
           <Route index element = {<h1>Sup</h1>} />
         </Route>
+		<Route path="/sendContract" element={<SendContract/>} />
         <Route path="*" element={<Navigate to ="/" />} /> 
       </Routes>
     </Router>
