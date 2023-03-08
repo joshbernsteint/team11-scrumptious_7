@@ -1,6 +1,7 @@
 CS555 Scrumptious 7 Project Repository
 
 Once in the project directory you can run: 
+`npm i` to download all of the dependencies
 `npm start`
 
 Open http://localhost:3000 to view it in your browser.
