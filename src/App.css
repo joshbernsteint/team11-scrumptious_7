@@ -1,7 +1,3 @@
-/* ------------------------------------------------------------------
-    Global App
------------------------------------------------------------------- */
-
 .App {
   text-align: center;
 }
@@ -11,27 +7,15 @@
   height: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .App-link {
   color: #61dafb;
 }
 
-button {
-  border: none;
-  background-color: #37424a;
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 10px;
-  color: white;
-}
-/* ------------------------------------------------------------------
-    Camera Access Page
------------------------------------------------------------------- */
 .camera {
   display: flex;
 }
@@ -50,10 +34,10 @@ button {
 .video {
   display: flex;
   position: fixed;
-  top: 10%;
+  top: 40%;
   left: 100px;
-  width: 76.92%;
-  height: 66.67%;
+  width: 56.92%;
+  height: 36.67%;
   flex-direction: row;
   align-items: stretch;
   justify-content: flex-end;
@@ -65,7 +49,7 @@ button {
 
 .resulthasPhoto {
   position: absolute;
-  top: 10%;
+  top: 40%;
   right: 0px;
   display: flex;
   float: right;
@@ -81,15 +65,6 @@ button {
   float: right;
 }
 
-.message {
-  color: rgb(45, 50, 54);
-  padding-left: 10px;
-  padding-top: 3px;
-}
-
-/* ------------------------------------------------------------------
-    Navigation
------------------------------------------------------------------- */
 .navBar {
   position: fixed;
   top: 3px;
@@ -127,9 +102,12 @@ button {
   padding-top: 7px;
 }
 
-/* ------------------------------------------------------------------
-    Task Status
------------------------------------------------------------------- */
+.message {
+  color: rgb(45, 50, 54);
+  padding-left: 10px;
+  padding-top: 3px;
+}
+
 .taskStatus {
   top: 10px;
   float: top;
@@ -152,15 +130,6 @@ button {
 #completedTasks button {
   margin-left: 15px;
 }
-
-.card-btn {
-  border: none;
-  background-color:rgb(198, 203, 203);
-}
-
-/* ------------------------------------------------------------------
-    Sign In/Register Pages
------------------------------------------------------------------- */
 .form{
   background-color: rgb(0, 0, 0);
   border-radius: 5px;
@@ -197,15 +166,108 @@ button {
   text-align: center;
 }
 
-.link-button {
-  cursor: pointer;
-  background: none;
-  color: black;
-  text-decoration: underline;
-  font-size: 16px;
+.task-notification {
+  display: flex;
+  margin: 10px 0 10px 0;
+  padding: 10px;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  text-align: left;
+  height: auto;
+  width: 80%;
+  background-color: #74819b;
+  border-radius: 10px;
 }
 
-/* ------------------------------------------------------------------
-    uhhh
------------------------------------------------------------------- */
+.task-title {
+  padding: 0;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  /* background-color: #282c34; */
+  color: #ffffff;
+}
 
+.task-description {
+  padding: 0;
+  margin-top: 5px;
+  font-size: 1.25rem;
+  /* background-color: #282c34; */
+  color: #ffffff;
+}
+
+.notification-bar {
+  display: flex;
+  margin: 10px;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  height: 200px;
+  background-color: #141518;
+  padding: 20px 0 20px 0;
+  border-radius: 10px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.task-href {
+  color: #ffffff;
+  padding: 0px;
+  margin: 0px;
+  text-decoration: none;
+  font-size: 1rem;
+  text-align: right;
+}
+
+.task-date {
+  color: #ffffff;
+  padding: 0px;
+  margin: 0px;
+  text-decoration: none;
+  font-size: 1rem;
+  text-align: right;
+}
+
+.top-task {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bottom-task {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-status {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+}
+.authDetails p {
+  font-size: small;
+}
+header h1 {
+  color: aliceblue
+}
+
+.require-div {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+}
+
+.temp-div {
+  position: relative;
+  left: 80%;
+}
+
+.h2-v1 {
+  color: #282c34;
+}

@@ -41,7 +41,11 @@ export default function Login () {
                     <button type="submit">Sign In</button>
                 </div>
             </form>
+<<<<<<<< HEAD:src/components/loginForm.jsx
             <a className="link-button" href="/register">Not already a user? Register an account here.</a>
+========
+            <a className="link-button" href="/login">Not already a user? Register an account here.</a>
+>>>>>>>> main:src/components/LoginForm.jsx
         </div>
     );
 };

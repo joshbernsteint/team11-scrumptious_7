@@ -324,7 +324,11 @@ export default function RegisterForm() {
 
                 <button type="submit">Register</button>
             </form>
+<<<<<<<< HEAD:src/components/registerForm.js
             <a className="link-button" href="/login">Already have an account? Sign in here</a>
+========
+            <a href="/login">Already have an account? Sign in here</a>
+>>>>>>>> main:src/components/RegisterForm.js
         </div>
     )
 }
