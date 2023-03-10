@@ -9,6 +9,7 @@ import AuthDetails from "./components/AuthDetails";
 import MaterialNotification from "./components/MaterialNotification";
 import React, { useState } from "react";
 import NotificationBar from './components/NotificationBar'
+import UpdateProgressBar from "./components/UpdateProgressBar";
 import { HomeNavBar } from "./components/homeNavBar";
 function App() {
   const [showNav, setShowNav] = useState(false);
@@ -30,6 +31,7 @@ function App() {
           <Route index element = {<h1>Sup</h1>} />
         </Route>
         <Route path="*" element={<Navigate to ="/" />} /> 
+        <Route path='/progress' element={<UpdateProgressBar/>}/>
       </Routes>
     </Router>
     </div>
