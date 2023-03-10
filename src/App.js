@@ -9,6 +9,7 @@ import AuthDetails from "./components/AuthDetails";
 import MaterialNotification from "./components/MaterialNotification";
 import React, { useState } from "react";
 import NotificationBar from './components/NotificationBar'
+import UpdateProgressBar from "./components/UpdateProgressBar";
 import { HomeNavBar } from "./components/homeNavBar";
 import SendContract from "./components/SendContract";
 function App() {
@@ -32,6 +33,7 @@ function App() {
         </Route>
 		<Route path="/sendContract" element={<SendContract/>} />
         <Route path="*" element={<Navigate to ="/" />} /> 
+        <Route path='/progress' element={<UpdateProgressBar/>}/>
       </Routes>
     </Router>
     </div>
