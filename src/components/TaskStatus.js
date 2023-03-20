@@ -159,7 +159,7 @@ function TaskStatus() {
           {cards}
         </Grid>
       )}
-      <h2>Completed Tasks</h2>
+      <h2 className="h2-v1">Completed Tasks</h2>
       <ul id="completedTasks"></ul>
     </div>
   );
