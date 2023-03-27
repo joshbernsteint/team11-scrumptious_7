@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import EmailChain from "./EmailChain";
 import {
   CardActionArea,
   CardActions,
@@ -55,6 +56,9 @@ function TaskStatus() {
               >
                 Done
               </button>
+            </CardActions>
+            <CardActions>
+              <EmailChain></EmailChain>
             </CardActions>
           </Card>
         </Grid>
