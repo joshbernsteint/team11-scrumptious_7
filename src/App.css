@@ -271,3 +271,8 @@ header h1 {
 .h2-v1 {
   color: #282c34;
 }
+
+.steps {
+  text-align: left;
+  margin-left:20px;
+}
