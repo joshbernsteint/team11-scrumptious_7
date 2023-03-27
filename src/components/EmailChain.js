@@ -9,6 +9,7 @@ function EmailChain() {
   const [users, setUsers] = useState([]);
   const [usersName, setUsersName] = useState([]);
   const [emlbtn, setEmlbtn] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     // mock users
@@ -18,6 +19,7 @@ function EmailChain() {
   }, []);
 
   const clickHandler = () => {
+    setError(null)
     setEmlbtn((prev) => !prev);
     const userNameList = users.map((user) => {
       return user.name;
@@ -34,9 +36,14 @@ function EmailChain() {
     event.preventDefault();
     const message = document.getElementById("eml-msg").value;
     if (!user) {
-      console.log("error");
-      return <p>Error: need to sign in to send email chain</p>;
+      setError("Error: need to sign in to send email chain")
+      return;
     }
+    if(!message || message.trim().length < 1){
+        setError("Error: message cannot be blank")
+        return;
+    }
+    setError(null)
     users.map((user) => {
       sendEmail(user, message);
     });
@@ -71,6 +78,7 @@ function EmailChain() {
         Send to Email Chain
       </button>
       {emlbtn && <ul>{usersName}</ul>}
+      {error && <p>{error}</p>}
       {emlbtn && (
         <form onSubmit={sumbitHandler}>
           <label className="lbl-msg">Message</label>
