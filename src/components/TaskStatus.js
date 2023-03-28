@@ -49,6 +49,11 @@ function TaskStatus() {
               </CardContent>
             </CardActionArea>
             <CardActions>
+              <Grid
+              container
+              alignItems="center"
+              justifyContent="center"
+              >
               <button className="card-btn"
                 onClick={() => {
                   if (task.id) handleClick(task.id);
@@ -56,6 +61,7 @@ function TaskStatus() {
               >
                 Done
               </button>
+              </Grid>
             </CardActions>
             <CardActions>
               <EmailChain></EmailChain>
@@ -159,6 +165,8 @@ function TaskStatus() {
           spacing={2}
           sx={{ flexGrow: 1, flexDirection: "row" }}
           className="gridTasks"
+          alignItems="center"
+          justifyContent="center"
         >
           {cards}
         </Grid>
