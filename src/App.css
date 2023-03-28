@@ -276,3 +276,29 @@ header h1 {
   text-align: left;
   margin-left:20px;
 }
+
+.userNames-div {
+  margin-top: 10px;
+}
+
+.userNames-div ul{
+  list-style: none;
+}
+
+.eml-form-div{
+  margin-left: 30px;
+}
+
+.eml-chain-div{
+  display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.people-h2{
+  font-size:medium;
+}
+
+.lbl-msg{
+  margin-right: 100%;
+}
