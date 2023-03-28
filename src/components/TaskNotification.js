@@ -4,7 +4,6 @@ import { useState } from "react";
 function TaskNotification(props) {
   const dateT = props.date;
   const dateN = new Date();
-
   const val1 = dateT.substring(8);
   const val2 = dateN.getDate();
 
@@ -48,7 +47,8 @@ function TaskNotification(props) {
   return (
     <div className="task-notification" style ={{backgroundColor: `${color()}`}}>
       <div className="top-task">
-        <p className="task-title">{props.title}</p>
+        <p className="task-title">#{props.id}: {props.title}</p>
+        <p className="task-date">Priority: {props.priority}</p>
         <p className="task-date">Due: {fullDate}</p>
       </div>
       <p className="task-description">{props.description}</p>

@@ -2,32 +2,46 @@ import React from "react";
 import TaskNotification from "./TaskNotification";
 
 function NotificationBar(props) {
-  const list = [
-    { title: "Task 1", description: "Task 1 description", date: "2023-03-30" },
-    { title: "Task 2", description: "Task 2 description", date: "2023-04-20" },
-    { title: "Task 3", description: "Task 3 description", date: "2023-03-07" },
-    { title: "Task 4", description: "Task 4 description", date: "2023-03-10" },
-    { title: "Task 5", description: "Task 5 description", date: "2023-03-02" },
+  const list = props.tasks
+  const priorities=[
+    <img src="/priorities/p1.png" className="priority-Images"/>,
+    <img src="/priorities/p2.png" className="priority-Images"/>,
+    <img src="/priorities/p3.png" className="priority-Images"/>,
+    <img src="/priorities/p4.png" className="priority-Images"/>,
+    <img src="/priorities/p5.png" className="priority-Images"/>,
   ];
 
+  const sorted = list.sort((a,b) =>
+  {
+    if(props.filterType === "1"){
+      if(a.date < b.date){
+        return -1;
+      }
+      else if(a.date > b.date){
+        return 1;
+      }
+      return 0;
+    }
+    else if(props.filterType === "2"){
+      if(a.id < b.id){
+        return -1;
+      }
+      else if(a.id > b.id){
+        return 1;
+      }
+      return 0;
+    }
+    else{
+      if(a.priority < b.priority){
+        return -1;
+      }
+      else if(a.priority > b.priority){
+        return 1;
+      }
+      return 0;
+    }
+  })
   
-  // for (let i = 0; i < list.length; i++) {
-  //   if (
-  //     parseInt(list[i].date.substring(8)) - parseInt(new Date().getDate()) >
-  //     100
-  //     ) {
-  //       list.splice(i, 1);
-  //       i--;
-  //       continue;
-  //     }
-  //     if (
-  //       parseInt(list[i].date.substring(8)) - parseInt(new Date().getDate()) <
-  //       0
-  //       ) {
-  //         list.splice(i, 1);
-  //         i--;
-  //       }
-  //     }
   if (list.length === 0)
     return (
       <div className="notification-bar">
@@ -35,15 +49,17 @@ function NotificationBar(props) {
       </div>
     );
 
-  const notis = list.map((noti) => (
+  const notis = sorted.map((noti) => (
     <TaskNotification
       key={noti.title}
       title={noti.title}
       description={noti.description}
       date={noti.date}
+      priority={priorities[parseInt(noti.priority)-1]}
+      id={noti.id}
     ></TaskNotification>
   ));
-
+  
   return <div className="notification-bar">{notis}</div>;
 }
 
