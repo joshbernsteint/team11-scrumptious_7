@@ -277,3 +277,10 @@ header h1 {
   height: 50px;
   width: 50px;
 }
+
+.priority-Images-large{
+  left: 0;
+  right: auto;
+  height: 250px;
+  width: 250px;
+}

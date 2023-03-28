@@ -12,6 +12,7 @@ import NotificationBar from './components/NotificationBar'
 import { HomeNavBar } from "./components/homeNavBar";
 import SendContract from "./components/SendContract";
 import { TaskDashboard } from "./components/TaskDashboard";
+import { TaskScreen } from "./components/TaskScreen";;
 function App() {
   const [showNav, setShowNav] = useState(false);
 
@@ -19,41 +20,77 @@ function App() {
     setShowNav(!showNav);
   };
 
-  const tasks = useRef([
+  const MyTasks = useRef([
     {
       id: "1",
-      name: "Submit Roof Picture",
+      title: "Submit Roof Picture",
       due: "March 8, 2023",
       owner: "Manager",
       assignedTo: "Construction Worker",
+      description: "placeholder",
+      priority: "3",
+      date: "2023-03-8",
+      completed: "no",
     },
     {
-      id: "2",
-      name: "Sign Contract",
-      due: "March 15, 2023",
-      owner: "Manager",
-      assignedTo: "Customer",
-    },
-    {
-      id: "3",
-      name: "Order Equipment",
-      due: "March 17, 2023",
+      id: "1.5",
+      title: "Submit Roof",
+      due: "March 13, 2023",
       owner: "Manager",
       assignedTo: "Construction Worker",
+      description: "placeholder",
+      priority: "3",
+      date: "2023-03-8",
+      completed: "no",
+    },
+    {
+        id: "5",
+        title: "Begin truss supports",
+        due: "March 12, 2023",
+        owner: "Manager",
+        assignedTo: "Construction Worker",
+        description: "",
+        priority: "4",
+        date: "2023-03-12",
+        completed: "no",
+
+    },
+    {
+        id: "2",
+        title: "Install panels",
+        due: "March 16, 2023",
+        owner: "Manager",
+        assignedTo: "Construction Worker",
+        description: "Put panels in place",
+        priority: "1",
+        date: "2023-03-30",
+        completed: "no",
+
+    },
+    {
+        id: "3",
+        title: "Connect wiring",
+        due: "May 12, 2023",
+        owner: "Manager",
+        assignedTo: "Construction Worker",
+        description: "Connect electrical wiring",
+        priority: "2",
+        date: "2023-03-31",
+        completed: "no",
+
     },
   ]);
-
 
   return (
     <div className="App">
       <HomeNavBar/>
       <Router>
       <Routes>
-        <Route path="/" element={<Home/>} />
+        <Route path="/" element={<Home tasks={MyTasks.current}/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/login/register" element={<RegisterForm />} />
         <Route path="/camera" element={<CameraForm />} />
-        <Route path="/tasks" element={<TaskDashboard tasks={tasks}/>} />
+        <Route path="/tasks" element={<TaskScreen tasks={MyTasks.current}/>} />
         <Route path="/login/:id" element={<h1>Sup</h1>}>
           <Route index element = {<h1>Sup</h1>} />
         </Route>

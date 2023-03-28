@@ -3,25 +3,16 @@ import TaskNotification from "./TaskNotification";
 
 function NotificationBar(props) {
   const list = props.tasks
-  const priorities=[
-    <img src="/priorities/p1.png" className="priority-Images"/>,
-    <img src="/priorities/p2.png" className="priority-Images"/>,
-    <img src="/priorities/p3.png" className="priority-Images"/>,
-    <img src="/priorities/p4.png" className="priority-Images"/>,
-    <img src="/priorities/p5.png" className="priority-Images"/>,
-  ];
+  const priorities = props.pList
 
   const sorted = list.sort((a,b) =>
   {
     if(props.filterType === "1"){
-      console.log(a.date)
       const aD = parseInt(a.date.substring(8));
       const bD = parseInt(b.date.substring(8));
       const aM = parseInt(a.date.substring(5));
       const bM = parseInt(b.date.substring(5));
-      console.log(aD + " " + bD)
       if(aM < bM){
-        console.log("here")
         return -1;
       }
       else if(aM > bM){
@@ -64,7 +55,17 @@ function NotificationBar(props) {
       </div>
     );
 
-  const notis = sorted.map((noti) => (
+
+    const sortedWdir = (() =>{
+      if(props.dir == 0){
+        return sorted;
+      }
+      else if(props.dir == 1){
+        return sorted.reverse();
+      }
+    })
+
+  const notis = (sortedWdir()).map((noti) => (
     <TaskNotification
       key={noti.title}
       title={noti.title}
