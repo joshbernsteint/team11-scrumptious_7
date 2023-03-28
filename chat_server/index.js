@@ -14,24 +14,25 @@ const io = new Server(http, {
 io.on("connection", async (socket) => {
   let { roomId } = socket.handshake.query;
   await socket.join(roomId);
-  console.log("new client connected", socket.id, "to room", roomId);
+  // console.log("new client connected", socket.id, "to room", roomId);
 
   socket.on("user_join", (name, room) => {
-    console.log("A user joined " + roomId + " their name is " + name);
+    // console.log("A user joined " + roomId + " their name is " + name);
     socket.to(roomId).emit("user_join", name);
   });
 
   socket.on("message", ({ name, message }, room) => {
-    console.log(name, message, socket.id, roomId);
+    // console.log(name, message, socket.id, roomId);
     io.to(roomId).to(socket.id).emit("message", { name, message });
   });
 
   socket.on("user_leave", (name, room) => {
     socket.to(roomId).emit("user_leave", name);
-    socket.leave(roomId);
+    // socket.leave(roomId);
   });
 
-  socket.on("disconnect", () => {
+  socket.on("disconnect", (reason, name) => {
+    // io.to(roomId).emit("user_leave", name);
     socket.leave(roomId);
     console.log("Disconnected from " + roomId);
   });

@@ -1,50 +1,99 @@
 import React, { useState, useEffect } from "react";
 import ChatLog from "./ChatBox";
+import styles from "./JoinChat.module.css";
 
 const JoinChat = (props) => {
   const [room, setRoom] = useState("general");
   const [toggle, setToggle] = useState(false);
   const [open, setOpen] = useState(false);
+  const [name, setName] = useState("");
+  const [taskName, setTaskName] = useState("task");
 
   useEffect(() => {
-    console.log("room changed", room);
+    // console.log("room: ", room);
   }, [room]);
 
-  const onPress = (value) => {
+  // will update room name and set the chat visible
+  const onPress = (value, task) => {
     setRoom(value);
     setToggle(!toggle);
-    console.log("value", room);
-    console.log("toggle", toggle);
+    setTaskName(task);
   };
 
+  const onClose = () => {
+    setOpen(!open);
+    setToggle(false);
+  };
+
+  // will update room name and set the chat to not visible
   const onLeave = () => {
     setRoom("general");
     setToggle(!toggle);
   };
 
+  const changeName = (e) => {
+    e.preventDefault();
+    setName(e.target.changeName.value);
+  };
+
   return (
-    <div>
-      <button className="close-button" onClick={() => setOpen(!open)}>
-        {!open ? "Open Chat" : "Close Chat"}
-      </button>
-      {open && toggle && (
-        <div className="chat-name">
-          <h1>Chat Name: {room}</h1>
-          <button onClick={() => onLeave()}>Leave Chat</button>
+    <div className={styles.main_chat}>
+      <div className={styles.room_header}>
+        <button className="close-button" onClick={() => onClose()}>
+          {!open ? "Open Chat" : "Close Chat"}
+        </button>
+        {open && toggle && (
+          <div className={styles.chat_name}>
+            <h1>Task: {taskName}</h1>
+            <button onClick={() => onLeave()}>Leave Chat</button>
+          </div>
+        )}
+      </div>
+      {open && !name && (
+        <div className={styles.room_header}>
+          <h1>Input a name</h1>
+          <form onSubmit={changeName}>
+            <input
+              type="text"
+              placeholder="Name"
+              name="changeName"
+              className={styles.inputOne}
+            />
+            <button>Confirm</button>
+          </form>
         </div>
       )}
-      {open && !toggle && (
-        <div className="join-chat">
-          <h1>Join Chat</h1>
-          <button onClick={() => onPress("room1")}>Submit Roof Picture</button>
-          <button onClick={() => onPress("room2")}>Sign Contract</button>
-          <button onClick={() => onPress("room3")}>Order Equipment</button>
+      {name && (
+        <div>
+          {open && !toggle && (
+            <div className={styles.join_chat}>
+              <h1>Join A Task Chat</h1>
+              <button
+                className={styles.task_chat}
+                onClick={() => onPress("room1", "Submit Roof Picture")}
+              >
+                Submit Roof Picture
+              </button>
+              <button
+                className={styles.task_chat}
+                onClick={() => onPress("room2", "Sign Contract")}
+              >
+                Sign Contract
+              </button>
+              <button
+                className={styles.task_chat}
+                onClick={() => onPress("room3", "Order Equipment")}
+              >
+                Order Equipment
+              </button>
+            </div>
+          )}
+          {open && toggle ? (
+            <ChatLog room={room} name={name} />
+          ) : (
+            <p>{open ? "No chat joined..." : ""}</p>
+          )}
         </div>
-      )}
-      {open && toggle ? (
-        <ChatLog room={room} name="user" />
-      ) : (
-        <p>No chat joined...</p>
       )}
     </div>
   );

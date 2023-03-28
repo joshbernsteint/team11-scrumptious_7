@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 // import ChatMessage from "./ChatMessage.jsx";
-import "../../App.css";
+// import "../../App.css";
+import styles from "./ChatBox.module.css";
 
 const ChatBox = (props) => {
   const [state, setState] = useState({
     message: "",
     name: props.name,
   });
-
+  // const [users, setUsers] = useState([]);
   const [chat, setChat] = useState([]);
   const room = useRef(props.room);
   const socketRef = useRef();
@@ -21,13 +22,13 @@ const ChatBox = (props) => {
     }
     userjoin(state.name, room.current);
     return () => {
-      socketRef.current.disconnect();
+      socketRef.current.disconnect("leave", state.name);
     };
   }, [state.name]);
 
   useEffect(() => {
     socketRef.current.on("message", ({ name, message }) => {
-      console.log("The server has sent some data to all clients");
+      // console.log("The server has sent some data to all clients");
       setChat([...chat, { name, message }]);
     });
 
@@ -35,20 +36,22 @@ const ChatBox = (props) => {
       setChat([
         ...chat,
         {
-          name: "ChatBot",
+          name: "Server",
           message: `${data} has joined the chat`,
         },
       ]);
+      // setUsers([...users, data]);
     });
 
     socketRef.current.on("user_leave", function (data) {
       setChat([
         ...chat,
         {
-          name: "ChatBot",
+          name: "Server",
           message: `${data} has left the chat`,
         },
       ]);
+      // setUsers(users.filter((user) => user !== data));
     });
 
     return () => {
@@ -86,9 +89,17 @@ const ChatBox = (props) => {
     msgEle.focus();
   };
 
+  // const renderUsers = () => {
+  //   return users.map((user, index) => (
+  //     <div key={index}>
+  //       <h3>{user}</h3>
+  //     </div>
+  //   ));
+  // };
+
   const renderChat = () => {
     return chat.map(({ name, message }, index) => (
-      <div key={index}>
+      <div key={index} className={styles.chat_mes}>
         <h3>
           {name}: <span>{message}</span>
         </h3>
@@ -98,15 +109,16 @@ const ChatBox = (props) => {
 
   return (
     <div>
-      <div className="card">
-        <div className="chat-header">
-          <h1>Chat Log</h1>
+      <div className={styles.card}>
+        <div className={styles.chat_header}>
+          {/* <h1>Chat Log</h1> */}
           {/* <Link to="/">Leave chat</Link> */}
         </div>
-        <div className="render-chat">{renderChat()}</div>
+        {/* <div className={styles.render_users}>{renderUsers()}</div> */}
+        <div className={styles.render_chat}>{renderChat()}</div>
         <form onSubmit={onMessageSubmit}>
           {/* <h1>Messenger</h1> */}
-          <div className="input-chat">
+          <div className={styles.input_chat}>
             <label htmlFor="message">
               Send a message
               <input
