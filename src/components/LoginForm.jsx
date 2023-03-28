@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
 import {auth} from '../firebase';
 import {signInWithEmailAndPassword} from "firebase/auth"
+import { useNavigate } from "react-router-dom";
 import '../App.css'
 
-//used youtube video for authentication https://www.youtube.com/watch?v=Vv_Oi7zPPTw
 
 export default function Login () {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     const signIn = (e) => {
         e.preventDefault();
@@ -17,6 +18,8 @@ export default function Login () {
             }).catch((error) => {
                 console.log(error);
             });
+
+        navigate("/");
     };
 
     return (
@@ -41,11 +44,7 @@ export default function Login () {
                     <button type="submit">Sign In</button>
                 </div>
             </form>
-<<<<<<<< HEAD:src/components/loginForm.jsx
             <a className="link-button" href="/register">Not already a user? Register an account here.</a>
-========
-            <a className="link-button" href="/login">Not already a user? Register an account here.</a>
->>>>>>>> main:src/components/LoginForm.jsx
         </div>
     );
 };
