@@ -2,32 +2,52 @@ import React from "react";
 import TaskNotification from "./TaskNotification";
 
 function NotificationBar(props) {
-  const list = [
-    { title: "Task 1", description: "Task 1 description", date: "2023-03-06" },
-    { title: "Task 2", description: "Task 2 description", date: "2023-03-06" },
-    { title: "Task 3", description: "Task 3 description", date: "2023-03-07" },
-    { title: "Task 4", description: "Task 4 description", date: "2023-03-10" },
-    { title: "Task 5", description: "Task 5 description", date: "2023-03-02" },
-  ];
+  const list = props.tasks
+  const priorities = props.pList
 
-  for (let i = 0; i < list.length; i++) {
-    if (
-      parseInt(list[i].date.substring(8)) - parseInt(new Date().getDate()) >
-      3
-    ) {
-      list.splice(i, 1);
-      i--;
-      continue;
+  const sorted = list.sort((a,b) =>
+  {
+    if(props.filterType === "1"){
+      const aD = parseInt(a.date.substring(8));
+      const bD = parseInt(b.date.substring(8));
+      const aM = parseInt(a.date.substring(5));
+      const bM = parseInt(b.date.substring(5));
+      if(aM < bM){
+        return -1;
+      }
+      else if(aM > bM){
+        return 1;
+      }
+      else{
+        if(aD < bD){
+          return -1
+        }
+        else if(aD > bD){
+          return 1;
+        }
+        return 0;
+      }
     }
-    if (
-      parseInt(list[i].date.substring(8)) - parseInt(new Date().getDate()) <
-      0
-    ) {
-      list.splice(i, 1);
-      i--;
+    else if(props.filterType === "2"){
+      if(a.id < b.id){
+        return -1;
+      }
+      else if(a.id > b.id){
+        return 1;
+      }
+      return 0;
     }
-  }
-
+    else{
+      if(a.priority < b.priority){
+        return -1;
+      }
+      else if(a.priority > b.priority){
+        return 1;
+      }
+      return 0;
+    }
+  })
+  
   if (list.length === 0)
     return (
       <div className="notification-bar">
@@ -35,15 +55,27 @@ function NotificationBar(props) {
       </div>
     );
 
-  const notis = list.map((noti) => (
+
+    const sortedWdir = (() =>{
+      if(props.dir == 0){
+        return sorted;
+      }
+      else if(props.dir == 1){
+        return sorted.reverse();
+      }
+    })
+
+  const notis = (sortedWdir()).map((noti) => (
     <TaskNotification
       key={noti.title}
       title={noti.title}
       description={noti.description}
       date={noti.date}
+      priority={priorities[parseInt(noti.priority)-1]}
+      id={noti.id}
     ></TaskNotification>
   ));
-
+  
   return <div className="notification-bar">{notis}</div>;
 }
 
