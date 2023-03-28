@@ -1,0 +1,72 @@
+.main_chat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2px;
+}
+
+.room_header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
+}
+
+.room_header button {
+  border: 2px solid #16711c;
+  border-radius: 5px;
+  background: #1f9e27;
+  color: white;
+  padding: 5px;
+  margin: 0px 20px 0px 20px;
+  cursor: pointer;
+}
+
+.room_header button:hover {
+  border: 2px solid #1a5c13;
+  border-radius: 3px;
+  background: #156217;
+}
+
+.join_chat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2px;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0px;
+}
+
+.chat_name {
+  display: flex;
+  flex-direction: row;
+}
+
+.task_chat {
+  border: 2px solid #16711c;
+  border-radius: 5px;
+  background: #1f9e27;
+  color: white;
+  padding: 5px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.task_chat:hover {
+  border: 2px solid #1a5c13;
+  transition: all 0.2s ease-in-out;
+  border-radius: 3px;
+  background: #156217;
+}
+
+.inputOne {
+  border: 2px solid #000000;
+  border-radius: 5px;
+  width: 200px;
+  margin: 0px 20px 0px 20px;
+}
