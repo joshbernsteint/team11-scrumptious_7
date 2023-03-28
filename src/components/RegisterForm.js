@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import '../App.css'
-import {user_database} from '../firebase'
 import {auth} from '../firebase';
-import {ref,push,child,update} from "firebase/database";
+import {ref, set, getDatabase} from "firebase/database";
 import {createUserWithEmailAndPassword } from 'firebase/auth';
 var CryptoJS = require("crypto-js");
 
@@ -11,7 +10,6 @@ export default function RegisterForm() {
         {
             firstName: "", 
             lastName: "", 
-            username: "",
             userType:  "",
             email: "", 
             password: "", 
@@ -36,7 +34,6 @@ export default function RegisterForm() {
         } else {
             errors.firstName = "";
             errors.lastName = "";
-            errors.username = "";
             errors.userType = "";
             errors.email = "";
             errors.password = "";
@@ -45,51 +42,54 @@ export default function RegisterForm() {
             let obj = {};
             obj.firstName = user.firstName;
             obj.lastName = user.lastName;
-            obj.username = user.username;
             obj.userType = user.userType;
             obj.email = user.email;
 
             const secretPass = "secretKey";
 
             let userCredential = createUserWithEmailAndPassword(
-              auth,
-              user.email,
-              user.password
+                auth,
+                user.email,
+                user.password
             ).then((userCredential) => {
                 setMessage("Success!")
                 obj.password = CryptoJS.AES.encrypt(
-                  JSON.stringify(user.password),
-                  secretPass
+                JSON.stringify(user.password),
+                secretPass
                 ).toString();
                 let temp = {
-                  firstName: "",
-                  lastName: "",
-                  username: "",
-                  userType: "",
-                  email: "",
-                  password: "",
-                  passwordConfirm: "",
+                firstName: "",
+                lastName: "",
+                userType: "",
+                email: "",
+                password: "",
+                passwordConfirm: "",
                 };
                 setUser(temp);
                 /*
                     decrypt password:
-
                     var bytes = CryptoJS.AES.decrypt(obj.password, secretPass);
                     var decryptedPassword = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
                 */
 
-                const newUser = push(child(ref(user_database), "users")).key;
-                const updates = {};
-                updates["/" + newUser] = obj;
-                return update(ref(user_database), updates);
-              }).catch((err) => {
+                return writeUserData(obj.firstName, obj.lastName, obj.userType, obj.email, obj.password, userCredential.user.uid)
+            }).catch((err) => {
                 console.log(err);
-              });
-                //const user = userCredential.user;
-         
-
-      
+            });
         }
+    }
+
+    function writeUserData(firstName, lastName, userType, email, password, uid){
+        const db = getDatabase();
+        set(ref(db, 'users/' + uid), {
+            firstName: firstName, 
+            lastName: lastName,
+            userType: userType,
+            email: email,
+            password: password,
+            uid: uid,
+            step: 1
+        })
     }
 
     const validate = (values) => {
@@ -105,12 +105,6 @@ export default function RegisterForm() {
         let lastNameCheck = checkName(user.lastName, "Last");
         if(lastNameCheck !== ""){
             errors.lastName = lastNameCheck;
-        }
-
-        //error check username input
-        let usernameCheck = checkUsername(user.username);
-        if(usernameCheck !== ""){
-            errors.username = usernameCheck
         }
 
         //error check user classification input
@@ -153,25 +147,6 @@ export default function RegisterForm() {
             }
         }
         return ""
-    }
-
-    function checkUsername(username){
-        if(!username){
-            return "Username is required!"
-        }
-        if(username.length < 3){
-            return "Username should be at least 3 characters long";
-        }
-        username = username.toLowerCase();
-
-        let valid_characters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
-
-        for(let i = 0; i < username.length; i++){
-            if(!valid_characters.includes(username[i])){
-                return "Username should only consist of alphanumeric characters";
-            }
-        }
-        return "";
     }
 
     function checkUserType(userType){
@@ -247,6 +222,7 @@ export default function RegisterForm() {
         <div className='register-container'>
             {message && <p>{message}</p>}
             <form onSubmit={handleRegister} className="form">
+                <div>
                     <label className='label'>First Name</label>
                     <p className='error'>{errors.firstName}</p>
                     <input
@@ -257,6 +233,8 @@ export default function RegisterForm() {
                         value={user.firstName}
                         className='input'
                     />
+                </div>
+                <div>
                     <label className='label'>Last Name</label>
                     <p className='error'>{errors.lastName}</p>
                     <input
@@ -267,16 +245,8 @@ export default function RegisterForm() {
                         value={user.lastName}
                         className='input'
                     />
-                    <label className='label'>Username</label>
-                    <p className='error'>{errors.username}</p>
-                    <input
-                        type="text"
-                        placeholder="Username"
-                        onChange={handleChange}
-                        name="username"
-                        value={user.username}
-                        className='input'
-                    />
+                </div> 
+                <div>
                     <label className='label'>User Classification </label>
                     <p className='error'>{errors.userType}</p>
                     <select 
@@ -291,6 +261,8 @@ export default function RegisterForm() {
                         <option value="worker">Construction Worker</option>
                         <option value="manager">Manager</option>
                     </select>
+                </div>
+                <div>
                     <label className='label'>Email </label>
                     <p className='error'>{errors.email}</p>
                     <input
@@ -301,6 +273,8 @@ export default function RegisterForm() {
                         value={user.email}
                         className='input'
                     />
+                </div>
+                <div>
                     <label className='label'>Password </label>
                     <p className='error'>{errors.password}</p>
                     <input
@@ -311,6 +285,8 @@ export default function RegisterForm() {
                         value={user.password}
                         className='input'
                     />
+                </div>
+                    <div>
                     <label className='label'>Confirm Password </label>
                     <p className='error'>{errors.passwordConfirm}</p>
                     <input
@@ -321,14 +297,10 @@ export default function RegisterForm() {
                         value={user.passwordConfirm}
                         className='input'
                     />
-
-                <button type="submit">Register</button>
+                </div>
+                <button>Register</button>
             </form>
-<<<<<<<< HEAD:src/components/registerForm.js
-            <a className="link-button" href="/login">Already have an account? Sign in here</a>
-========
             <a href="/login">Already have an account? Sign in here</a>
->>>>>>>> main:src/components/RegisterForm.js
         </div>
     )
 }
