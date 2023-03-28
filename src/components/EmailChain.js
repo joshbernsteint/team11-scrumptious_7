@@ -14,8 +14,8 @@ function EmailChain() {
   useEffect(() => {
     // mock users
     const user1 = { name: "Jasmine", email: "jperez11@stevens.edu" };
-    //const user2 = { name: "Campbell", email: "ctedtsen@stevens.edu" };
-    setUsers([user1]);
+    const user2 = { name: "Campbell", email: "ctedtsen@stevens.edu" };
+    setUsers([user1, user2]);
   }, []);
 
   const clickHandler = () => {
@@ -73,19 +73,21 @@ function EmailChain() {
   };
 
   return (
-    <div>
+    <div className="eml-chain-div">
       <button className="eml-btn" onClick={clickHandler}>
         Send to Email Chain
       </button>
-      {emlbtn && <ul>{usersName}</ul>}
+      {emlbtn && <div className="userNames-div"><h2 className="people-h2">People:</h2><ul>{usersName}</ul></div>}
       {error && <p>{error}</p>}
       {emlbtn && (
+        <div className="eml-form-div">
         <form onSubmit={sumbitHandler}>
           <label className="lbl-msg">Message</label>
           <br></br>
           <input type="text" id="eml-msg"></input>
           <button type="submit">Send</button>
         </form>
+        </div>
       )}
     </div>
   );
