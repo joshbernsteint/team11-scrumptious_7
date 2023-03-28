@@ -14,13 +14,28 @@ function NotificationBar(props) {
   const sorted = list.sort((a,b) =>
   {
     if(props.filterType === "1"){
-      if(a.date < b.date){
+      console.log(a.date)
+      const aD = parseInt(a.date.substring(8));
+      const bD = parseInt(b.date.substring(8));
+      const aM = parseInt(a.date.substring(5));
+      const bM = parseInt(b.date.substring(5));
+      console.log(aD + " " + bD)
+      if(aM < bM){
+        console.log("here")
         return -1;
       }
-      else if(a.date > b.date){
+      else if(aM > bM){
         return 1;
       }
-      return 0;
+      else{
+        if(aD < bD){
+          return -1
+        }
+        else if(aD > bD){
+          return 1;
+        }
+        return 0;
+      }
     }
     else if(props.filterType === "2"){
       if(a.id < b.id){
