@@ -49,7 +49,7 @@ function App() {
         due: "March 12, 2023",
         owner: "Manager",
         assignedTo: "Construction Worker",
-        description: "",
+        description: "There is no light here",
         priority: "4",
         date: "2023-03-12",
         completed: "no",
