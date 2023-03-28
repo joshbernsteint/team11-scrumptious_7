@@ -259,9 +259,7 @@ header h1 {
 }
 
 .require-div {
-  position: absolute;
-  top: 20%;
-  left: 50%;
+  margin: 10% 25%;
 }
 
 .temp-div {
