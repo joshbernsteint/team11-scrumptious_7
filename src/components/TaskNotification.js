@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 
 function TaskNotification(props) {
   const dateT = props.date;
@@ -8,6 +9,20 @@ function TaskNotification(props) {
   const val2 = dateN.getDate();
 
   const caltime = parseInt(val1) - parseInt(val2);
+
+
+  // const color = "#74819b"
+  const color = (() => {
+    if(caltime < 0){
+      return "red"
+    }
+    else{
+      return "#74819b"
+    }
+  })
+
+
+
 
   const format = caltime === 1 ? "day" : "days";
 
@@ -31,7 +46,7 @@ function TaskNotification(props) {
   const fullDate = `${monthNames[month - 1]} ${val1}`;
 
   return (
-    <div className="task-notification">
+    <div className="task-notification" style ={{backgroundColor: `${color()}`}}>
       <div className="top-task">
         <p className="task-title">{props.title}</p>
         <p className="task-date">Due: {fullDate}</p>

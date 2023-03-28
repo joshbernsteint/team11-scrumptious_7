@@ -7,16 +7,43 @@ import RegisterForm from "./components/RegisterForm";
 import Login from "./components/LoginForm";
 import AuthDetails from "./components/AuthDetails";
 import MaterialNotification from "./components/MaterialNotification";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import NotificationBar from './components/NotificationBar'
 import { HomeNavBar } from "./components/homeNavBar";
 import SendContract from "./components/SendContract";
+import { TaskDashboard } from "./components/TaskDashboard";
 function App() {
   const [showNav, setShowNav] = useState(false);
 
   const clickHandler = () => {
     setShowNav(!showNav);
   };
+
+  const tasks = useRef([
+    {
+      id: "1",
+      name: "Submit Roof Picture",
+      due: "March 8, 2023",
+      owner: "Manager",
+      assignedTo: "Construction Worker",
+    },
+    {
+      id: "2",
+      name: "Sign Contract",
+      due: "March 15, 2023",
+      owner: "Manager",
+      assignedTo: "Customer",
+    },
+    {
+      id: "3",
+      name: "Order Equipment",
+      due: "March 17, 2023",
+      owner: "Manager",
+      assignedTo: "Construction Worker",
+    },
+  ]);
+
+
   return (
     <div className="App">
       <HomeNavBar/>
@@ -26,7 +53,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/login/register" element={<RegisterForm />} />
         <Route path="/camera" element={<CameraForm />} />
-        <Route path="/tasks" element={<NotificationBar/>} />
+        <Route path="/tasks" element={<TaskDashboard tasks={tasks}/>} />
         <Route path="/login/:id" element={<h1>Sup</h1>}>
           <Route index element = {<h1>Sup</h1>} />
         </Route>
