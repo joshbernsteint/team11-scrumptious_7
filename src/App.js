@@ -31,7 +31,7 @@ function App() {
       description: "placeholder",
       priority: "3",
       date: "2023-03-8",
-      completed: "no",
+      completed: "40",
     },
     {
       id: "1.5",
@@ -42,7 +42,7 @@ function App() {
       description: "placeholder",
       priority: "3",
       date: "2023-03-8",
-      completed: "no",
+      completed: "15",
     },
     {
         id: "5",
@@ -53,7 +53,7 @@ function App() {
         description: "There is no light here",
         priority: "4",
         date: "2023-03-12",
-        completed: "no",
+        completed: "65",
 
     },
     {
@@ -65,7 +65,7 @@ function App() {
         description: "Put panels in place",
         priority: "1",
         date: "2023-03-30",
-        completed: "no",
+        completed: "30",
 
     },
     {
@@ -77,7 +77,7 @@ function App() {
         description: "Connect electrical wiring",
         priority: "2",
         date: "2023-03-31",
-        completed: "no",
+        completed: "90",
 
     },
   ]);

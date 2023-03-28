@@ -64,7 +64,6 @@ function NotificationBar(props) {
         return sorted.reverse();
       }
     })
-
   const notis = (sortedWdir()).map((noti) => (
     <TaskNotification
       key={noti.title}
@@ -73,6 +72,7 @@ function NotificationBar(props) {
       date={noti.date}
       priority={priorities[parseInt(noti.priority)-1]}
       id={noti.id}
+      completed={noti.completed}
     ></TaskNotification>
   ));
   

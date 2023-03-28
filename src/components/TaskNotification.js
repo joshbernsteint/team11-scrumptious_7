@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import ProgressBar from "./ProgressBar";
 
 function TaskNotification(props) {
   const dateT = props.date;
@@ -43,7 +44,7 @@ function TaskNotification(props) {
   const month = parseInt(dateT.substring(5, 8));
 
   const fullDate = `${monthNames[month - 1]} ${val1}`;
-
+  
   return (
     <div className="task-notification" style ={{backgroundColor: `${color()}`}}>
       <div className="top-task">
@@ -56,10 +57,13 @@ function TaskNotification(props) {
         <p className="task-status">
           Due in: {caltime.toString()} {format}
         </p>
-        <a href="/" className="task-href">
+        <a href={`/tasks/#${props.id}`} className="task-href">
           Go to task
         </a>
       </div>
+      <b>Completion:</b>
+      <ProgressBar bgcolor="blue" completed={props.completed}/>
+
     </div>
   );
 }

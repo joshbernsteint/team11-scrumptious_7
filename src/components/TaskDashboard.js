@@ -3,6 +3,7 @@ import { Stack, Card, ButtonGroup, ToggleButton, Button, Modal } from 'react-boo
 import { useRef, useState, useEffect } from 'react'
 import TaskStatus from './TaskStatus';
 import NotificationBar from './NotificationBar';
+import ProgressBar from './ProgressBar';
 
 const priorities=[
     <img src="/priorities/p1.png" className="priority-Images"/>,
@@ -44,6 +45,8 @@ function FocusedTask(props) {
            <h5><b>Description</b></h5>
            {selectedTask.description}<br/>
            <>
+           <b>Completion:</b>
+           <ProgressBar bgcolor="blue" completed={selectedTask.completed}/>
         <Button variant="primary" onClick={handleShow}>
           Change Featured Task
         </Button>

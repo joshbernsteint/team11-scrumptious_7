@@ -20,8 +20,8 @@ const ProgressBar = (props) => {
 
     const writing = {
         fontWeight: 'bold',
-        padding: 10,
-        color: 'white'
+        padding: 5,
+        color: 'white',
     }
 
     return (
