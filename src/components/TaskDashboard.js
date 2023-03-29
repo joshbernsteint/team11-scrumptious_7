@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from 'react'
 import TaskStatus from './TaskStatus';
 import NotificationBar from './NotificationBar';
 import ProgressBar from './ProgressBar';
+import UpdateProgressBar from './UpdateProgressBar';
 
 const priorities=[
     <img src="/priorities/p1.png" className="priority-Images"/>,
@@ -152,8 +153,11 @@ export function TaskDashboard(tasks) {
                         {notBar}
                     </Stack>
                 </Stack>
+            <Button href="/progress" variant='primary' style={{width: "15%", alignContent: "center"}}>See overall Progress</Button>
             </Card.Body>
             </Card>
+
+
         
         </div>
     )

@@ -35,7 +35,7 @@ const JoinChat = (props) => {
     e.preventDefault();
     setName(e.target.changeName.value);
   };
-
+  const tasks=props.tasks
   return (
     <div className={styles.main_chat}>
       <div className={styles.room_header}>
@@ -68,9 +68,9 @@ const JoinChat = (props) => {
           {open && !toggle && (
             <div className={styles.join_chat}>
               <h1>Join A Task Chat</h1>
-              <button
+              {/* <button
                 className={styles.task_chat}
-                onClick={() => onPress("room1", "Submit Roof Picture")}
+                onClick={() => onPress("room1", "Submit Roof Hahaha")}
               >
                 Submit Roof Picture
               </button>
@@ -85,7 +85,15 @@ const JoinChat = (props) => {
                 onClick={() => onPress("room3", "Order Equipment")}
               >
                 Order Equipment
-              </button>
+              </button> */}
+              {tasks.map((task,idx) => (
+                  <button
+                  className={styles.task_chat}
+                  onClick={() => onPress(`room${idx}`, task.title)}
+                >
+                  {task.title}
+                </button>
+              ))}
             </div>
           )}
           {open && toggle ? (
