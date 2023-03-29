@@ -37,7 +37,7 @@ function FocusedTask(props) {
     })
 
     return (
-        <div style={{ width: '40rem', border: "0.15rem solid gray", height: '40rem', borderRadius: '5%', top: "0", left: "0", bottom: "auto"}}>
+        <div style={{ width: '40rem', border: "0.15rem solid gray", height: '40rem', borderRadius: '5%', top: "0", left: "0", bottom: "auto"}} aria-label="featured">
            <h1>Task ID: {selectedTask.id}</h1>
            <h2>{selectedTask.title}</h2>
            <h6><i>Due: {selectedTask.due}</i></h6>
@@ -50,7 +50,7 @@ function FocusedTask(props) {
            <b>Completion:</b>
            <ProgressBar bgcolor="blue" completed={selectedTask.completed}/>
         <Button variant="primary" onClick={handleShow}>
-          Change Featured Task
+          <p aria-label='change-task-button'>Change Featured Task</p>
         </Button>
             <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
@@ -59,7 +59,7 @@ function FocusedTask(props) {
             <Modal.Body>
                 <Stack gap={2}>
                 {otherChoices.map((t, idx) => (
-                    <Button value={idx} variant="success" onClick={(e) => {setSelectedTask(props.tasks[e.currentTarget.value])}}>ID #{t.id}: {t.title}</Button>
+                    <Button value={idx} variant="success" onClick={(e) => {setSelectedTask(props.tasks[e.currentTarget.value])}} key={idx}>ID #{t.id}: {t.title}</Button>
                 ))}
                 </Stack>
             </Modal.Body>
@@ -68,6 +68,7 @@ function FocusedTask(props) {
                 Close
                 </Button>
             </Modal.Footer>
+            <div aria-label='featured-selector'/>
             </Modal>
       </>
         </div>
@@ -79,8 +80,8 @@ function getBar(props){
 }
 
 
-export function TaskDashboard(tasks) {
-    const myTasks = tasks.taskRef;
+export function TaskDashboard(props) {
+    const myTasks = props.tasks;
     const [selectedTask, setSelectedTask] = useState(myTasks[0]);
     
 

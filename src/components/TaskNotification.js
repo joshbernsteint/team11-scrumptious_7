@@ -46,7 +46,7 @@ function TaskNotification(props) {
   const fullDate = `${monthNames[month - 1]} ${val1}`;
   
   return (
-    <div className="task-notification" style ={{backgroundColor: `${color()}`}}>
+    <div className="task-notification" style ={{backgroundColor: `${color()}`}} aria-label={`${props.id}`}>
       <div className="top-task">
         <p className="task-title">#{props.id}: {props.title}</p>
         <p className="task-date">Priority: {props.priority}</p>
