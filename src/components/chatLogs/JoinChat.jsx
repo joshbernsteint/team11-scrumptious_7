@@ -95,6 +95,7 @@ const JoinChat = (props) => {
               </button> */}
               {tasks.map((task, idx) => (
                 <button
+                  key={idx}
                   aria-label={`task_chat${idx}`}
                   className={styles.task_chat}
                   onClick={() => onPress(`room${idx}`, task.title)}
