@@ -116,19 +116,20 @@ const ChatBox = (props) => {
         </div>
         {/* <div className={styles.render_users}>{renderUsers()}</div> */}
         <div className={styles.render_chat}>{renderChat()}</div>
-        <form onSubmit={onMessageSubmit}>
+        <form onSubmit={onMessageSubmit} aria-label="msg-form">
           {/* <h1>Messenger</h1> */}
           <div className={styles.input_chat}>
             <label htmlFor="message">
               Send a message
               <input
+                aria-label="msg-input"
                 name="message"
                 id="message"
                 variant="outlined"
                 label="Message"
               />
             </label>
-            <button>Send Message</button>
+            <button aria-label="message-btn">Send Message</button>
           </div>
         </form>
       </div>

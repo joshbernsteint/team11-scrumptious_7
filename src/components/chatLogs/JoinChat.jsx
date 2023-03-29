@@ -7,6 +7,7 @@ const JoinChat = (props) => {
   const [toggle, setToggle] = useState(false);
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
+  const [temp, setTemp] = useState("");
   const [taskName, setTaskName] = useState("task");
 
   useEffect(() => {
@@ -33,13 +34,17 @@ const JoinChat = (props) => {
 
   const changeName = (e) => {
     e.preventDefault();
-    setName(e.target.changeName.value);
+    setName(temp);
   };
-  const tasks=props.tasks
+  const tasks = props.tasks;
   return (
     <div className={styles.main_chat}>
       <div className={styles.room_header}>
-        <button className="close-button" onClick={() => onClose()}>
+        <button
+          aria-label="close-button"
+          className="close-button"
+          onClick={() => onClose()}
+        >
           {!open ? "Open Chat" : "Close Chat"}
         </button>
         {open && toggle && (
@@ -52,14 +57,16 @@ const JoinChat = (props) => {
       {open && !name && (
         <div className={styles.room_header}>
           <h1>Input a name</h1>
-          <form onSubmit={changeName}>
+          <form onSubmit={changeName} aria-label="name-form">
             <input
+              aria-label="name-prompt"
               type="text"
               placeholder="Name"
               name="changeName"
               className={styles.inputOne}
+              onChange={(e) => setTemp(e.target.value)}
             />
-            <button>Confirm</button>
+            <button aria-label="confirm">Confirm</button>
           </form>
         </div>
       )}
@@ -86,8 +93,9 @@ const JoinChat = (props) => {
               >
                 Order Equipment
               </button> */}
-              {tasks.map((task,idx) => (
-                  <button
+              {tasks.map((task, idx) => (
+                <button
+                  aria-label={`task_chat${idx}`}
                   className={styles.task_chat}
                   onClick={() => onPress(`room${idx}`, task.title)}
                 >
