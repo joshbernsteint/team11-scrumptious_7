@@ -39,6 +39,7 @@ function FocusedTask(props) {
     return (
         <div style={{ width: '40rem', border: "0.15rem solid gray", height: '40rem', borderRadius: '5%', top: "0", left: "0", bottom: "auto"}}>
            <h1>Task ID: {selectedTask.id}</h1>
+           <h2>{selectedTask.title}</h2>
            <h6><i>Due: {selectedTask.due}</i></h6>
            <h5>
             {prioritiesB[selectedTask.priority-1]}
@@ -153,7 +154,7 @@ export function TaskDashboard(tasks) {
                         {notBar}
                     </Stack>
                 </Stack>
-            <Button href="/progress" variant='primary' style={{width: "15%", alignContent: "center"}}>See overall Progress</Button>
+            {/* <Button href="/progress" variant='primary' style={{width: "15%", alignContent: "center"}}>See overall Progress</Button> */}
             </Card.Body>
             </Card>
 
