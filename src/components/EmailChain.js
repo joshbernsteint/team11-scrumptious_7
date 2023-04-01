@@ -13,9 +13,11 @@ function EmailChain() {
 
   useEffect(() => {
     // mock users
-    const user1 = { name: "Jasmine", email: "jperez11@stevens.edu" };
-    const user2 = { name: "Campbell", email: "ctedtsen@stevens.edu" };
-    setUsers([user1, user2]);
+    // const user1 = { name: "Jasmine", email: "jperez11@stevens.edu" };
+    // const user2 = { name: "Campbell", email: "ctedtsen@stevens.edu" };
+    const user3 = { name: "Josh B", email: "jbernst1@stevens.edu"};
+    const user4 = { name: "Josh G", email: "jgorman4@stevens.edu"};
+    setUsers([user3, user4]);
   }, []);
 
   const clickHandler = () => {

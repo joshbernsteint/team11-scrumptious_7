@@ -9,30 +9,31 @@ import {
   Typography,
 } from "@mui/material";
 
-function TaskStatus() {
-  const tasks = useRef([
-    {
-      id: "1",
-      name: "Submit Roof Picture",
-      due: "March 8, 2023",
-      owner: "Manager",
-      assignedTo: "Construction Worker",
-    },
-    {
-      id: "2",
-      name: "Sign Contract",
-      due: "March 15, 2023",
-      owner: "Manager",
-      assignedTo: "Customer",
-    },
-    {
-      id: "3",
-      name: "Order Equipment",
-      due: "March 17, 2023",
-      owner: "Manager",
-      assignedTo: "Construction Worker",
-    },
-  ]);
+function TaskStatus(props) {
+  // const tasks = useRef([
+  //   {
+  //     id: "1",
+  //     name: "Submit Roof Picture",
+  //     due: "March 8, 2023",
+  //     owner: "Manager",
+  //     assignedTo: "Construction Worker",
+  //   },
+  //   {
+  //     id: "2",
+  //     name: "Sign Contract",
+  //     due: "March 15, 2023",
+  //     owner: "Manager",
+  //     assignedTo: "Customer",
+  //   },
+  //   {
+  //     id: "3",
+  //     name: "Order Equipment",
+  //     due: "March 17, 2023",
+  //     owner: "Manager",
+  //     assignedTo: "Construction Worker",
+  //   },
+  // ]);
+  let tasks = props.tasks
   const [cards, setCards] = useState(null);
   const completedTasks = useRef([]);
   const buildTaskCard = (task) => {
@@ -42,13 +43,18 @@ function TaskStatus() {
           <Card>
             <CardActionArea>
               <CardContent>
-                <Typography>Task Name: {task.name}</Typography>
+                <Typography>Task Name: {task.title}</Typography>
                 <Typography>Deadline: {task.due}</Typography>
                 <Typography>Task Owner: {task.owner}</Typography>
                 <Typography>Assigned To: {task.assignedTo}</Typography>
               </CardContent>
             </CardActionArea>
             <CardActions>
+              <Grid
+              container
+              alignItems="center"
+              justifyContent="center"
+              >
               <button className="card-btn"
                 onClick={() => {
                   if (task.id) handleClick(task.id);
@@ -56,6 +62,7 @@ function TaskStatus() {
               >
                 Done
               </button>
+              </Grid>
             </CardActions>
             <CardActions>
               <EmailChain></EmailChain>
@@ -67,7 +74,7 @@ function TaskStatus() {
   };
   useEffect(() => {
     setCards(
-      tasks.current.map((task) => {
+      tasks.map((task) => {
         return buildTaskCard(task);
       })
     );
@@ -97,7 +104,7 @@ function TaskStatus() {
       }
     }
     completedTasks.current = doneTasks;
-    let temp2 = [...tasks.current, incompleteTask];
+    let temp2 = [...tasks, incompleteTask];
     tasks.current = temp2;
     setCards(
       tasks.current.map((task) => {
@@ -114,23 +121,23 @@ function TaskStatus() {
     let li = document.createElement("li");
 
     // find task marked completed in tasks
-    for (let i = 0; i < tasks.current.length; i++) {
-      if (tasks.current[i].id === id) {
-        taskCompleted = tasks.current[i];
+    for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].id === id) {
+        taskCompleted = tasks[i];
         completedTasks.current = [...completedTasks.current, taskCompleted];
         break;
       }
     }
-    for (let i = 0; i < tasks.current.length; i++) {
-      if (tasks.current[i].id) {
-        if (tasks.current[i].id !== id) {
-          task = tasks.current[i];
+    for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].id) {
+        if (tasks[i].id !== id) {
+          task = tasks[i];
           incompleteTasks.push(task);
         }
       }
     }
-    tasks.current = incompleteTasks;
-    li.appendChild(document.createTextNode("Task Name: "+taskCompleted.name));
+    tasks = incompleteTasks;
+    li.appendChild(document.createTextNode("Task Name: "+taskCompleted.title));
     li.appendChild(document.createElement("br"))
     let date = new Date();
     li.appendChild(document.createTextNode("Completed On: "+ date.toDateString() +" "+ date.toLocaleTimeString()))
@@ -144,7 +151,7 @@ function TaskStatus() {
     li.id = "li-task" + id;
     ul.appendChild(li);
     setCards(
-      tasks.current.map((task) => {
+      tasks.map((task) => {
         return buildTaskCard(task);
       })
     );
@@ -159,6 +166,8 @@ function TaskStatus() {
           spacing={2}
           sx={{ flexGrow: 1, flexDirection: "row" }}
           className="gridTasks"
+          alignItems="center"
+          justifyContent="center"
         >
           {cards}
         </Grid>

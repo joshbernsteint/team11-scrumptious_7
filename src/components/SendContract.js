@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import './style.css'
+// import './App.css'
+//import './style.css'
 
-import {user_database} from '../firebase'
+// import {user_database} from './firebase'
 
 export default function SendContract() {
 	
@@ -29,12 +30,12 @@ export default function SendContract() {
 				</div>
 				<div>
 					<label className='label'>Signers Email</label>
-					<p className='error'>{errors.email}</p>
+					<p className='error'>{/*errors.email*/}</p>
 					<input
 						type="text"
 						placeholder="Email"
 						name="signersEmail"
-						value={user.lastName}
+						//value={user.lastName}
 						className='input'
 					/>
 				</div>

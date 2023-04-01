@@ -28,7 +28,7 @@ function RequirePhotos(){
     return (
         <div className="App">
             <form onSubmit={handleSubmit}>
-              <h1>React File Upload</h1>
+              <h1>Image Upload</h1>
               <input required type="file" onChange={handleChange}/>
               <button type="submit">Upload</button>
             </form>
