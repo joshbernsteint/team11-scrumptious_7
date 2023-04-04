@@ -4,7 +4,7 @@ const ProgressBar = (props) => {
 
     const bar = {
         height: 20,
-        width: '80%',
+        width: '97%',
         backgroundColor: "#e0e0de",
         borderRadius: 70,
         margin: 20

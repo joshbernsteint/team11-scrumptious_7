@@ -81,7 +81,8 @@ function getBar(props){
 
 
 export function TaskDashboard(props) {
-    const myTasks = props.tasks;
+
+    const myTasks = props.taskRef;
     const [selectedTask, setSelectedTask] = useState(myTasks[0]);
     
 
