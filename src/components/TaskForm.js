@@ -17,6 +17,13 @@ function TaskForm() {
   const [uid, setUid] = useState(undefined);
   const [userList, setUserList] = useState([]);
   const [result, setResult] = useState({});
+  const [error, setError] = useState({
+    title: "",
+    description: "",
+    assignedTo: "",
+    dueDate: "",
+  });
+  const [success, setSuccess] = useState(false);
   const auth = getAuth();
   let options = null;
 
@@ -107,13 +114,31 @@ function TaskForm() {
         assignedTo: assignedTo,
         owner: uid,
       });
+      setSuccess(true);
+      setError(false);
     } else {
-      console.log("error: field cannot be empty and must be signed in");
+      let errorObj = {};
+      if (!title) {
+        errorObj.title = "Title cannot be empty";
+      }
+      if (!description) {
+        errorObj.description = "Task must have a description ";
+      }
+
+      if (!assignedTo) {
+        errorObj.assignedTo = "Task must be assigned to someone";
+      }
+
+      if (!dueDate) {
+        errorObj.dueDate = "Select a due date";
+      }
+      setError(errorObj);
     }
   }
 
   function handleSubmit(event) {
     event.preventDefault();
+    setSuccess(false);
     writeTaskData();
     setTitle("");
     setDescription("");
@@ -123,20 +148,23 @@ function TaskForm() {
 
   return (
     <div>
-      <p>message present if error</p>
+      {success && <p>Task successfully created!</p>}
       <form onSubmit={handleSubmit} className="task-form">
         <div>
+          {error.title && <p className="error">{error.title}</p>}
           <label className="">Task Title:</label>
           <input
             type="text"
             name="title"
             value={title}
             onChange={(event) => {
+              setSuccess(false);
               setTitle(event.target.value);
             }}
           ></input>
         </div>
         <div>
+          {error.description && <p className="error">{error.description}</p>}
           <label className="">Task Description:</label>
           <textarea
             className="text-area"
@@ -144,33 +172,35 @@ function TaskForm() {
             name="description"
             value={description}
             onChange={(event) => {
+              setSuccess(false);
               setDescription(event.target.value);
             }}
           ></textarea>
         </div>
         <div className="date-picker">
+          {error.dueDate && <p className="error">{error.dueDate}</p>}
           <label className="">Deadline:</label>
           <br />
           <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={de}>
             <DatePicker
               selected={dueDate}
               format="MM/dd/yyyy"
-              onChange={(date) => setDueDate(date)}
+              onChange={(date) => setDueDate(date.toString())}
             />
           </LocalizationProvider>
         </div>
         <div>
+          {error.assignedTo && <p className="error">{error.assignedTo}</p>}
           <label className="">Assign To:</label>
           <select
             name="assignedTo"
             value={assignedTo}
             onChange={(event) => {
+              setSuccess(false);
               setAssignedTo(event.target.value);
             }}
           >
-            <option disabled>
-              Choose Assignee
-            </option>
+            <option disabled>Choose Assignee</option>
             {options}
           </select>
         </div>
