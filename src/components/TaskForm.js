@@ -1,0 +1,187 @@
+import React, { useState, useEffect } from "react";
+import "../App.css";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { ref, set, getDatabase, child, get, onValue } from "firebase/database";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import de from "date-fns/locale/de";
+import { v4 as uuid } from "uuid";
+
+function TaskForm() {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [assignedTo, setAssignedTo] = useState("");
+  const [dueDate, setDueDate] = useState("");
+  const [owner, setOwner] = useState("");
+  const [uid, setUid] = useState(undefined);
+  const [userList, setUserList] = useState([]);
+  const [result, setResult] = useState({});
+  const auth = getAuth();
+  let options = null;
+
+  const getAllUsers = async () => {
+    const dbRef = ref(getDatabase());
+    try {
+      const snapshot = await get(child(dbRef, "users"));
+      if (snapshot.exists()) {
+        setResult(snapshot.val());
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUid(user.uid);
+        getUser();
+      } else {
+        console.log("User not signed in");
+      }
+    });
+  }, [auth, uid]);
+
+  useEffect(() => {
+    if (uid) {
+      getAllUsers();
+    }
+  }, [uid]);
+
+  useEffect(() => {
+    if (Object.keys(result).length !== 0) {
+      let userNamesAndUid = [];
+      Object.keys(result).forEach((key, index) => {
+        let userName = `${result[key].firstName} ${result[key].lastName}`;
+        let userUid = `${result[key].uid}`;
+        console.log(userName);
+        userNamesAndUid = [
+          ...userNamesAndUid,
+          { name: userName, uid: userUid },
+        ];
+      });
+      setUserList(userNamesAndUid);
+    }
+  }, [result]);
+
+  useEffect(() => {
+    console.log(userList);
+  }, [userList]);
+
+  if (userList.length > 0) {
+    options = userList.map((user) => {
+      return buildOptions(user.name, user.uid);
+    });
+  }
+
+  function buildOptions(name, userUid) {
+    if (name) {
+      return (
+        <option key={userUid} value={`${name}`}>
+          {name}
+        </option>
+      );
+    }
+  }
+  async function getUser() {
+    const dbRef = ref(getDatabase());
+    try {
+      const snapshot = await get(child(dbRef, `users/${uid}`));
+      if (snapshot.exists) {
+        setOwner(snapshot.val());
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  function writeTaskData() {
+    if (title && description && assignedTo && dueDate && owner) {
+      const db = getDatabase();
+      set(ref(db, "tasks/" + uuid()), {
+        title: title,
+        description: description,
+        dueDate: dueDate,
+        assignedTo: assignedTo,
+        owner: uid,
+      });
+    } else {
+      console.log("error: field cannot be empty and must be signed in");
+    }
+  }
+  function handleSubmit(event) {
+    event.preventDefault();
+    console.log(title);
+    console.log(description);
+    console.log(dueDate);
+    console.log(assignedTo);
+    writeTaskData();
+    setTitle("");
+    setDescription("");
+    setAssignedTo("");
+    setDueDate("");
+  }
+  return (
+    <div>
+      <p>message present if error</p>
+      <form onSubmit={handleSubmit} className="task-form">
+        <div>
+          <label className="">Task Title</label>
+          <input
+            type="text"
+            name="title"
+            value={title}
+            onChange={(event) => {
+              setTitle(event.target.value);
+            }}
+          ></input>
+        </div>
+        <div>
+          <label className="">Task Description</label>
+          <input
+            type="text"
+            name="description"
+            value={description}
+            onChange={(event) => {
+              setDescription(event.target.value);
+            }}
+          ></input>
+        </div>
+        <div className="date-picker">
+          <label className="">Deadline</label>
+          <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={de}>
+            <DatePicker
+              selected={dueDate}
+              format="MM/dd/yyyy"
+              onChange={(date) => setDueDate(date)}
+            />
+          </LocalizationProvider>
+        </div>
+        <div>
+          <label className="">Assign To</label>
+          <select
+            name="assignedTo"
+            value={assignedTo}
+            onChange={(event) => {
+              setAssignedTo(event.target.value);
+            }}
+          >
+            {options}
+          </select>
+          <input
+            type="text"
+            name="assignedTo"
+            value={assignedTo}
+            onChange={(event) => {
+              setAssignedTo(event.target.value);
+            }}
+          ></input>
+        </div>
+        <button type="submit">Create</button>
+      </form>
+    </div>
+  );
+}
+
+export default TaskForm;

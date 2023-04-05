@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import EmailChain from "./EmailChain";
+import TaskForm from "./TaskForm";
+import {Link} from "react-router-dom"
 import {
   CardActionArea,
   CardActions,
@@ -10,29 +12,6 @@ import {
 } from "@mui/material";
 
 function TaskStatus(props) {
-  // const tasks = useRef([
-  //   {
-  //     id: "1",
-  //     name: "Submit Roof Picture",
-  //     due: "March 8, 2023",
-  //     owner: "Manager",
-  //     assignedTo: "Construction Worker",
-  //   },
-  //   {
-  //     id: "2",
-  //     name: "Sign Contract",
-  //     due: "March 15, 2023",
-  //     owner: "Manager",
-  //     assignedTo: "Customer",
-  //   },
-  //   {
-  //     id: "3",
-  //     name: "Order Equipment",
-  //     due: "March 17, 2023",
-  //     owner: "Manager",
-  //     assignedTo: "Construction Worker",
-  //   },
-  // ]);
   let tasks = props.tasks
   const [cards, setCards] = useState(null);
   const completedTasks = useRef([]);
@@ -174,6 +153,7 @@ function TaskStatus(props) {
       )}
       <h2 className="h2-v1">Completed Tasks</h2>
       <ul id="completedTasks"></ul>
+      <Link to='/newTask'><p>Create a new task here.</p></Link>
     </div>
   );
 }

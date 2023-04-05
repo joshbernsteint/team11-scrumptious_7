@@ -6,6 +6,7 @@
     "@emailjs/browser": "^3.10.0",
     "@emotion/styled": "^11.10.6",
     "@mui/material": "^5.11.11",
+    "@mui/x-date-pickers": "^6.0.4",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -20,6 +21,7 @@
     "react-router-dom": "^6.8.2",
     "react-scripts": "5.0.1",
     "socket.io-client": "^4.6.1",
+    "uuid": "^9.0.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
