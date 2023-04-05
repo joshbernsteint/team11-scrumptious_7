@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { ref, set, getDatabase, child, get, onValue } from "firebase/database";
+import { ref, set, getDatabase, child, get } from "firebase/database";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -84,6 +84,7 @@ function TaskForm() {
       );
     }
   }
+
   async function getUser() {
     const dbRef = ref(getDatabase());
     try {
@@ -110,24 +111,22 @@ function TaskForm() {
       console.log("error: field cannot be empty and must be signed in");
     }
   }
+
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(title);
-    console.log(description);
-    console.log(dueDate);
-    console.log(assignedTo);
     writeTaskData();
     setTitle("");
     setDescription("");
     setAssignedTo("");
     setDueDate("");
   }
+
   return (
     <div>
       <p>message present if error</p>
       <form onSubmit={handleSubmit} className="task-form">
         <div>
-          <label className="">Task Title</label>
+          <label className="">Task Title:</label>
           <input
             type="text"
             name="title"
@@ -138,18 +137,20 @@ function TaskForm() {
           ></input>
         </div>
         <div>
-          <label className="">Task Description</label>
-          <input
+          <label className="">Task Description:</label>
+          <textarea
+            className="text-area"
             type="text"
             name="description"
             value={description}
             onChange={(event) => {
               setDescription(event.target.value);
             }}
-          ></input>
+          ></textarea>
         </div>
         <div className="date-picker">
-          <label className="">Deadline</label>
+          <label className="">Deadline:</label>
+          <br />
           <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={de}>
             <DatePicker
               selected={dueDate}
@@ -159,7 +160,7 @@ function TaskForm() {
           </LocalizationProvider>
         </div>
         <div>
-          <label className="">Assign To</label>
+          <label className="">Assign To:</label>
           <select
             name="assignedTo"
             value={assignedTo}
@@ -167,18 +168,17 @@ function TaskForm() {
               setAssignedTo(event.target.value);
             }}
           >
+            <option disabled>
+              Choose Assignee
+            </option>
             {options}
           </select>
-          <input
-            type="text"
-            name="assignedTo"
-            value={assignedTo}
-            onChange={(event) => {
-              setAssignedTo(event.target.value);
-            }}
-          ></input>
         </div>
-        <button type="submit">Create</button>
+        <div className="btn-div">
+          <button className="form-btn" type="submit">
+            Create
+          </button>
+        </div>
       </form>
     </div>
   );
