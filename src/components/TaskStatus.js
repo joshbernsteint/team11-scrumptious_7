@@ -2,19 +2,16 @@ import React, { useState, useEffect, useRef } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import EmailChain from "./EmailChain";
-import TaskForm from "./TaskForm";
-import {Link} from "react-router-dom"
-import {
-  CardActionArea,
-  CardActions,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { ref, getDatabase, update, child, get, set } from "firebase/database";
+import { Link } from "react-router-dom";
+import { CardActionArea, CardActions, Grid, Typography } from "@mui/material";
 
 function TaskStatus(props) {
-  let tasks = props.tasks
+  const [tasks, setTasks] = useState(props.tasks);
   const [cards, setCards] = useState(null);
-  const completedTasks = useRef([]);
+  const [completedTasks, setCompletedTasks] = useState([]);
+  const [doneList, setDoneList] = useState(null);
+
   const buildTaskCard = (task) => {
     if (task) {
       return (
@@ -23,24 +20,21 @@ function TaskStatus(props) {
             <CardActionArea>
               <CardContent>
                 <Typography>Task Name: {task.title}</Typography>
-                <Typography>Deadline: {task.due}</Typography>
+                <Typography>Deadline: {task.dueDate}</Typography>
                 <Typography>Task Owner: {task.owner}</Typography>
                 <Typography>Assigned To: {task.assignedTo}</Typography>
               </CardContent>
             </CardActionArea>
             <CardActions>
-              <Grid
-              container
-              alignItems="center"
-              justifyContent="center"
-              >
-              <button className="card-btn"
-                onClick={() => {
-                  if (task.id) handleClick(task.id);
-                }}
-              >
-                Done
-              </button>
+              <Grid container alignItems="center" justifyContent="center">
+                <button
+                  className="card-btn"
+                  onClick={() => {
+                    if (task.id) handleClick(task.id);
+                  }}
+                >
+                  Done
+                </button>
               </Grid>
             </CardActions>
             <CardActions>
@@ -51,89 +45,79 @@ function TaskStatus(props) {
       );
     }
   };
+
   useEffect(() => {
-    setCards(
-      tasks.map((task) => {
-        return buildTaskCard(task);
-      })
-    );
+    updateTaskCards()
   }, []);
 
-  const handleClick = (id) => {
-    if (id) {
-      addToCompletedTasks(id);
-    }
-  };
-
-  const undoTask = (id) => {
-    let task;
-    document.getElementById(id).remove();
-    document.getElementById("li-" + id).remove();
-    id = id.substring(4);
-    let doneTasks = [];
-    let incompleteTask;
-
-    // find task marked as undone and add back to tasks
-    for (let i = 0; i < completedTasks.current.length; i++) {
-      task = completedTasks.current[i];
-      if (task.id === id) {
-        incompleteTask = task;
-      } else {
-        doneTasks.push(task);
-      }
-    }
-    completedTasks.current = doneTasks;
-    let temp2 = [...tasks, incompleteTask];
-    tasks.current = temp2;
+  const updateTaskCards = () => {
     setCards(
-      tasks.current.map((task) => {
-        return buildTaskCard(task);
+      tasks.map((task) => {
+        if (!task.completed) return buildTaskCard(task);
       })
     );
+    let doneTasks = [];
+    tasks.map((task) => {
+      if (task.completed) {
+        doneTasks = [...doneTasks, task];
+      }
+    });
+    setCompletedTasks(doneTasks);
   };
 
-  const addToCompletedTasks = (id) => {
-    let incompleteTasks = [];
-    let task;
-    let taskCompleted;
-    let ul = document.getElementById("completedTasks");
-    let li = document.createElement("li");
+  useEffect(() => {
+    setDoneList(
+      completedTasks.map((task) => {
+        return buildCompleteItem(task);
+      })
+    );
+  }, [completedTasks]);
 
-    // find task marked completed in tasks
-    for (let i = 0; i < tasks.length; i++) {
+  const buildCompleteItem = (task) => {
+    if (task)
+      return (
+        <li key={task.id}>
+          {task.title}
+          <button
+            onClick={() => {
+              if (task.id) handleClick(task.id);
+            }}
+          >
+            Mark as not done
+          </button>
+        </li>
+      );
+  };
+
+  const updtateTaskStatus = async (id) => {
+    const db = getDatabase();
+    const dbRef = ref(db);
+    let taskStatus = false;
+    try {
+      const snapshot = await get(child(dbRef, `tasks/${id}`));
+      if (snapshot.exists()) {
+        taskStatus = snapshot.val().completed;
+      }
+    } catch (e) {
+      console.log(e);
+    }
+    let updates = {};
+    updates["/tasks/" + id + "/completed"] = !taskStatus;
+    await update(ref(db), updates);
+    let updatedTasks = tasks;
+    for (let i = 0; tasks.length; i++) {
       if (tasks[i].id === id) {
-        taskCompleted = tasks[i];
-        completedTasks.current = [...completedTasks.current, taskCompleted];
+        updatedTasks[i].completed = !taskStatus;
         break;
       }
     }
-    for (let i = 0; i < tasks.length; i++) {
-      if (tasks[i].id) {
-        if (tasks[i].id !== id) {
-          task = tasks[i];
-          incompleteTasks.push(task);
-        }
-      }
+    updateTaskCards();
+  };
+
+  const handleClick = (id) => {
+    if (id) {
+      updtateTaskStatus(id);
     }
-    tasks = incompleteTasks;
-    li.appendChild(document.createTextNode("Task Name: "+taskCompleted.title));
-    li.appendChild(document.createElement("br"))
-    let date = new Date();
-    li.appendChild(document.createTextNode("Completed On: "+ date.toDateString() +" "+ date.toLocaleTimeString()))
-    let button = document.createElement("button");
-    button.appendChild(document.createTextNode("Mark as not Done"));
-    button.id = "task" + id;
-    button.addEventListener("click", function () {
-      undoTask(this.id);
-    });
-    li.appendChild(button);
-    li.id = "li-task" + id;
-    ul.appendChild(li);
-    setCards(
-      tasks.map((task) => {
-        return buildTaskCard(task);
-      })
-    );
   };
 
   return (
@@ -153,7 +137,10 @@ function TaskStatus(props) {
       )}
       <h2 className="h2-v1">Completed Tasks</h2>
       <ul id="completedTasks"></ul>
-      <Link to='/newTask'><p>Create a new task here.</p></Link>
+      {doneList}
+      <Link to="/newTask">
+        <p>Create a new task here.</p>
+      </Link>
     </div>
   );
 }

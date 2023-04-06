@@ -113,6 +113,7 @@ function TaskForm() {
         dueDate: dueDate,
         assignedTo: assignedTo,
         owner: uid,
+        complete: false,
       });
       setSuccess(true);
       setError(false);
