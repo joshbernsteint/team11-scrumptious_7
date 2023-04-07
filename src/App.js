@@ -12,7 +12,7 @@ import RegisterForm from "./components/RegisterForm";
 import Login from "./components/LoginForm";
 import AuthDetails from "./components/AuthDetails";
 import MaterialNotification from "./components/MaterialNotification";
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import NotificationBar from "./components/NotificationBar";
 import UpdateProgressBar from "./components/UpdateProgressBar";
 import { HomeNavBar } from "./components/homeNavBar";
@@ -20,6 +20,8 @@ import SendContract from "./components/SendContract";
 import { TaskDashboard } from "./components/TaskDashboard";
 import { TaskScreen } from "./components/TaskScreen";
 import TaskForm from "./components/TaskForm";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase";
 function App() {
 
   // const MyTasks = useRef([
@@ -80,6 +82,18 @@ function App() {
   //   },
   // ]);
 
+  const [uid, setUid] = useState(undefined);
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUid(user.uid);
+      } else {
+        console.log("User not signed in");
+      }
+    });
+  }, [auth, uid]);
+
+
   return (
     <div className="App">
       <HomeNavBar />
@@ -99,7 +113,7 @@ function App() {
           <Route path="/sendContract" element={<SendContract />} />
           <Route path="*" element={<Navigate to="/" />} />
           <Route path="/progress" element={<UpdateProgressBar />} />
-          <Route path="/newTask" element={<TaskForm />}></Route>
+          <Route path="/newTask" element={<TaskForm uid={uid}/>}></Route>
         </Routes>
       </Router>
     </div>

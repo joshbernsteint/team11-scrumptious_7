@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { auth } from "../firebase";
+import { onAuthStateChanged } from "firebase/auth";
 import { ref, set, getDatabase, child, get } from "firebase/database";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers";
@@ -8,14 +9,14 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import de from "date-fns/locale/de";
 import { v4 as uuid } from "uuid";
 
-function TaskForm() {
+function TaskForm(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [assignedTo, setAssignedTo] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [owner, setOwner] = useState("");
-  const [priority, setPriority] = useState("")
-  const [uid, setUid] = useState(undefined);
+  const [priority, setPriority] = useState("");
+  const [uid, setUid] = useState(props.uid);
   const [userList, setUserList] = useState([]);
   const [result, setResult] = useState({});
   const [error, setError] = useState({
@@ -25,7 +26,6 @@ function TaskForm() {
     dueDate: "",
   });
   const [success, setSuccess] = useState(false);
-  const auth = getAuth();
   let options = null;
 
   const getAllUsers = async () => {
@@ -98,9 +98,10 @@ function TaskForm() {
     try {
       const snapshot = await get(child(dbRef, `users/${uid}`));
       if (snapshot.exists) {
-        if(snapshot.val().userType==="manager"){
-        setOwner(snapshot.val().firstName + " " + snapshot.val().lastName);}else{
-            setOwner(false)
+        if (snapshot.val().userType === "manager") {
+          setOwner(snapshot.val().firstName + " " + snapshot.val().lastName);
+        } else {
+          setOwner(false);
         }
       }
     } catch (e) {
@@ -117,8 +118,8 @@ function TaskForm() {
         dueDate: dueDate,
         assignedTo: assignedTo,
         owner: owner,
-        complete: false,
-        priority: priority
+        completed: false,
+        priority: priority,
       });
       setSuccess(true);
       setError(false);
@@ -139,12 +140,12 @@ function TaskForm() {
         errorObj.dueDate = "Select a due date";
       }
 
-      if(!priority) {
-        errorObj.priority = "Select a priority"
+      if (!priority) {
+        errorObj.priority = "Select a priority";
       }
 
-      if(!owner){
-        errorObj.owner = "Must be a manager to assign new tasks"
+      if (!owner) {
+        errorObj.owner = "Must be a manager to assign new tasks";
       }
       setError(errorObj);
     }
@@ -154,28 +155,32 @@ function TaskForm() {
     event.preventDefault();
     setSuccess(false);
     writeTaskData();
-    if(error === false){
-        setTitle("");
-        setDescription("");
-        setAssignedTo("");
-        setDueDate("");
-        setPriority("");
+    if (error === false) {
+      setTitle("");
+      setDescription("");
+      setAssignedTo("");
+      setDueDate("");
+      setPriority("");
     }
-    
   }
 
   return (
     <div>
-      {success && <p>Task successfully created!</p>}
-      {error.owner && <p>{error.owner}</p>}
-      <form onSubmit={handleSubmit} className="task-form">
+      {success && <p data-tesid="success">Task successfully created!</p>}
+      {error.owner && <p data-testid="auth-msg">{error.owner}</p>}
+      <form
+        onSubmit={handleSubmit}
+        data-testid="task-form"
+        className="task-form"
+      >
         <div>
-          {error.title && <p className="error">{error.title}</p>}
+          {error.title && <p data-testid="title-msg" className="error">{error.title}</p>}
           <label className="">Task Title:</label>
           <input
             type="text"
             name="title"
             value={title}
+            aria-label="title-input"
             onChange={(event) => {
               setSuccess(false);
               setTitle(event.target.value);
@@ -190,6 +195,7 @@ function TaskForm() {
             type="text"
             name="description"
             value={description}
+            aria-label="desc-input"
             onChange={(event) => {
               setSuccess(false);
               setDescription(event.target.value);
@@ -197,13 +203,14 @@ function TaskForm() {
           ></textarea>
         </div>
         <div className="date-picker">
-          {error.dueDate && <p className="error">{error.dueDate}</p>}
+          {error.dueDate && <p data-testid="date-msg" className="error">{error.dueDate}</p>}
           <label className="">Deadline:</label>
           <br />
           <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={de}>
             <DatePicker
               selected={dueDate}
               format="MM/dd/yyyy"
+              data-testid="date-picker"
               onChange={(date) => setDueDate(date.toString())}
             />
           </LocalizationProvider>
@@ -214,33 +221,44 @@ function TaskForm() {
           <select
             name="assignedTo"
             value={assignedTo}
+            aria-label="assignee-input"
             onChange={(event) => {
               setSuccess(false);
               setAssignedTo(event.target.value);
             }}
           >
-            <option disabled value="">Choose Assignee</option>
+            <option disabled value="">
+              Choose Assignee
+            </option>
             {options}
           </select>
 
-          {error.priority && <span className="error">   {error.priority}</span>}
+          {error.priority && <span className="error"> {error.priority}</span>}
           <label className="priority-select"> Priority</label>
           <select
             name="priority"
             value={priority}
-            onChange={(event)=>{
-                setPriority(event.target.value);
-            }}>
-                <option disabled value="">Choose level</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
+            aria-label="priority-input"
+            onChange={(event) => {
+              setPriority(event.target.value);
+            }}
+          >
+            <option disabled value="">
+              Choose level
+            </option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
         </div>
         <div className="btn-div">
-          <button className="form-btn" type="submit">
+          <button
+            data-testid="task-submit-btn"
+            className="form-btn"
+            type="submit"
+          >
             Create
           </button>
         </div>
