@@ -21,82 +21,77 @@ import { TaskDashboard } from "./components/TaskDashboard";
 import { TaskScreen } from "./components/TaskScreen";
 import TaskForm from "./components/TaskForm";
 function App() {
-  const [showNav, setShowNav] = useState(false);
 
-  const clickHandler = () => {
-    setShowNav(!showNav);
-  };
-
-  const MyTasks = useRef([
-    {
-      id: "1",
-      title: "Submit Roof Picture",
-      due: "March 8, 2023",
-      owner: "Manager",
-      assignedTo: "Construction Worker",
-      description: "placeholder",
-      priority: "3",
-      date: "2023-03-8",
-      completed: "40",
-    },
-    {
-      id: "1.5",
-      title: "Submit Roof",
-      due: "March 13, 2023",
-      owner: "Manager",
-      assignedTo: "Construction Worker",
-      description: "placeholder",
-      priority: "3",
-      date: "2023-03-8",
-      completed: "15",
-    },
-    {
-      id: "5",
-      title: "Begin truss supports",
-      due: "March 12, 2023",
-      owner: "Manager",
-      assignedTo: "Construction Worker",
-      description: "There is no light here",
-      priority: "4",
-      date: "2023-03-12",
-      completed: "65",
-    },
-    {
-      id: "2",
-      title: "Install panels",
-      due: "March 16, 2023",
-      owner: "Manager",
-      assignedTo: "Construction Worker",
-      description: "Put panels in place",
-      priority: "1",
-      date: "2023-03-30",
-      completed: "30",
-    },
-    {
-      id: "3",
-      title: "Connect wiring",
-      due: "May 12, 2023",
-      owner: "Manager",
-      assignedTo: "Construction Worker",
-      description: "Connect electrical wiring",
-      priority: "2",
-      date: "2023-03-31",
-      completed: "90",
-    },
-  ]);
+  // const MyTasks = useRef([
+  //   {
+  //     id: "1",
+  //     title: "Submit Roof Picture",
+  //     due: "March 8, 2023",
+  //     owner: "Manager",
+  //     assignedTo: "Construction Worker",
+  //     description: "placeholder",
+  //     priority: "3",
+  //     date: "2023-03-8",
+  //     completed: "40",
+  //   },
+  //   {
+  //     id: "1.5",
+  //     title: "Submit Roof",
+  //     due: "March 13, 2023",
+  //     owner: "Manager",
+  //     assignedTo: "Construction Worker",
+  //     description: "placeholder",
+  //     priority: "3",
+  //     date: "2023-03-8",
+  //     completed: "15",
+  //   },
+  //   {
+  //     id: "5",
+  //     title: "Begin truss supports",
+  //     due: "March 12, 2023",
+  //     owner: "Manager",
+  //     assignedTo: "Construction Worker",
+  //     description: "There is no light here",
+  //     priority: "4",
+  //     date: "2023-03-12",
+  //     completed: "65",
+  //   },
+  //   {
+  //     id: "2",
+  //     title: "Install panels",
+  //     due: "March 16, 2023",
+  //     owner: "Manager",
+  //     assignedTo: "Construction Worker",
+  //     description: "Put panels in place",
+  //     priority: "1",
+  //     date: "2023-03-30",
+  //     completed: "30",
+  //   },
+  //   {
+  //     id: "3",
+  //     title: "Connect wiring",
+  //     due: "May 12, 2023",
+  //     owner: "Manager",
+  //     assignedTo: "Construction Worker",
+  //     description: "Connect electrical wiring",
+  //     priority: "2",
+  //     date: "2023-03-31",
+  //     completed: "90",
+  //   },
+  // ]);
 
   return (
     <div className="App">
       <HomeNavBar />
       <Router>
         <Routes>
-          <Route path="/" element={<Home tasks={MyTasks.current} />} />
+          <Route path="/" element={<Home/>} />
           <Route path="/login" element={<Login />} />
           <Route path="/login/register" element={<RegisterForm />} />
           <Route path="/camera" element={<CameraForm />} />
           <Route
             path="/tasks"
-            element={<TaskScreen tasks={MyTasks.current} />}
+            element={<TaskScreen/>}
           />
           <Route path="/login/:id" element={<h1>Sup</h1>}>
             <Route index element={<h1>Sup</h1>} />

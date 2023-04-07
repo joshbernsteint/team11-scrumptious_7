@@ -395,3 +395,11 @@ input[type='text']:focus{
   text-align: left;
   margin: 15px;
 }
+
+.priority-select {
+  margin-left: 15px;
+}
+
+.id-p {
+  margin-top: 35px;
+}

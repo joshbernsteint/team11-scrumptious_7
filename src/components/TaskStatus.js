@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import EmailChain from "./EmailChain";
-import { ref, getDatabase, update, child, get, set } from "firebase/database";
+import { ref, getDatabase, update, child, get } from "firebase/database";
 import { Link } from "react-router-dom";
 import { CardActionArea, CardActions, Grid, Typography } from "@mui/material";
 
@@ -23,6 +23,7 @@ function TaskStatus(props) {
                 <Typography>Deadline: {task.dueDate}</Typography>
                 <Typography>Task Owner: {task.owner}</Typography>
                 <Typography>Assigned To: {task.assignedTo}</Typography>
+                <Typography>Priority: {task.priority}</Typography>
               </CardContent>
             </CardActionArea>
             <CardActions>
@@ -150,9 +151,7 @@ function TaskStatus(props) {
       )}
       <br />
       <h2 className="h2-v1">Completed Tasks</h2>
-      <ul className="completedTasks">
-      {doneList}
-      </ul>
+      <ul className="completedTasks">{doneList}</ul>
       <Link to="/newTask">
         <p>Create a new task here.</p>
       </Link>

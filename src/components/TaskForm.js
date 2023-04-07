@@ -14,6 +14,7 @@ function TaskForm() {
   const [assignedTo, setAssignedTo] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [owner, setOwner] = useState("");
+  const [priority, setPriority] = useState("")
   const [uid, setUid] = useState(undefined);
   const [userList, setUserList] = useState([]);
   const [result, setResult] = useState({});
@@ -105,7 +106,7 @@ function TaskForm() {
   }
 
   function writeTaskData() {
-    if (title && description && assignedTo && dueDate && owner) {
+    if (title && description && assignedTo && dueDate && owner && priority) {
       const db = getDatabase();
       set(ref(db, "tasks/" + uuid()), {
         title: title,
@@ -114,6 +115,7 @@ function TaskForm() {
         assignedTo: assignedTo,
         owner: uid,
         complete: false,
+        priority: priority
       });
       setSuccess(true);
       setError(false);
@@ -133,6 +135,10 @@ function TaskForm() {
       if (!dueDate) {
         errorObj.dueDate = "Select a due date";
       }
+
+      if(!priority) {
+        errorObj.priority = "Select a priority"
+      }
       setError(errorObj);
     }
   }
@@ -141,10 +147,14 @@ function TaskForm() {
     event.preventDefault();
     setSuccess(false);
     writeTaskData();
-    setTitle("");
-    setDescription("");
-    setAssignedTo("");
-    setDueDate("");
+    if(error === false){
+        setTitle("");
+        setDescription("");
+        setAssignedTo("");
+        setDueDate("");
+        setPriority("");
+    }
+    
   }
 
   return (
@@ -201,9 +211,25 @@ function TaskForm() {
               setAssignedTo(event.target.value);
             }}
           >
-            <option disabled>Choose Assignee</option>
+            <option disabled value="">Choose Assignee</option>
             {options}
           </select>
+
+          {error.priority && <span className="error">   {error.priority}</span>}
+          <label className="priority-select"> Priority</label>
+          <select
+            name="priority"
+            value={priority}
+            onChange={(event)=>{
+                setPriority(event.target.value);
+            }}>
+                <option disabled value="">Choose level</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
         </div>
         <div className="btn-div">
           <button className="form-btn" type="submit">

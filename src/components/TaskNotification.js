@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import ProgressBar from "./ProgressBar";
 
 function TaskNotification(props) {
@@ -48,7 +47,7 @@ function TaskNotification(props) {
   return (
     <div className="task-notification" style ={{backgroundColor: `${color()}`}} aria-label={`${props.id}`}>
       <div className="top-task">
-        <p className="task-title">#{props.id}: {props.title}</p>
+        <p className="task-title">Title: {props.title}</p>
         <p className="task-date">Priority: {props.priority}</p>
         <p className="task-date">Due: {fullDate}</p>
       </div>
@@ -62,7 +61,7 @@ function TaskNotification(props) {
         </a>
       </div>
       <b>Completion:</b>
-      <ProgressBar bgcolor="blue" completed={props.completed}/>
+      <ProgressBar bgcolor="blue" completed={props.completed? "100": "0"}/>
 
     </div>
   );
