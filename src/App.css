@@ -384,3 +384,14 @@ input[type='text']:focus{
   margin-bottom: 15px;
   margin-top: 15px
 }
+
+.completedTasks {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+}
+
+.completedTasks li{
+  text-align: left;
+  margin: 15px;
+}

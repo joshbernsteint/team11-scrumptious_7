@@ -30,7 +30,7 @@ function TaskStatus(props) {
                 <button
                   className="card-btn"
                   onClick={() => {
-                    if (task.id) handleClick(task.id);
+                    if (task.id) handleClick(task.id, true);
                   }}
                 >
                   Done
@@ -47,7 +47,7 @@ function TaskStatus(props) {
   };
 
   useEffect(() => {
-    updateTaskCards()
+    updateTaskCards();
   }, []);
 
   const updateTaskCards = () => {
@@ -77,19 +77,22 @@ function TaskStatus(props) {
     if (task)
       return (
         <li key={task.id}>
-          {task.title}
+          <div>
+            <p>Task Title: {task.title}</p>
+            <p>Completed On: {task.dateCompleted}</p>
+          </div>
           <button
             onClick={() => {
-              if (task.id) handleClick(task.id);
+              if (task.id) handleClick(task.id, false);
             }}
           >
-            Mark as not done
+            Mark Not Done
           </button>
         </li>
       );
   };
 
-  const updtateTaskStatus = async (id) => {
+  const updtateTaskStatus = async (id, done) => {
     const db = getDatabase();
     const dbRef = ref(db);
     let taskStatus = false;
@@ -101,22 +104,32 @@ function TaskStatus(props) {
     } catch (e) {
       console.log(e);
     }
+
     let updates = {};
     updates["/tasks/" + id + "/completed"] = !taskStatus;
+    let dateString = "";
+    if (done) {
+      let date = new Date();
+      dateString = date.toDateString() + " " + date.toLocaleTimeString();
+      updates["/tasks/" + id + "/dateCompleted"] = dateString;
+    } else {
+      updates["/tasks/" + id + "/dateCompleted"] = "";
+    }
     await update(ref(db), updates);
     let updatedTasks = tasks;
     for (let i = 0; tasks.length; i++) {
       if (tasks[i].id === id) {
         updatedTasks[i].completed = !taskStatus;
+        updatedTasks[i].dateCompleted = dateString;
         break;
       }
     }
     updateTaskCards();
   };
 
-  const handleClick = (id) => {
+  const handleClick = (id, done) => {
     if (id) {
-      updtateTaskStatus(id);
+      updtateTaskStatus(id, done);
     }
   };
 
@@ -135,9 +148,11 @@ function TaskStatus(props) {
           {cards}
         </Grid>
       )}
+      <br />
       <h2 className="h2-v1">Completed Tasks</h2>
-      <ul id="completedTasks"></ul>
+      <ul className="completedTasks">
       {doneList}
+      </ul>
       <Link to="/newTask">
         <p>Create a new task here.</p>
       </Link>
