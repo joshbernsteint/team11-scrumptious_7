@@ -98,7 +98,10 @@ function TaskForm() {
     try {
       const snapshot = await get(child(dbRef, `users/${uid}`));
       if (snapshot.exists) {
-        setOwner(snapshot.val());
+        if(snapshot.val().userType==="manager"){
+        setOwner(snapshot.val().firstName + " " + snapshot.val().lastName);}else{
+            setOwner(false)
+        }
       }
     } catch (e) {
       console.log(e);
@@ -113,7 +116,7 @@ function TaskForm() {
         description: description,
         dueDate: dueDate,
         assignedTo: assignedTo,
-        owner: uid,
+        owner: owner,
         complete: false,
         priority: priority
       });
@@ -139,6 +142,10 @@ function TaskForm() {
       if(!priority) {
         errorObj.priority = "Select a priority"
       }
+
+      if(!owner){
+        errorObj.owner = "Must be a manager to assign new tasks"
+      }
       setError(errorObj);
     }
   }
@@ -160,6 +167,7 @@ function TaskForm() {
   return (
     <div>
       {success && <p>Task successfully created!</p>}
+      {error.owner && <p>{error.owner}</p>}
       <form onSubmit={handleSubmit} className="task-form">
         <div>
           {error.title && <p className="error">{error.title}</p>}
