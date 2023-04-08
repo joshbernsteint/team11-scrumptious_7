@@ -22,7 +22,7 @@ function TaskStatus(props) {
                 <Typography>Task Name: {task.title}</Typography>
                 <Typography>Deadline: {task.dueDate}</Typography>
                 <Typography>Task Owner: {task.owner}</Typography>
-                <Typography>Assigned To: {task.assignedTo}</Typography>
+                <Typography>Assigned To: {task.assignedTo.name}</Typography>
                 <Typography>Priority: {task.priority}</Typography>
               </CardContent>
             </CardActionArea>
@@ -39,7 +39,7 @@ function TaskStatus(props) {
               </Grid>
             </CardActions>
             <CardActions>
-              <EmailChain></EmailChain>
+              <EmailChain users={[task.assignedTo.uid]}></EmailChain>
             </CardActions>
           </Card>
         </Grid>

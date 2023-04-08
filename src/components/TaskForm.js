@@ -63,7 +63,6 @@ function TaskForm(props) {
       Object.keys(result).forEach((key, index) => {
         let userName = `${result[key].firstName} ${result[key].lastName}`;
         let userUid = `${result[key].uid}`;
-        console.log(userName);
         userNamesAndUid = [
           ...userNamesAndUid,
           { name: userName, uid: userUid },
@@ -72,10 +71,6 @@ function TaskForm(props) {
       setUserList(userNamesAndUid);
     }
   }, [result]);
-
-  useEffect(() => {
-    console.log(userList);
-  }, [userList]);
 
   if (userList.length > 0) {
     options = userList.map((user) => {
@@ -86,7 +81,7 @@ function TaskForm(props) {
   function buildOptions(name, userUid) {
     if (name) {
       return (
-        <option key={userUid} value={`${name}`}>
+        <option key={userUid} value={`${userUid} ${name}`}>
           {name}
         </option>
       );
@@ -112,11 +107,12 @@ function TaskForm(props) {
   function writeTaskData() {
     if (title && description && assignedTo && dueDate && owner && priority) {
       const db = getDatabase();
+      let assignedToObj = {uid: assignedTo.split(" ")[0], name: assignedTo.split(" ")[1] + " " + assignedTo.split(" ")[2]}
       set(ref(db, "tasks/" + uuid()), {
         title: title,
         description: description,
         dueDate: dueDate,
-        assignedTo: assignedTo,
+        assignedTo: assignedToObj,
         owner: owner,
         completed: false,
         priority: priority,
