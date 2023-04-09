@@ -4,12 +4,10 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from "./homeNavBar.module.css"
-import AuthDetails from "./AuthDetails"
 
 export function HomeNavBar() {
     return (
     <>
-    <AuthDetails />
       <Navbar className={styles.bar}>
         <Container fluid>
           <Navbar.Brand href="/" className={styles.brand}> 

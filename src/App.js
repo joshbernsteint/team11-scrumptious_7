@@ -97,7 +97,8 @@ function App() {
           <Route index element = {<h1>Sup</h1>} />
         </Route>
 		<Route path="/sendContract" element={<SendContract/>} />
-		<Route path="/RequestInspection" element={<RequestInspection user={{userType: 'manager'}}/>} />
+		<Route path="/landing" element={<AuthDetails />} />
+		<Route path="/RequestInspection" element={<RequestInspection />} />
         <Route path="*" element={<Navigate to ="/" />} /> 
         <Route path='/progress' element={<UpdateProgressBar/>}/>
       </Routes>

@@ -15,18 +15,18 @@ export default function Login () {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 console.log(userCredential);
+                navigate("/landing");
             }).catch((error) => {
                 console.log(error);
-            });
 
-        navigate("/");
+            });
     };
 
     return (
         <div className='login-container'>
             <form className='form' onSubmit={signIn}>
                 <div className='form-body'>
-                    <h2>Sign In</h2>
+                    <h2 className="inspectionHeader">Sign In</h2>
                     <input
                         className='input'
                         type='email'
