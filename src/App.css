@@ -315,3 +315,7 @@ header h1 {
 .lbl-msg{
   margin-right: 100%;
 }
+
+.inspectionHeader{
+    color: white;
+}

@@ -13,7 +13,8 @@ import UpdateProgressBar from "./components/UpdateProgressBar";
 import { HomeNavBar } from "./components/homeNavBar";
 import SendContract from "./components/SendContract";
 import { TaskDashboard } from "./components/TaskDashboard";
-import { TaskScreen } from "./components/TaskScreen";;
+import { TaskScreen } from "./components/TaskScreen";
+import RequestInspection from "./components/RequestInspection";
 function App() {
   const [showNav, setShowNav] = useState(false);
 
@@ -96,6 +97,7 @@ function App() {
           <Route index element = {<h1>Sup</h1>} />
         </Route>
 		<Route path="/sendContract" element={<SendContract/>} />
+		<Route path="/RequestInspection" element={<RequestInspection user={{userType: 'manager'}}/>} />
         <Route path="*" element={<Navigate to ="/" />} /> 
         <Route path='/progress' element={<UpdateProgressBar/>}/>
       </Routes>
