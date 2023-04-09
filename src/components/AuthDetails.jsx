@@ -25,7 +25,7 @@ const AuthDetails = () => {
                   console.log("user not found")
           }
     }
-
+  //Listener for authenticated user
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -42,7 +42,7 @@ const AuthDetails = () => {
         getUserFromDb();
     }
   }, [uid, signedInUser])
-  //check if user is currently signed in
+  //check if a user is currently signed in
   useEffect(() => {
       const loggedInUser = localStorage.getItem("user");
       if (loggedInUser) {
@@ -67,7 +67,7 @@ const AuthDetails = () => {
     <div>
       {authUser ? (
         <>
-            <p>Welcome back!</p>
+            <p>Welcome back!</p>{signedInUser.userType==="manager" ? <p>manager</p> : <p>not a manager</p>}
             <br />
             {showProfile
             ? <button onClick={() => setShowProfile(!showProfile)}>Hide User Information</button>
