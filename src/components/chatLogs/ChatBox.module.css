@@ -1,0 +1,76 @@
+.card {
+  border: 2px solid #000000;
+  margin: 20px;
+  padding: 10px;
+  min-height: 30rem;
+  width: 500px;
+}
+
+.render_chat {
+  border: 2px solid #000000;
+  background-color: rgb(234, 255, 237);
+  margin: 30px;
+  min-height: 30rem;
+  text-align: left;
+  padding: 10px;
+}
+
+.input_chat {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-self: center;
+  text-align: center;
+  justify-content: center;
+  width: auto;
+}
+
+.input_chat input {
+  border: 2px solid #000000;
+  border-radius: 5px;
+  width: 300px;
+  margin: 0px 20px 0px 20px;
+}
+
+.input_chat input:hover {
+  border: 2px solid #000000;
+  background-color: rgb(219, 219, 219);
+  border-radius: 4px;
+  /* width: 50%; */
+  margin: 0px 20px 0px 20px;
+}
+.input_chat input:focus {
+  border: 2px solid #2e851d;
+  background-color: rgb(234, 234, 234);
+  border-radius: 3px;
+  /* width: 50%; */
+  margin: 0px 20px 0px 20px;
+}
+
+.input_chat button {
+  border: 2px solid #16711c;
+  border-radius: 5px;
+  background: #1f9e27;
+  color: white;
+  padding: 5px;
+  margin: 0px 20px 0px 20px;
+  cursor: pointer;
+}
+
+.input_chat button:hover {
+  border: 2px solid #1a5c13;
+  border-radius: 3px;
+  background: #156217;
+}
+
+.chat_mes h3 {
+  font-size: 1.2rem;
+}
+
+h3 {
+  color: #24a122;
+}
+
+span {
+  color: black;
+}

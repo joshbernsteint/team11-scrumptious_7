@@ -2,12 +2,13 @@ import React from 'react';
 
 import '../App.css';
 import TaskStatus from './TaskStatus';
+import { TaskDashboard } from './TaskDashboard';
 import NotificationBar from './NotificationBar'
 
-function Home() {
+function Home(props) {
   return (
     <div>
-      <TaskStatus></TaskStatus>
+      <TaskDashboard taskRef={props.tasks}/>
     </div>
   );
 }
