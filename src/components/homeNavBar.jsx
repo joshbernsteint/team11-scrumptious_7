@@ -26,7 +26,7 @@ export function HomeNavBar() {
           <Nav className={`my-1 my-lg-2 ${styles.nav}`}  navbarScroll >
             <Nav.Link href="/" className={`${styles.navLink}`}>Home</Nav.Link>
             <Nav.Link href = "/tasks" className={`${styles.navLink}`}>Tasks</Nav.Link>
-            <Nav.Link href = "/camera" className={`${styles.navLink}`}>Camera Form</Nav.Link>
+            <Nav.Link href = "/camera" className={`${styles.navLink}`}>Forms</Nav.Link>
             <Nav.Link href = "/login" className={`${styles.navLink}`}>Login</Nav.Link>
             <Nav.Link href = "/login/register" className={`${styles.navLink}`}>Register</Nav.Link>
           </Nav>

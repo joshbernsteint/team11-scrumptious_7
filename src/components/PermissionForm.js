@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import EmailChain from "./EmailChain";
 import '../App.css';
+import { 
+    CardActionArea,
+    CardActions,
+    Grid,} from '@mui/material';
 function PermissionForm(){
     const[name, setName] = useState('');
     const[role, setRole] = useState('');
@@ -26,22 +33,30 @@ function PermissionForm(){
             <header classname="App-header">
                 <form onSubmit={(e)=>{handleSubmit(e)}}>{}
                 <h2>Request Permission</h2>
-                <label >
-                Name:
-                </label><br/>
-                <input type="text" value={name} required onChange={(e)=> 
-                    {handleNameChange(e)}} /><br/>
-                <label >
-                Role:
-                </label><br/>
-                <input type="text" value={role} required onChange={(e)=> 
-                    {handleRoleChange(e)}} /><br/>
-                <label>
-                Email:
-                </label><br/>
-                <input type="email" value={email} required onChange={(e) => 
-                    {handleEmailChange(e)}} /><br/>
-                <input type="submit" value="Submit"/>
+                    <Grid>
+                    <Card>
+                        <CardActionArea>
+                            <label >
+                            Name:
+                            </label><br/>
+                            <input type="text" value={name} required onChange={(e)=> 
+                                {handleNameChange(e)}} /><br/>
+                            <label >
+                            Role:
+                            </label><br/>
+                            <input type="text" value={role} required onChange={(e)=> 
+                                {handleRoleChange(e)}} /><br/>
+                            <label>
+                            Email:
+                            </label><br/>
+                            <input type="email" value={email} required onChange={(e) => 
+                                {handleEmailChange(e)}} /><br/>
+                        </CardActionArea>
+                        <CardActionArea>
+                            <EmailChain></EmailChain>
+                        </CardActionArea>
+                    </Card>
+                    </Grid>
                 </form>
             </header>
         </div>

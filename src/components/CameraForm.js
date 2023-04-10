@@ -8,9 +8,9 @@ function CameraForm() {
     <div>
       <div className="require-div">
         <RequirePhotos></RequirePhotos>
-      </div>
         <CameraAccess></CameraAccess>
         <PermissionForm></PermissionForm>
+      </div>
     </div>
   );
 }
