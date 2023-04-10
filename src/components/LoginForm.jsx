@@ -26,7 +26,7 @@ export default function Login () {
         <div className='login-container'>
             <form className='form' onSubmit={signIn}>
                 <div className='form-body'>
-                    <h2 className="inspectionHeader">Sign In</h2>
+                    <h2 className="inspectionHeader">Welcome</h2>
                     <input
                         className='input'
                         type='email'

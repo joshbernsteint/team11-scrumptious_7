@@ -2,6 +2,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { auth } from "../firebase";
 import { getDatabase, ref, child, get, update } from "firebase/database";
+import { useNavigate } from "react-router-dom";
 
 //used youtube video for authentication https://www.youtube.com/watch?v=Vv_Oi7zPPTw
 
@@ -10,6 +11,7 @@ const AuthDetails = () => {
   const [uid, setUid] = useState("");
   const [signedInUser, setSignedInUser] = useState(undefined);
   const [showProfile, setShowProfile] = useState(false);
+  let navigate = useNavigate();
 
   //Get currently signed in user IF SIGNED IN
   const getUserFromDb = async () => {
@@ -59,6 +61,10 @@ const AuthDetails = () => {
       .catch((error) => console.log(error));
   };
 
+  const reqInsp = () => {
+    navigate("/requestInspection")
+  }
+
     // Get Currently Signed In User's information!!
     // TODO: Find userType of signed in user ONLY CHECK MANAGER BECAUSE WORKER CUSTOMER PERMS DONT MATTER
     // TODO: Create userType specific elements
@@ -67,7 +73,7 @@ const AuthDetails = () => {
     <div>
       {authUser ? (
         <>
-            <p>Welcome back!</p>{signedInUser.userType==="manager" ? <p>manager</p> : <p>not a manager</p>}
+            <p>Welcome back!</p>{signedInUser.userType==="manager" ? ( <button onClick={reqInsp}>Request an Inspection</button> ) : ( <> </>) }
             <br />
             {showProfile
             ? <button onClick={() => setShowProfile(!showProfile)}>Hide User Information</button>
