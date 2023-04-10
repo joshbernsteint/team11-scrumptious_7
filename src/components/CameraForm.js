@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import RequirePhotos from "./RequirePhotos";
 import CameraAccess from "./CameraAccess";
+import PermissionForm from "./PermissionForm";
 
 function CameraForm() {
   return (
@@ -9,6 +10,7 @@ function CameraForm() {
         <RequirePhotos></RequirePhotos>
       </div>
         <CameraAccess></CameraAccess>
+        <PermissionForm></PermissionForm>
     </div>
   );
 }
