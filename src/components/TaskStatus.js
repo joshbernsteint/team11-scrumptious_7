@@ -136,7 +136,7 @@ function TaskStatus(props) {
 
   return (
     <div className="taskStatus">
-      <h1>Tasks</h1>
+      <h2>Tasks</h2>
       {cards && (
         <Grid
           container

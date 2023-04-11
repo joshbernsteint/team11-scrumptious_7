@@ -25,9 +25,15 @@ import { auth } from "./firebase";
 import CreateProject from "./components/CreateProject";
 import { Stack, Row,Col } from 'react-bootstrap';
 import { alignProperty } from "@mui/material/styles/cssUtils";
-function App() {
+import RequestInspection from "./components/RequestInspection";
 
-  const [showNav, setShowNav] = useState(false);
+const [showNav, setShowNav] = useState(false);
+
+
+
+function App() {
+  const clickHandler = () => {
+  setShowNav(!showNav);};
   const [uid, setUid] = useState(undefined);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -56,6 +62,8 @@ function App() {
           <Route path="/login/:id" element={<h1>Sup</h1>}>
             <Route index element={<h1>Sup</h1>} />
           </Route>
+            <Route path="/landing" element={<AuthDetails />} />
+		       <Route path="/RequestInspection" element={<RequestInspection />} />
           <Route path="/sendContract" element={<SendContract />} />
           <Route path="*" element={<Navigate to="/" />} />
           <Route path="/progress" element={<UpdateProgressBar />} />

@@ -131,17 +131,44 @@
   margin-left: 15px;
 }
 .form{
-  background-color: rgb(0, 0, 0);
+  background-color: #76b852;
   border-radius: 5px;
   width: 550px;
   margin: 20px auto;
-  padding: 20px;
+  padding: 10px;
   /* height: 600px; */
+}
+
+.form button {
+	border-radius: 20px;
+	border: 1px solid black;
+	background-color: #eee;
+	color: black;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 45px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+}
+
+.form input,
+.form select {
+      	background-color: #eee;
+      	border: none;
+      	padding: 12px 15px;
+      	margin: 8px 0;
+      	width: 100%;
 }
 
 .form-body{
   text-align: left;
   padding: 20px 10px;
+}
+
+.login-container .form-body,
+.inspection-container .form-body{
+  text-align: center;
 }
 
 .form-body > *{
@@ -253,9 +280,7 @@
   align-items: center;
   font-size: 1rem;
 }
-.authDetails p {
-  font-size: small;
-}
+
 header h1 {
   color: aliceblue
 }
@@ -315,6 +340,28 @@ header h1 {
 
 .lbl-msg{
   margin-right: 100%;
+}
+
+.inspectionHeader{
+    color: white;
+}
+
+.profile-container {
+    margin-top: 2%;
+    margin-left: 30%;
+    width: 40%;
+    background-color: rgb(198, 203, 203);
+    border-radius: 18px;
+    box-shadow: 1px 1px 8px 0 grey;
+    height: auto;
+    margin-bottom: 20px;
+    padding: 20px 0 20px 50px;
+}
+
+.profile-container table {
+    border: none;
+    font-size: 16px;
+    width: 80%;
 }
 
 .task-form {
