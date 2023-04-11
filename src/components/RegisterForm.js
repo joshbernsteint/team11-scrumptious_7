@@ -47,7 +47,7 @@ export default function RegisterForm() {
 
             const secretPass = "secretKey";
 
-            let userCredential = createUserWithEmailAndPassword(
+            createUserWithEmailAndPassword(
                 auth,
                 user.email,
                 user.password
@@ -88,7 +88,8 @@ export default function RegisterForm() {
             email: email,
             password: password,
             uid: uid,
-            step: 1
+            step: 1,
+            projectManager: ''
         })
     }
 
