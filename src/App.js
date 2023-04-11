@@ -24,9 +24,17 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import CreateProject from "./components/CreateProject";
 import { Redirect } from './components/Redirect'
+import { Stack, Row,Col } from 'react-bootstrap';
+import { alignProperty } from "@mui/material/styles/cssUtils";
+import RequestInspection from "./components/RequestInspection";
+
 
 function App() {
   const inquiryLink = "https://forms.gle/B8mE2UWJ2zEsiJxE9"
+  
+  const [showNav, setShowNav] = useState(false);
+  const clickHandler = () => {
+  setShowNav(!showNav);};
   const [uid, setUid] = useState(undefined);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -55,6 +63,8 @@ function App() {
           <Route path="/login/:id" element={<h1>Sup</h1>}>
             <Route index element={<h1>Sup</h1>} />
           </Route>
+            <Route path="/landing" element={<AuthDetails />} />
+		       <Route path="/RequestInspection" element={<RequestInspection />} />
           <Route path="/sendContract" element={<SendContract />} />
           <Route path="*" element={<Navigate to="/" />} />
           <Route path="/progress" element={<UpdateProgressBar />} />
