@@ -55,12 +55,19 @@ function TaskStatus(props) {
               alignItems="center"
               justifyContent="center"
               >
-              <button className="card-btn"
+              <button className="card-btn-done"
                 onClick={() => {
                   if (task.id) handleClick(task.id);
                 }}
               >
                 Done
+              </button>
+			  <button className="card-btn-edit"
+                onClick={() => {
+                  if (task.id) handleEdit(task.id);
+                }}
+              >
+                Edit
               </button>
               </Grid>
             </CardActions>
@@ -83,6 +90,12 @@ function TaskStatus(props) {
   const handleClick = (id) => {
     if (id) {
       addToCompletedTasks(id);
+    }
+  };
+  
+  const handleEdit = (id) => {
+    if (id) {
+      editTask(id);
     }
   };
 
