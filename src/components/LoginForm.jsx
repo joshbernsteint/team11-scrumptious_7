@@ -1,22 +1,25 @@
 import React, {useState} from 'react';
 import {auth} from '../firebase';
 import {signInWithEmailAndPassword} from "firebase/auth"
+import { useNavigate } from "react-router-dom";
 import AuthDetails from './AuthDetails';
 import '../App.css'
 
-//used youtube video for authentication https://www.youtube.com/watch?v=Vv_Oi7zPPTw
 
 export default function Login () {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     const signIn = (e) => {
         e.preventDefault();
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 console.log(userCredential);
+                navigate("/landing");
             }).catch((error) => {
                 console.log(error);
+
             });
     };
 
@@ -24,7 +27,7 @@ export default function Login () {
         <div className='login-container'>
             <form className='form' onSubmit={signIn}>
                 <div className='form-body'>
-                    <h2>Sign In</h2>
+                    <h2 className="inspectionHeader">Welcome</h2>
                     <input
                         className='input'
                         type='email'
