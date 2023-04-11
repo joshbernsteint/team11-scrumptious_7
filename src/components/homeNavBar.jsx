@@ -29,6 +29,7 @@ export function HomeNavBar() {
             <Nav.Link href = "/camera" className={`${styles.navLink}`}>Forms</Nav.Link>
             <Nav.Link href = "/login" className={`${styles.navLink}`}>Login</Nav.Link>
             <Nav.Link href = "/login/register" className={`${styles.navLink}`}>Register</Nav.Link>
+            <Nav.Link href = "/inquiry" className={`${styles.navLink}`} target='_blank'>Inquiry Form</Nav.Link>
           </Nav>
           </Navbar.Collapse>
         </Container>

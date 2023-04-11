@@ -121,7 +121,6 @@
 .mainDefault {
   top: 0;
 }
-
 #completedTasks {
   list-style: none;
   align-items: left;
@@ -403,4 +402,30 @@ input[type='text']:focus{
 
 .id-p {
   margin-top: 35px;
+}
+
+.redirect {
+  background-color: rgb(221, 220, 220);
+  height: 100%;
+  text-align: center;
+  left: 50%;
+  width: 100%;
+}
+
+.redirect-square{
+  background-color: rgb(53, 53, 53);
+  color: rgb(174, 172, 172);
+  justify-content: center;
+  border: black;
+  border-radius: 5%;
+  align-items: center;
+  margin: 0 auto;
+  border: 10rem;
+  height: 500px;
+  width: 500px;
+  cursor:default;
+}
+
+.redirect-square-items{
+  margin: 5%;
 }

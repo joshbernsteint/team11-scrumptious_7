@@ -23,9 +23,10 @@ import TaskForm from "./components/TaskForm";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import CreateProject from "./components/CreateProject";
+import { Redirect } from './components/Redirect'
 
 function App() {
-
+  const inquiryLink = "https://forms.gle/B8mE2UWJ2zEsiJxE9"
   const [uid, setUid] = useState(undefined);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -57,7 +58,9 @@ function App() {
           <Route path="/sendContract" element={<SendContract />} />
           <Route path="*" element={<Navigate to="/" />} />
           <Route path="/progress" element={<UpdateProgressBar />} />
+          <Route path="/createproject" element={<CreateProject />} />
           <Route path="/newTask" element={<TaskForm uid={uid}/>}></Route>
+          <Route path = "/inquiry" element={<Redirect link={inquiryLink}/>}/>
         </Routes>
       </Router>
     </div>
