@@ -3,15 +3,15 @@ import TaskNotification from "./TaskNotification";
 
 function NotificationBar(props) {
   const list = props.tasks
+  
   const priorities = props.pList
-
   const sorted = list.sort((a,b) =>
   {
     if(props.filterType === "1"){
-      const aD = parseInt(a.date.substring(8));
-      const bD = parseInt(b.date.substring(8));
-      const aM = parseInt(a.date.substring(5));
-      const bM = parseInt(b.date.substring(5));
+      const aD = parseInt(a.dueDate.substring(8));
+      const bD = parseInt(b.dueDate.substring(8));
+      const aM = parseInt(a.dueDate.substring(5));
+      const bM = parseInt(b.dueDate.substring(5));
       if(aM < bM){
         return -1;
       }
@@ -69,7 +69,7 @@ function NotificationBar(props) {
       key={noti.title}
       title={noti.title}
       description={noti.description}
-      date={noti.date}
+      date={noti.dueDate}
       priority={priorities[parseInt(noti.priority)-1]}
       id={noti.id}
       completed={noti.completed}

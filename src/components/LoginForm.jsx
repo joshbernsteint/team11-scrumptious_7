@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {auth} from '../firebase';
 import {signInWithEmailAndPassword} from "firebase/auth"
+import AuthDetails from './AuthDetails';
 import '../App.css'
 
 //used youtube video for authentication https://www.youtube.com/watch?v=Vv_Oi7zPPTw
@@ -41,7 +42,8 @@ export default function Login () {
                     <button type="submit">Sign In</button>
                 </div>
             </form>
-            <a className="link-button" href="/login">Not already a user? Register an account here.</a>
+            <a className="link-button" href="/login/register">Not already a user? Register an account here.</a>
+            <AuthDetails/>
         </div>
     );
 };
