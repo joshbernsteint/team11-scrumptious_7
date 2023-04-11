@@ -404,3 +404,7 @@ input[type='text']:focus{
 .id-p {
   margin-top: 35px;
 }
+.notification{
+  right: 0;
+  position: absolute;
+}

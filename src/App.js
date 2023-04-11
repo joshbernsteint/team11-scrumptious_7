@@ -23,9 +23,11 @@ import TaskForm from "./components/TaskForm";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import CreateProject from "./components/CreateProject";
-
+import { Stack, Row,Col } from 'react-bootstrap';
+import { alignProperty } from "@mui/material/styles/cssUtils";
 function App() {
 
+  const [showNav, setShowNav] = useState(false);
   const [uid, setUid] = useState(undefined);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
