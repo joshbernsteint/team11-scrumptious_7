@@ -95,7 +95,6 @@ function TaskStatus(props) {
   
   const handleEdit = (id) => {
     if (id) {
-      editTask(id);
     }
   };
 
