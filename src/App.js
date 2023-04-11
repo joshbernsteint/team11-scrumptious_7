@@ -22,65 +22,9 @@ import { TaskScreen } from "./components/TaskScreen";
 import TaskForm from "./components/TaskForm";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
-function App() {
+import CreateProject from "./components/CreateProject";
 
-  // const MyTasks = useRef([
-  //   {
-  //     id: "1",
-  //     title: "Submit Roof Picture",
-  //     due: "March 8, 2023",
-  //     owner: "Manager",
-  //     assignedTo: "Construction Worker",
-  //     description: "placeholder",
-  //     priority: "3",
-  //     date: "2023-03-8",
-  //     completed: "40",
-  //   },
-  //   {
-  //     id: "1.5",
-  //     title: "Submit Roof",
-  //     due: "March 13, 2023",
-  //     owner: "Manager",
-  //     assignedTo: "Construction Worker",
-  //     description: "placeholder",
-  //     priority: "3",
-  //     date: "2023-03-8",
-  //     completed: "15",
-  //   },
-  //   {
-  //     id: "5",
-  //     title: "Begin truss supports",
-  //     due: "March 12, 2023",
-  //     owner: "Manager",
-  //     assignedTo: "Construction Worker",
-  //     description: "There is no light here",
-  //     priority: "4",
-  //     date: "2023-03-12",
-  //     completed: "65",
-  //   },
-  //   {
-  //     id: "2",
-  //     title: "Install panels",
-  //     due: "March 16, 2023",
-  //     owner: "Manager",
-  //     assignedTo: "Construction Worker",
-  //     description: "Put panels in place",
-  //     priority: "1",
-  //     date: "2023-03-30",
-  //     completed: "30",
-  //   },
-  //   {
-  //     id: "3",
-  //     title: "Connect wiring",
-  //     due: "May 12, 2023",
-  //     owner: "Manager",
-  //     assignedTo: "Construction Worker",
-  //     description: "Connect electrical wiring",
-  //     priority: "2",
-  //     date: "2023-03-31",
-  //     completed: "90",
-  //   },
-  // ]);
+function App() {
 
   const [uid, setUid] = useState(undefined);
   useEffect(() => {

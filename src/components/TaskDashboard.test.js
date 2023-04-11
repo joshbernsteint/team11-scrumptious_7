@@ -3,7 +3,6 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { TaskDashboard } from "./TaskDashboard";
 
 const MyTasks = [
-  
    {
       id:   "0507ae01-3364-4d76-94c8-c8fe7dc7cd6b",
       assignedTo: "Joshua Bernstein",
@@ -83,7 +82,6 @@ const MyTasks = [
       priority: 1,
       title: "Install Panels",
     },
-  
 ];
 
 test("check if featured task is in the document", () => {

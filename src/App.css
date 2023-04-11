@@ -262,6 +262,7 @@ header h1 {
 
 .require-div {
   margin: 10% 25%;
+  display: flex;
 }
 
 .temp-div {
