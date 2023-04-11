@@ -1,62 +1,63 @@
 import React, {useState} from 'react';
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import EmailChain from "./EmailChain";
+import { send } from 'emailjs-com';
 import '../App.css';
-import { 
-    CardActionArea,
-    CardActions,
-    Grid,} from '@mui/material';
 function PermissionForm(){
-    const[name, setName] = useState('');
-    const[role, setRole] = useState('');
-    const[email, setEmail] = useState('');
+    const [toSend, setToSend] = useState({
+        sender: '',
+        receiver: '',
+        message: '',
+        reply_to: '',
+      });
 
-    const handleNameChange =(e)=>{
-        setName(e.target.value);
-    }
+    const handleChange = (e, name) => {
+        setToSend((prevToSend) => ({
+          ...prevToSend,
+          [name]: e.target.value,
+        }));
+    };
 
-    const handleRoleChange =(e)=>{
-        setRole(e.target.value);
-    }
-
-    const handleEmailChange =(e)=>{
-        setEmail(e.target.value);
-    }
-
-    const handleSubmit=(e)=>{
-        alert('A form was submitted with Name :"' + name +'" ,Role :"'+ role +'" and Email :"' + email + '"');
-    }
+    const onSubmit = (e) => {
+        e.preventDefault();
+        send(
+          'SERVICE ID',
+          'TEMPLATE ID',
+          toSend,
+          'User ID'
+        )
+          .then((response) => {
+            console.log('SUCCESS!', response.status, response.text);
+          })
+          .catch((err) => {
+            console.log('FAILED...', err);
+          });
+      };
 
     return (
         <div classname="App">
             <header classname="App-header">
-                <form onSubmit={(e)=>{handleSubmit(e)}}>{}
+                <form onSubmit={onSubmit}>{}
                 <h2>Request Permission</h2>
-                    <Grid>
-                    <Card>
-                        <CardActionArea>
-                            <label >
-                            Name:
-                            </label><br/>
-                            <input type="text" value={name} required onChange={(e)=> 
-                                {handleNameChange(e)}} /><br/>
-                            <label >
-                            Role:
-                            </label><br/>
-                            <input type="text" value={role} required onChange={(e)=> 
-                                {handleRoleChange(e)}} /><br/>
-                            <label>
-                            Email:
-                            </label><br/>
-                            <input type="email" value={email} required onChange={(e) => 
-                                {handleEmailChange(e)}} /><br/>
-                        </CardActionArea>
-                        <CardActionArea>
-                            <EmailChain></EmailChain>
-                        </CardActionArea>
-                    </Card>
-                    </Grid>
+                    <label >
+                    Sender:
+                    </label><br/>
+                    <input type='text' value={toSend.sender} required onChange={(e)=> 
+                        handleChange(e, 'sender')} /><br/>
+                    <label >
+                    Receiver:
+                    </label><br/>
+                    <input type='text' value={toSend.receiver} required onChange={(e)=> 
+                        handleChange(e, 'receiver')} /><br/>
+                    <label>
+                    Message:
+                    </label><br/>
+                    <input type='text' value={toSend.message} required onChange={(e)=> 
+                        handleChange(e, 'message')} /><br/>
+                    <label >
+                    Reply To:
+                    </label><br/>
+                    <input type='text' value={toSend.reply_to} required onChange={(e)=> 
+                        handleChange(e, 'reply_to')} /><br/>
+                    <button type='submit'>Send Email</button>
                 </form>
             </header>
         </div>
