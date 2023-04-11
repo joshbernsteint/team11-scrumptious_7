@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {auth} from '../firebase';
 import {signInWithEmailAndPassword} from "firebase/auth"
 import { useNavigate } from "react-router-dom";
+import AuthDetails from './AuthDetails';
 import '../App.css'
 
 
@@ -44,7 +45,8 @@ export default function Login () {
                     <button type="submit">Sign In</button>
                 </div>
             </form>
-            <a className="link-button" href="/register">Not already a user? Register an account here.</a>
+            <a className="link-button" href="/login/register">Not already a user? Register an account here.</a>
+            <AuthDetails/>
         </div>
     );
 };

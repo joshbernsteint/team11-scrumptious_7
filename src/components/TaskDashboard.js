@@ -1,10 +1,8 @@
 import '../App.css';
 import { Stack, Card, ButtonGroup, ToggleButton, Button, Modal } from 'react-bootstrap'
-import { useRef, useState, useEffect } from 'react'
-import TaskStatus from './TaskStatus';
+import { useState } from 'react'
 import NotificationBar from './NotificationBar';
 import ProgressBar from './ProgressBar';
-import UpdateProgressBar from './UpdateProgressBar';
 
 const priorities=[
     <img src="/priorities/p1.png" className="priority-Images"/>,
@@ -38,9 +36,8 @@ function FocusedTask(props) {
 
     return (
         <div style={{ width: '40rem', border: "0.15rem solid gray", height: '40rem', borderRadius: '5%', top: "0", left: "0", bottom: "auto"}} aria-label="featured">
-           <h1>Task ID: {selectedTask.id}</h1>
-           <h2>{selectedTask.title}</h2>
-           <h6><i>Due: {selectedTask.due}</i></h6>
+           <h1>{selectedTask.title}</h1>
+           <h6><i>Due: {selectedTask.dueDate}</i></h6>
            <h5>
             {prioritiesB[selectedTask.priority-1]}
            </h5>
@@ -48,10 +45,12 @@ function FocusedTask(props) {
            {selectedTask.description}<br/>
            <>
            <b>Completion:</b>
-           <ProgressBar bgcolor="blue" completed={selectedTask.completed}/>
+           <ProgressBar bgcolor="blue" completed={selectedTask.completed? "100" : "0"}/>
         <Button variant="primary" onClick={handleShow}>
           <p aria-label='change-task-button'>Change Featured Task</p>
         </Button>
+        
+        <p className='id-p'>Task ID: {selectedTask.id}</p>
             <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
                 <Modal.Title>Choose Different Task</Modal.Title>
@@ -76,8 +75,9 @@ function FocusedTask(props) {
 }
 
 function getBar(props){
+    if(props.tasks){
     return (<NotificationBar tasks={props.tasks} filterType={props.filter} dir={props.dir} pList={priorities}/>)
-}
+}}
 
 
 export function TaskDashboard(props) {
