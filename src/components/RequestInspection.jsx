@@ -3,6 +3,7 @@ import { auth } from "../firebase";
 import { getDatabase, ref, child, get } from "firebase/database";
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import emailjs from "@emailjs/browser";
 import '../App.css'
 
 const RequestInspection = () => {
@@ -10,20 +11,63 @@ const RequestInspection = () => {
   const [authUser, setAuthUser] = useState(null);
   const [uid, setUid] = useState("");
   const [signedInUser, setSignedInUser] = useState(undefined);
-  // Define state variables to store the form data
+  //Variables to store the form data
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState('');
   const [type, setType] = useState('');
   const [date, setDate] = useState('');
+  //Variable for sending emails
+  const [msg, setMsg] = useState("");
+  const [toSend, setToSend] = useState({
+      from_name: '',
+      to_name: '',
+      message: '',
+      reply_to: '',
+    });
+
+  // Define a function to handle form value changes
+  const handleChange = (e) => {
+    setToSend({ ...toSend, [e.target.name]: e.target.value });
+  }
 
   // Define a function to handle form submission
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
     // TODO: Send form data to server OR send as an email
     //have email, address, type of inspection, date
     //make an email that: requests a(n) TYPE inspection at ADDRESS on DATE.
+    if (!address) {return;}
+    if (!email) {return;}
+    if (!type) {return;}
+    if (!date) {return;}
 
+    if (type !== "Electrical") {
+        setMsg("Requesting a " + type + " inspection for a project site at " + address + " on " + date
+                                             + ". Let us know when what time you are available.");
+    } else {
+        setMsg("Requesting an " + type + " inspection for a project site at " + address + " on " + date
+            + ". Let us know what time you are available.");
+    }
+    
+    if (!msg) {return;}
+    emailjs.send(
+      'service_irz0jpj',
+      'template_00t2vd7',
+      {
+         to_email: email,
+         message: msg,
+         from_name: signedInUser.firstName + " " + signedInUser.lastName,
+      },
+      'efzfTDu4C32h1a2WF'
+    )
+      .then((response) => {
+        console.log('SUCCESS!', response.status, response.text);
+      })
+      .catch((err) => {
+        console.log('FAILED...', err);
+      });
   };
+
 
   // TODO: Get currently signed in user
   const getUserFromDb = async () => {
@@ -98,7 +142,7 @@ const RequestInspection = () => {
         </div>
         <label className = "label">
           Date: <br />
-          <input classname="input"
+          <input className="input"
           type="date"
           value={date} onChange={(e) => setDate(e.target.value)} />
         </label>
