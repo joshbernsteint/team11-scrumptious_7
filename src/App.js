@@ -13,7 +13,9 @@ import UpdateProgressBar from "./components/UpdateProgressBar";
 import { HomeNavBar } from "./components/homeNavBar";
 import SendContract from "./components/SendContract";
 import { TaskDashboard } from "./components/TaskDashboard";
-import { TaskScreen } from "./components/TaskScreen";;
+import { TaskScreen } from "./components/TaskScreen";
+import CreateProject from "./components/CreateProject";
+
 function App() {
   const [showNav, setShowNav] = useState(false);
 
@@ -97,7 +99,8 @@ function App() {
         </Route>
 		<Route path="/sendContract" element={<SendContract/>} />
         <Route path="*" element={<Navigate to ="/" />} /> 
-        <Route path='/progress' element={<UpdateProgressBar/>}/>
+        <Route path='/progress/:id' element={<UpdateProgressBar/>}/>
+        <Route path='/createproject' element={<CreateProject />} />
       </Routes>
     </Router>
     </div>
