@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import "../App.css";
 import emailjs from "@emailjs/browser";
 import { getAuth } from "firebase/auth";
+import { ref, getDatabase, child, get } from "firebase/database";
 
-function EmailChain() {
+function EmailChain(props) {
   const auth = getAuth();
   const user = auth.currentUser;
   const [users, setUsers] = useState([]);
@@ -11,20 +12,36 @@ function EmailChain() {
   const [emlbtn, setEmlbtn] = useState(false);
   const [error, setError] = useState(null);
 
+  async function getUser(uid) {
+    const dbRef = ref(getDatabase());
+    try {
+      const snapshot = await get(child(dbRef, `users/${uid}`));
+      if (snapshot.exists) {
+        return snapshot.val();
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   useEffect(() => {
-    // mock users
-    // const user1 = { name: "Jasmine", email: "jperez11@stevens.edu" };
-    // const user2 = { name: "Campbell", email: "ctedtsen@stevens.edu" };
-    const user3 = { name: "Josh B", email: "jbernst1@stevens.edu"};
-    const user4 = { name: "Josh G", email: "jgorman4@stevens.edu"};
-    setUsers([user3, user4]);
+    let usersArray = []
+    const fetchData = async () => {
+      await props.users.map(async (uid)=>{
+        let userInfo = await getUser(uid);
+        usersArray = [...usersArray, userInfo]
+        setUsers(usersArray);
+      })
+    }
+    fetchData();
+    
   }, []);
 
   const clickHandler = () => {
     setError(null)
     setEmlbtn((prev) => !prev);
     const userNameList = users.map((user) => {
-      return user.name;
+      return user.firstName;
     });
     setUsersName(
       userNameList.map((name) => {
@@ -34,7 +51,6 @@ function EmailChain() {
   };
 
   const sumbitHandler = (event) => {
-    // check that user is signed in
     event.preventDefault();
     const message = document.getElementById("eml-msg").value;
     if (!user) {
@@ -80,7 +96,7 @@ function EmailChain() {
         Send to Email Chain
       </button>
       {emlbtn && <div className="userNames-div"><h2 className="people-h2">People:</h2><ul>{usersName}</ul></div>}
-      {error && <p>{error}</p>}
+      {error && <p className="error">{error}</p>}
       {emlbtn && (
         <div className="eml-form-div">
         <form onSubmit={sumbitHandler}>

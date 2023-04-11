@@ -315,3 +315,91 @@ header h1 {
 .lbl-msg{
   margin-right: 100%;
 }
+
+.task-form {
+  text-align: left;
+}
+
+.task-form input[type='text'] {
+	background: none;
+  border: none;
+	border-bottom: solid 2px #198754;
+	color: #474544;
+	font-size: 16px;
+  font-weight: 400;
+	margin: 0em 0 1.875em 0;
+	width: 100%;
+}
+
+input[type='text']:focus{
+	outline: none;
+}
+
+.task-form select { 
+  outline: none;
+  margin-left: 20px;
+}
+
+.task-form select::-ms-expand {
+  display: none;
+}
+
+.text-area {
+	height: 50px;
+	resize: none;
+  width: 100%;
+  border-color: #198754;
+  outline: none;
+}
+
+.form-btn {
+  background: none;
+  border: solid 2px #474544;
+  color: #474544;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Helvetica', Arial, sans-serif;
+  font-size: 0.875em;
+  font-weight: bold;
+  outline: none;
+  padding: 20px 35px;
+  margin-top: 15px;
+}
+
+.form-btn:hover {
+  background: #198754;
+  color: #F2F3EB;
+}
+
+.task-form {
+  margin-left: 25%;
+  margin-right: 25%
+}
+
+.btn-div {
+ text-align: center;
+}
+
+.date-picker {
+  margin-bottom: 15px;
+  margin-top: 15px
+}
+
+.completedTasks {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+}
+
+.completedTasks li{
+  text-align: left;
+  margin: 15px;
+}
+
+.priority-select {
+  margin-left: 15px;
+}
+
+.id-p {
+  margin-top: 35px;
+}
