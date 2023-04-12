@@ -202,11 +202,11 @@ function TaskStatus(props) {
         </Grid>
       )}
       <br />
-      <h2 className="h2-v1">Completed Tasks</h2>
-      <ul className="completedTasks">{doneList}</ul>
-      {(signedInUser && signedInUser.userType === "manager") ? ( <Link to="/newTask">
+      
+      {(signedInUser && signedInUser.userType === "manager") ? ( <><h2 className="h2-v1">Completed Tasks</h2>
+      <ul className="completedTasks">{doneList}</ul><Link to="/newTask">
         <p>Create a new task here.</p>
-      </Link>) : null}
+      </Link></>) : null}
      
     </div>
   );
