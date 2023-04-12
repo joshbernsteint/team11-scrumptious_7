@@ -48,7 +48,7 @@ const RequestInspection = () => {
         setMsg("Requesting an " + type + " inspection for a project site at " + address + " on " + date
             + ". Let us know what time you are available.");
     }
-    
+
     if (!msg) {return;}
     emailjs.send(
       'service_irz0jpj',
