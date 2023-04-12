@@ -3,14 +3,61 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import EmailChain from "./EmailChain";
 import { ref, getDatabase, update, child, get } from "firebase/database";
+
 import { Link } from "react-router-dom";
 import { CardActionArea, CardActions, Grid, Typography } from "@mui/material";
+
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function TaskStatus(props) {
   const [tasks, setTasks] = useState(props.tasks);
   const [cards, setCards] = useState(null);
   const [completedTasks, setCompletedTasks] = useState([]);
   const [doneList, setDoneList] = useState(null);
+  const [signedInUser, setSignedInUser] = useState(null);
+  const [authUser, setAuthUser] = useState(null);
+
+  const [uid, setUid] = useState(undefined);
+  const auth = getAuth();
+
+  const getUserFromDb = async () => {
+    const dbRef = ref(getDatabase());
+    try {
+      const snapshot = await get(child(dbRef, `users/${uid}`));
+      if (snapshot.exists()) {
+        setSignedInUser(snapshot.val());
+        localStorage.setItem("user", signedInUser);
+      }
+    } catch (e) {
+      console.log(e);
+      console.log("user not found");
+    }
+  };
+
+  //Listener for authenticated user
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setAuthUser(user);
+        setUid(user.uid);
+      } else {
+        setAuthUser(null);
+      }
+    });
+  }, [auth, uid]);
+
+  useEffect(() => {
+    if (uid) {
+      getUserFromDb();
+    }
+  }, [uid, signedInUser]);
+  //check if a user is currently signed in
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      setSignedInUser(loggedInUser);
+    }
+  }, []);
 
   const buildTaskCard = (task) => {
     if (task) {
@@ -26,18 +73,21 @@ function TaskStatus(props) {
                 <Typography>Priority: {task.priority}</Typography>
               </CardContent>
             </CardActionArea>
-            <CardActions>
-              <Grid container alignItems="center" justifyContent="center">
-                <button
-                  className="card-btn"
-                  onClick={() => {
-                    if (task.id) handleClick(task.id, true);
-                  }}
-                >
-                  Done
-                </button>
-              </Grid>
-            </CardActions>
+            {(signedInUser && signedInUser.userType === "manager") ||
+            (signedInUser && signedInUser.userType === "worker") ? (
+              <CardActions>
+                <Grid container alignItems="center" justifyContent="center">
+                  <button
+                    className="card-btn"
+                    onClick={() => {
+                      if (task.id) handleClick(task.id, true);
+                    }}
+                  >
+                    Done
+                  </button>
+                </Grid>
+              </CardActions>
+            ) : null}
             <CardActions>
               <EmailChain users={[task.assignedTo.uid]}></EmailChain>
             </CardActions>
