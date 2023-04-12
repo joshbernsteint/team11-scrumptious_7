@@ -18,7 +18,7 @@ export function SalesRepCard() {
                     <Button variant = "info" style={{margin: "2%",width: "50%"}} onClick={handleShow}>Specific Country</Button>
                 </Stack>
                 <Stack style={{alignItems: "center", margin: "2%",borderRadius: "10%"}}>
-                    <h3 style={{color: "white"}}>[Other data to go here]</h3>
+                    {/* <h3 style={{color: "white"}}>[Other data to go here]</h3> */}
                 </Stack>
                 <Stack>
                 </Stack>

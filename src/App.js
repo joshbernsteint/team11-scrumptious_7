@@ -16,8 +16,6 @@ import React, { useState, useEffect } from "react";
 import NotificationBar from "./components/NotificationBar";
 import UpdateProgressBar from "./components/UpdateProgressBar";
 import { HomeNavBar } from "./components/homeNavBar";
-import { Stack, Row,Col } from 'react-bootstrap';
-import { alignProperty } from "@mui/material/styles/cssUtils";
 
 import SendContract from "./components/SendContract";
 import { TaskDashboard } from "./components/TaskDashboard";

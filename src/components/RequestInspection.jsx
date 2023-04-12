@@ -118,7 +118,7 @@ const RequestInspection = () => {
   {authUser ? (
   <form className='form' onSubmit={handleSubmit}>
       <h3 className="inspectionHeader">Send an Inspection Request</h3>
-      {signedInUser.userType==="manager" ?
+      {signedInUser && signedInUser.userType==="manager" ?
       (
       <div className='form-body'>
           <input type="email"

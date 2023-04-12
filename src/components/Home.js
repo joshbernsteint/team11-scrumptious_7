@@ -132,7 +132,7 @@ function Home(props) {
           <TaskDashboard taskRef={tasks} />
           <br/>
           <br/>
-          <SalesRepCard/>
+          {(signedInUser && signedInUser.userType === "sales-rep") ? (<SalesRepCard/>) : (<br/>)}
         </Stack>
       ) : (
         <h1>loading...</h1>
