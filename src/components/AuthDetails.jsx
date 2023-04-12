@@ -15,18 +15,18 @@ const AuthDetails = () => {
 
   //Get currently signed in user IF SIGNED IN
   const getUserFromDb = async () => {
-      const dbRef = ref(getDatabase());
-          try{
-              const snapshot = await get(child(dbRef, `users/${uid}`));
-                  if(snapshot.exists()) {
-                      setSignedInUser(snapshot.val())
-                      localStorage.setItem('user', signedInUser)
-              }
-          } catch(e) {
-                  console.log(e);
-                  console.log("user not found")
-          }
+    const dbRef = ref(getDatabase());
+    try {
+      const snapshot = await get(child(dbRef, `users/${uid}`));
+      if (snapshot.exists()) {
+        setSignedInUser(snapshot.val());
+        localStorage.setItem("user", signedInUser);
+      }
+    } catch (e) {
+      console.log(e);
+      console.log("user not found");
     }
+  };
   //Listener for authenticated user
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -37,85 +37,101 @@ const AuthDetails = () => {
         setAuthUser(null);
       }
     });
-  }, [auth, uid])
+  }, [auth, uid]);
 
   useEffect(() => {
     if (uid) {
-        getUserFromDb();
+      getUserFromDb();
     }
-  }, [uid, signedInUser])
+  }, [uid, signedInUser]);
   //check if a user is currently signed in
   useEffect(() => {
-      const loggedInUser = localStorage.getItem("user");
-      if (loggedInUser) {
-        setSignedInUser(loggedInUser);
-      }
-    }, []);
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      setSignedInUser(loggedInUser);
+    }
+  }, []);
 
   const userSignOut = () => {
     signOut(auth)
       .then(() => {
         console.log("sign out successful");
         localStorage.clear();
+        window.location.reload(false);
       })
       .catch((error) => console.log(error));
   };
 
   const reqInsp = () => {
-    navigate("/requestInspection")
-  }
+    navigate("/requestInspection");
+  };
 
-    // Get Currently Signed In User's information!!
-    // TODO: Find userType of signed in user ONLY CHECK MANAGER BECAUSE WORKER CUSTOMER PERMS DONT MATTER
-    // TODO: Create userType specific elements
+  // Get Currently Signed In User's information!!
+  // TODO: Find userType of signed in user ONLY CHECK MANAGER BECAUSE WORKER CUSTOMER PERMS DONT MATTER
+  // TODO: Create userType specific elements
 
   return (
     <div>
       {authUser ? (
         <>
-            <p>Welcome back!</p>{signedInUser.userType==="manager" ? ( <button onClick={reqInsp}>Request an Inspection</button> ) : ( <> </>) }
-            <br />
-            {showProfile
-            ? <button onClick={() => setShowProfile(!showProfile)}>Hide User Information</button>
-            : <button onClick={() => setShowProfile(!showProfile)}>Show User Information</button>}
-            {showProfile && (
+          <p>Welcome back!</p>
+          {signedInUser && signedInUser.userType === "manager" ? (
+            <button onClick={reqInsp}>Request an Inspection</button>
+          ) : (
+            <> </>
+          )}
+          <br />
+          {showProfile ? (
+            <button onClick={() => setShowProfile(!showProfile)}>
+              Hide User Information
+            </button>
+          ) : (
+            <button onClick={() => setShowProfile(!showProfile)}>
+              Show User Information
+            </button>
+          )}
+          {showProfile && (
             <>
-            <div className="profile-container">
+              <div className="profile-container">
                 <table>
-                    <tbody>
-                        <tr>
-                            <td>Name</td>
-                            <td>:</td>
-                            <td>{signedInUser.firstName} {signedInUser.lastName}</td>
-                        </tr>
-                        <tr>
-                            <td>Email</td>
-                            <td>:</td>
-                            <td>{signedInUser.email}</td>
-                        </tr>
-                        <tr>
-                            <td>Role</td>
-                            <td>:</td>
-                            <td>{signedInUser.userType}</td>
-                        </tr>
-                        <tr>
-                            <td>Step</td>
-                            <td>:</td>
-                            <td>{signedInUser.step}</td>
-                        </tr>
-                    </tbody>
+                  <tbody>
+                    <tr>
+                      <td>Name</td>
+                      <td>:</td>
+                      <td>
+                        {signedInUser.firstName} {signedInUser.lastName}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Email</td>
+                      <td>:</td>
+                      <td>{signedInUser.email}</td>
+                    </tr>
+                    <tr>
+                      <td>Role</td>
+                      <td>:</td>
+                      <td>{signedInUser.userType}</td>
+                    </tr>
+                    <tr>
+                      <td>Step</td>
+                      <td>:</td>
+                      <td>{signedInUser.step}</td>
+                    </tr>
+                  </tbody>
                 </table>
-            </div>
+              </div>
             </>
-            )}
-            <br />
-            <button onClick={userSignOut}>Sign Out</button>
+          )}
+          <br />
+          <button onClick={userSignOut}>Sign Out</button>
         </>
       ) : (
-      <>
-        <p>You are currently not signed in.</p>
-        <a className="link-button" href="/login">Would you like to sign in? Click here.</a>
-      </>
+        <>
+          <p>You are currently not signed in.</p>
+          <a className="link-button" href="/login">
+            Would you like to sign in? Click here.
+          </a>
+        </>
       )}
     </div>
   );
