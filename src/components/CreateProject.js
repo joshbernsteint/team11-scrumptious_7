@@ -117,7 +117,7 @@ export default function CreateProject() {
                                 onChange={(e) => setCustomerUid(e.target.value)}
                             />
                         </div>
-                        <button>Crete Project</button>
+                        <button>Create Project</button>
                     </form>
                     <a href="/login">Already have an account? Sign in here</a>
                 </div>

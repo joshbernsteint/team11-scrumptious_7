@@ -121,7 +121,6 @@
 .mainDefault {
   top: 0;
 }
-
 #completedTasks {
   list-style: none;
   align-items: left;
@@ -299,6 +298,7 @@ header h1 {
   color: #282c34;
 }
 
+
 .priority-Images{
   height: 50px;
   width: 50px;
@@ -450,4 +450,45 @@ input[type='text']:focus{
 
 .id-p {
   margin-top: 35px;
+}
+
+
+.redirect {
+  background-color: rgb(221, 220, 220);
+  height: 100%;
+  text-align: center;
+  left: 50%;
+  width: 100%;
+}
+
+.redirect-square{
+  background-color: rgb(53, 53, 53);
+  color: rgb(174, 172, 172);
+  justify-content: center;
+  border-radius: 5%;
+  align-items: center;
+  margin: 0 auto;
+  height: 500px;
+  width: 500px;
+  cursor:default;
+}
+
+.redirect-square-items{
+  margin: 5%;
+}
+.notification{
+  right: 0;
+  position: absolute;
+}
+
+.sales-card{
+  background-color: green;
+  margin: 5%;
+  border-radius: 5%;
+  height: 400px;
+  left: 50%
+}
+
+.sales-card-item{
+  margin: 2%
 }

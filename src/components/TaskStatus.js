@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import EmailChain from "./EmailChain";
+
+
 import { ref, getDatabase, update, child, get } from "firebase/database";
 
 import { Link } from "react-router-dom";
@@ -19,6 +21,7 @@ function TaskStatus(props) {
 
   const [uid, setUid] = useState(undefined);
   const auth = getAuth();
+
 
   const getUserFromDb = async () => {
     const dbRef = ref(getDatabase());
@@ -48,7 +51,7 @@ function TaskStatus(props) {
 
   useEffect(() => {
     if (uid) {
-      getUserFromDb();
+       getUserFromDb();
     }
   }, [uid, signedInUser]);
   //check if a user is currently signed in
@@ -73,8 +76,7 @@ function TaskStatus(props) {
                 <Typography>Priority: {task.priority}</Typography>
               </CardContent>
             </CardActionArea>
-            {(signedInUser && signedInUser.userType === "manager") ||
-            (signedInUser && signedInUser.userType === "worker") ? (
+            {(signedInUser && signedInUser.userType == "manager") ? (
               <CardActions>
                 <Grid container alignItems="center" justifyContent="center">
                   <button
@@ -202,9 +204,10 @@ function TaskStatus(props) {
       <br />
       <h2 className="h2-v1">Completed Tasks</h2>
       <ul className="completedTasks">{doneList}</ul>
-      <Link to="/newTask">
+      {(signedInUser && signedInUser.userType === "manager") ? ( <Link to="/newTask">
         <p>Create a new task here.</p>
-      </Link>
+      </Link>) : null}
+     
     </div>
   );
 }

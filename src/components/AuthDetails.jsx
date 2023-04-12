@@ -90,7 +90,7 @@ const AuthDetails = () => {
               Show User Information
             </button>
           )}
-          {showProfile && (
+          {showProfile && signedInUser && (
             <>
               <div className="profile-container">
                 <table>

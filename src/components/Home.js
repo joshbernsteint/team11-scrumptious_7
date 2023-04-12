@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { ref, getDatabase, child, get } from "firebase/database";
 import "../App.css";
+import { Stack } from "react-bootstrap";
 import { TaskDashboard } from "./TaskDashboard";
+import { SalesRepCard } from "./SalesRepCard";
 import { useNavigate } from "react-router-dom";
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -126,9 +128,12 @@ function Home(props) {
   return (
     <>
       {tasks.length !== 0 ? (
-        <>
+        <Stack gap = {5}>
           <TaskDashboard taskRef={tasks} />
-        </>
+          <br/>
+          <br/>
+          {(signedInUser && signedInUser.userType === "sales-rep") ? (<SalesRepCard/>) : (<br/>)}
+        </Stack>
       ) : (
         <h1>loading...</h1>
       )}
