@@ -46,7 +46,6 @@ function App() {
     });
   }, [auth, uid]);
 
-
   return (
     <div className="App">
       <HomeNavBar />

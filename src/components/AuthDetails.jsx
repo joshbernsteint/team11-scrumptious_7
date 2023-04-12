@@ -73,7 +73,7 @@ const AuthDetails = () => {
     <div>
       {authUser ? (
         <>
-            <p>Welcome back!</p>{signedInUser.userType==="manager" ? ( <button onClick={reqInsp}>Request an Inspection</button> ) : ( <> </>) }
+            <p>Welcome back!</p>{signedInUser && signedInUser.userType==="manager" ? ( <button onClick={reqInsp}>Request an Inspection</button> ) : ( <> </>) }
             <br />
             {showProfile
             ? <button onClick={() => setShowProfile(!showProfile)}>Hide User Information</button>

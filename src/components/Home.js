@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { ref, getDatabase, child, get } from "firebase/database";
 import "../App.css";
+import { Stack } from "react-bootstrap";
 import { TaskDashboard } from "./TaskDashboard";
+import { SalesRepCard } from "./SalesRepCard";
 
 function Home(props) {
   const [result, setResult] = useState({});
@@ -49,9 +51,12 @@ function Home(props) {
   return (
     <>
       {tasks.length !== 0 ? (
-        <>
+        <Stack gap = {5}>
           <TaskDashboard taskRef={tasks} />
-        </>
+          <br/>
+          <br/>
+          <SalesRepCard/>
+        </Stack>
       ) : (
         <h1>loading...</h1>
       )}

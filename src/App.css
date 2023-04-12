@@ -464,11 +464,9 @@ input[type='text']:focus{
   background-color: rgb(53, 53, 53);
   color: rgb(174, 172, 172);
   justify-content: center;
-  border: black;
   border-radius: 5%;
   align-items: center;
   margin: 0 auto;
-  border: 10rem;
   height: 500px;
   width: 500px;
   cursor:default;
@@ -480,4 +478,16 @@ input[type='text']:focus{
 .notification{
   right: 0;
   position: absolute;
+}
+
+.sales-card{
+  background-color: green;
+  margin: 5%;
+  border-radius: 5%;
+  height: 400px;
+  left: 50%
+}
+
+.sales-card-item{
+  margin: 2%
 }
