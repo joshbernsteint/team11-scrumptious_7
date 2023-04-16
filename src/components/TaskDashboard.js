@@ -35,7 +35,7 @@ function FocusedTask(props) {
     })
 
     return (
-        <div style={{ width: '40rem', border: "0.15rem solid gray", height: '40rem', borderRadius: '5%', top: "0", left: "0", bottom: "auto"}} aria-label="featured">
+        <div style={{ width: '40rem', border: "0.15rem solid gray", height: '40rem', borderRadius: '5%', top: "0", left: "0", bottom: "auto",cursor: "default"}} aria-label="featured">
            <h1>{selectedTask.title}</h1>
            <h6><i>Due: {selectedTask.dueDate}</i></h6>
            <h5>
@@ -46,7 +46,7 @@ function FocusedTask(props) {
            <>
            <b>Completion:</b>
            <ProgressBar bgcolor="blue" completed={selectedTask.completed? "100" : "0"}/>
-        <Button variant="primary" onClick={handleShow}>
+        <Button variant="primary" onClick={handleShow} style={{height: "40px"}}>
           <p aria-label='change-task-button'>Change Featured Task</p>
         </Button>
         
@@ -58,7 +58,7 @@ function FocusedTask(props) {
             <Modal.Body>
                 <Stack gap={2}>
                 {otherChoices.map((t, idx) => (
-                    <Button value={idx} variant="success" onClick={(e) => {setSelectedTask(props.tasks[e.currentTarget.value])}} key={idx}>ID #{t.id}: {t.title}</Button>
+                    <Button value={idx} variant="success" onClick={(e) => {setSelectedTask(props.tasks[e.currentTarget.value])}} key={idx}>{t.title}</Button>
                 ))}
                 </Stack>
             </Modal.Body>
@@ -112,7 +112,7 @@ export function TaskDashboard(props) {
                     <FocusedTask task={myTasks[0]} tasks={myTasks}/>
                     <Stack style={{maxWidth: "100%"}}>
                         <Stack direction="horizontal" gap = {2}>
-                            <ButtonGroup style={{width: "50%", top: "2%"}}>
+                            <ButtonGroup style={{width: "50%", top: "2%",cursor: "default"}}>
                                 {filters.map((filter, idx) => (
                                 <ToggleButton
                                     key={idx}

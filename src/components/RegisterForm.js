@@ -221,25 +221,27 @@ export default function RegisterForm() {
 
     return (
         <div className='register-container'>
-            {message && <p>{message}</p>}
-            <form onSubmit={handleRegister} className="form">
+            {message && <p aria-label='message'>{message}</p>}
+            <form onSubmit={handleRegister} className="form" aria-label="register a user">
                 <div>
                     <label className='label'>First Name</label>
-                    <p className='error'>{errors.firstName}</p>
+                    {errors.firstName && <p className='error' aria-label="first-name-error">{errors.firstName}</p>}
                     <input
                         type="text"
                         placeholder="First Name"
                         onChange={handleChange}
                         name="firstName"
+                        aria-label='first-name'
                         value={user.firstName}
                         className='input'
                     />
                 </div>
                 <div>
                     <label className='label'>Last Name</label>
-                    <p className='error'>{errors.lastName}</p>
+                    {errors.lastName && <p className='error' aria-label="last-name-error">{errors.lastName}</p>}
                     <input
                         type="text"
+                        aria-label='last-name'
                         placeholder="Last Name"
                         onChange={handleChange}
                         name="lastName"
@@ -249,8 +251,9 @@ export default function RegisterForm() {
                 </div> 
                 <div>
                     <label className='label'>User Classification </label>
-                    <p className='error'>{errors.userType}</p>
+                    {errors.userType && <p className='error' aria-label="user-type-error">{errors.userType}</p>}
                     <select 
+                        aria-label='user-type'
                         id="userType"
                         value={user.userType}
                         onChange={handleChange}
@@ -260,14 +263,16 @@ export default function RegisterForm() {
                         <option value="">-- Choose --</option>
                         <option value="customer">Customer</option>
                         <option value="worker">Construction Worker</option>
+                        <option value="sales-rep">Sales Representative</option>
                         <option value="manager">Manager</option>
                     </select>
                 </div>
                 <div>
                     <label className='label'>Email </label>
-                    <p className='error'>{errors.email}</p>
+                    {errors.email && <p className='error' aria-label="email-error">{errors.email}</p>}
                     <input
                         type="email"
+                        aria-label='email'
                         placeholder="Email"
                         onChange={handleChange}
                         name="email"
@@ -277,9 +282,10 @@ export default function RegisterForm() {
                 </div>
                 <div>
                     <label className='label'>Password </label>
-                    <p className='error'>{errors.password}</p>
+                    {errors.password && <p className='error' aria-label="password-error">{errors.password}</p>}
                     <input
                         type="password"
+                        aria-label='password'
                         placeholder="Password"
                         onChange={handleChange}
                         name="password"
@@ -289,9 +295,10 @@ export default function RegisterForm() {
                 </div>
                     <div>
                     <label className='label'>Confirm Password </label>
-                    <p className='error'>{errors.passwordConfirm}</p>
+                    {errors.passwordConfirm && <p className='error' aria-label="password-confirm-error">{errors.passwordConfirm}</p>}
                     <input
                         type="password"
+                        aria-label='password-confirm'
                         placeholder="Confirm Password"
                         onChange={handleChange}
                         name="passwordConfirm"
