@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import RequirePhotos from "./RequirePhotos";
 import CameraAccess from "./CameraAccess";
 import PermissionForm from "./PermissionForm";
+import StripeContainer from "./StripeContainer";
 
 function CameraForm() {
   return (
@@ -10,6 +11,7 @@ function CameraForm() {
         <RequirePhotos></RequirePhotos>
         <CameraAccess></CameraAccess>
         <PermissionForm></PermissionForm>
+        <StripeContainer></StripeContainer>
       </div>
     </div>
   );
