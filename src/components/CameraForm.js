@@ -7,7 +7,7 @@ import StripeContainer from "./StripeContainer";
 function CameraForm() {
   return (
     <div>
-      <div className="require-div">
+      <div className="App">
         <RequirePhotos></RequirePhotos>
         <CameraAccess></CameraAccess>
         <PermissionForm></PermissionForm>

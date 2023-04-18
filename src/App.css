@@ -22,8 +22,8 @@
 
 .cameraPower {
   position: absolute;
-  bottom: 10%;
-  left: 40%;
+  bottom: 60%;
+  left: 45%;
   display: flex;
 }
 #cameraRequest {
@@ -494,7 +494,7 @@ input[type='text']:focus{
 }
 
 .FormGroup {
-	margin: 0 150px 20px;
+	margin: 10px 150px 20px;
 	padding: 0;
 	border-style: none;
 	background-color: #7795f8;
@@ -518,5 +518,5 @@ input[type='text']:focus{
 
 .StripeElement {
 	width: 100%;
-	padding: 11px 200px 11px 0;
+	padding: 11px 15px 11px 0;
 }
