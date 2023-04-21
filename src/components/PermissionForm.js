@@ -33,8 +33,8 @@ function PermissionForm(){
       };
 
     return (
-        <div classname="App">
-            <header classname="App-header">
+        <div className="App">
+            <header className="App-header">
                 <form onSubmit={onSubmit}>{}
                 <h2>Request Permission</h2>
                     <label >
