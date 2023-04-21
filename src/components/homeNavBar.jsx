@@ -64,6 +64,11 @@ export function HomeNavBar() {
                 Register
               </Nav.Link>
               <Nav.Link href = "/inquiry" className={`${styles.navLink}`} target='_blank'>Inquiry Form</Nav.Link>
+              {uid && (
+                <Nav.Link href={"/progress/"+uid} className={`${styles.navLink}`}>
+                  Progress
+                </Nav.Link>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>

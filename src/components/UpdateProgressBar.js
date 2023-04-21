@@ -108,7 +108,8 @@ function UpdateProgressBar() {
                     <p>Hi {signedInUser ? signedInUser.firstName : "must sign in"}</p>
                     { stepDescription ?
                         <div>
-                            <p>You are currently at step {currentStep} in the project process.</p>
+                            {manager && <p>This project is for user {id.id}</p>}
+                            <p>This project is currently at step {currentStep} in the project process.</p>
                             <p>Step {currentStep}: {stepDescription}</p>
                         </div> 
                         : 
@@ -136,7 +137,7 @@ function UpdateProgressBar() {
             return (
                 <div>
                 <p>Hi {signedInUser ? signedInUser.firstName : "must sign in"}</p>
-                <p>You're project has not yet begun! You'll have to wait for a manager to start your project.</p>
+                <p>You're project has not yet begun! You'll have to wait for a manager to start your project to see your project progress.</p>
                 </div>
             )
         } else {

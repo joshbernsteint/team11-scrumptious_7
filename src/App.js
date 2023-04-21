@@ -28,6 +28,7 @@ import { Redirect } from './components/Redirect'
 import { Stack, Row,Col } from 'react-bootstrap';
 import { alignProperty } from "@mui/material/styles/cssUtils";
 import RequestInspection from "./components/RequestInspection";
+import ManagerProjects from "./components/MangerProjects";
 
 
 function App() {
@@ -64,8 +65,8 @@ function App() {
           <Route path="/RequestInspection" element={<RequestInspection />} />
           <Route path="/sendContract" element={<SendContract />} />
           <Route path="*" element={<Navigate to="/" />} />
-          <Route path="/progress" element={<UpdateProgressBar />} />
-          <Route path="/createproject" element={<CreateProject />} />
+          <Route path="/progress/:id" element={<UpdateProgressBar />} />
+          <Route path="/new-project" element={<CreateProject />} />
           <Route path="/newTask" element={<TaskForm uid={uid}/>}></Route>
           <Route path = "/inquiry" element={<Redirect link={inquiryLink}/>}/>
         </Routes>
