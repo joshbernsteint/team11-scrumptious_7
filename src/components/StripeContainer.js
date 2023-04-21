@@ -12,7 +12,7 @@ export default function StripeContainer(){
     return (
         <div className="App">
             <h1>
-                Enter payment info.
+                Enter bank card info:
             </h1>
             <Elements stripe={stripeTestPromise}>
                 <PaymentForm/>

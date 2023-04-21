@@ -22,6 +22,10 @@ const CARD_OPTIONS = {
 	}
 }
 
+function showErrorAlert(){
+    alert("Your payment did not go through, please try again.");
+}
+
 export default function PaymentForm(){
     const [success, setSuccess] = useState(false)
     const stripe = useStripe()
@@ -51,6 +55,7 @@ export default function PaymentForm(){
         }
         else {
             console.log(error.message)
+            showErrorAlert()
         }
     }
 
@@ -67,7 +72,7 @@ export default function PaymentForm(){
         </form>
         :
         <div>
-           <h2>Your payment has successfully gone through. Scrumptioous Solar Services will begin the project.</h2>
+           <h6>Your payment has successfully gone through. Scrumptioous Solar Services will begin the project.</h6>
         </div>
        }
         </>
