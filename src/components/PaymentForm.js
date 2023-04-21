@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import axios from "axios";
+const axios = require('axios');
 
 const CARD_OPTIONS = {
 	iconStyle: "solid",
@@ -72,7 +72,7 @@ export default function PaymentForm(){
         </form>
         :
         <div>
-           <h6>Your payment has successfully gone through. Scrumptioous Solar Services will begin the project.</h6>
+           <h6>Your payment has successfully gone through. Scrumptious Solar Services will begin the project.</h6>
         </div>
        }
         </>
