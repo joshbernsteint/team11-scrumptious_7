@@ -119,15 +119,14 @@ export default function CreateProject() {
                 onChange={(e) => setCustomerUid(e.target.value)}
               />
             </div>
-            <button>Create Project</button>
+            <button>Assign Project to Yourself</button>
           </form>
-          <a href="/login">Already have an account? Sign in here</a>
         </div>
       );
     } else {
       return (
         <div>
-          <p>You must be a manager to create a project</p>
+          <p>You must be a manager to assign a project to yourself</p>
         </div>
       );
     }
