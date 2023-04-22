@@ -31,7 +31,7 @@ const JoinChat = (props) => {
     setRoom("general");
     setToggle(!toggle);
   };
-
+  // another comment
   const changeName = (e) => {
     e.preventDefault();
     setName(temp);
