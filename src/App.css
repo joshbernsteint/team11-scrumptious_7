@@ -72,7 +72,7 @@
   height: auto;
   z-index: 25;
 }
-.navBar button{
+.navBar button {
   position: fixed;
   left: 0%;
   font-size: 16px;
@@ -114,7 +114,7 @@
 }
 
 .mainShifted {
-  top:0;
+  top: 0;
   margin-left: 25%;
 }
 
@@ -124,71 +124,72 @@
 #completedTasks {
   list-style: none;
   align-items: left;
-  
 }
 #completedTasks button {
   margin-left: 15px;
 }
-.form{
+.form {
   background-color: #76b852;
   border-radius: 5px;
-  width: 550px;
-  margin: 20px auto;
+  max-width: 550px;
+  min-width: 100px;
+  width: auto;
+  margin: 20px 10px;
   padding: 10px;
   /* height: 600px; */
 }
 
 .form button {
-	border-radius: 20px;
-	border: 1px solid black;
-	background-color: #eee;
-	color: black;
-	font-size: 12px;
-	font-weight: bold;
-	padding: 12px 45px;
-	letter-spacing: 1px;
-	text-transform: uppercase;
-	transition: transform 80ms ease-in;
+  border-radius: 20px;
+  border: 1px solid black;
+  background-color: #eee;
+  color: black;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
 }
 
 .form input,
 .form select {
-      	background-color: #eee;
-      	border: none;
-      	padding: 12px 15px;
-      	margin: 8px 0;
-      	width: 100%;
+  background-color: #eee;
+  border: none;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 100%;
 }
 
-.form-body{
+.form-body {
   text-align: left;
   padding: 20px 10px;
 }
 
 .login-container .form-body,
-.inspection-container .form-body{
+.inspection-container .form-body {
   text-align: center;
 }
 
-.form-body > *{
+.form-body > * {
   padding: 5px;
 }
 
-.error{
+.error {
   font-size: 15px;
   color: red;
 }
 
-.label{
+.label {
   color: white;
-  font-size: 20px
+  font-size: 20px;
 }
 
-.input{
+.input {
   width: 90%;
 }
 
-.footer{
+.footer {
   text-align: center;
 }
 
@@ -231,7 +232,7 @@
   width: 50%;
   height: 200px;
   background-color: white;
-  color:#ffffff;
+  color: #ffffff;
   padding: 20px 0 20px 0;
   border-radius: 10px;
   overflow-y: scroll;
@@ -281,7 +282,7 @@
 }
 
 header h1 {
-  color: aliceblue
+  color: aliceblue;
 }
 
 .require-div {
@@ -298,92 +299,91 @@ header h1 {
   color: #282c34;
 }
 
-
-.priority-Images{
+.priority-Images {
   height: 50px;
   width: 50px;
 }
 
-.priority-Images-large{
+.priority-Images-large {
   left: 0;
   right: auto;
   height: 250px;
   width: 250px;
 }
-  
+
 .steps {
   text-align: left;
-  margin-left:20px;
+  margin-left: 20px;
 }
 
 .userNames-div {
   margin-top: 10px;
 }
 
-.userNames-div ul{
+.userNames-div ul {
   list-style: none;
 }
 
-.eml-form-div{
+.eml-form-div {
   margin-left: 30px;
 }
 
-.eml-chain-div{
+.eml-chain-div {
   display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.people-h2{
-  font-size:medium;
+.people-h2 {
+  font-size: medium;
 }
 
-.lbl-msg{
+.lbl-msg {
   margin-right: 100%;
 }
 
-.inspectionHeader{
-    color: white;
+.inspectionHeader {
+  color: white;
 }
 
 .profile-container {
-    margin-top: 2%;
-    margin-left: 30%;
-    width: 40%;
-    background-color: rgb(198, 203, 203);
-    border-radius: 18px;
-    box-shadow: 1px 1px 8px 0 grey;
-    height: auto;
-    margin-bottom: 20px;
-    padding: 20px 0 20px 50px;
+  margin-top: 2%;
+  margin-left: 30%;
+  width: 40%;
+  background-color: rgb(198, 203, 203);
+  border-radius: 18px;
+  box-shadow: 1px 1px 8px 0 grey;
+  height: auto;
+  margin-bottom: 20px;
+  padding: 20px 0 20px 50px;
 }
 
 .profile-container table {
-    border: none;
-    font-size: 16px;
-    width: 80%;
+  border: none;
+  font-size: 16px;
+  width: 80%;
 }
 
 .task-form {
   text-align: left;
 }
 
-.task-form input[type='text'] {
-	background: none;
+.task-form input[type="text"] {
+  background: none;
   border: none;
-	border-bottom: solid 2px #198754;
-	color: #474544;
-	font-size: 16px;
+  border-bottom: solid 2px #198754;
+  color: #474544;
+  font-size: 16px;
   font-weight: 400;
-	margin: 0em 0 1.875em 0;
-	width: 100%;
+  margin: 0em 0 1.875em 0;
+  width: 100%;
 }
 
-input[type='text']:focus{
-	outline: none;
+input[type="text"]:focus {
+  outline: none;
 }
 
-.task-form select { 
+.task-form select {
   outline: none;
   margin-left: 20px;
 }
@@ -393,8 +393,8 @@ input[type='text']:focus{
 }
 
 .text-area {
-	height: 50px;
-	resize: none;
+  height: 50px;
+  resize: none;
   width: 100%;
   border-color: #198754;
   outline: none;
@@ -406,7 +406,7 @@ input[type='text']:focus{
   color: #474544;
   cursor: pointer;
   display: inline-block;
-  font-family: 'Helvetica', Arial, sans-serif;
+  font-family: "Helvetica", Arial, sans-serif;
   font-size: 0.875em;
   font-weight: bold;
   outline: none;
@@ -416,21 +416,21 @@ input[type='text']:focus{
 
 .form-btn:hover {
   background: #198754;
-  color: #F2F3EB;
+  color: #f2f3eb;
 }
 
 .task-form {
   margin-left: 25%;
-  margin-right: 25%
+  margin-right: 25%;
 }
 
 .btn-div {
- text-align: center;
+  text-align: center;
 }
 
 .date-picker {
   margin-bottom: 15px;
-  margin-top: 15px
+  margin-top: 15px;
 }
 
 .completedTasks {
@@ -439,7 +439,7 @@ input[type='text']:focus{
   justify-content: center;
 }
 
-.completedTasks li{
+.completedTasks li {
   text-align: left;
   margin: 15px;
 }
@@ -452,7 +452,6 @@ input[type='text']:focus{
   margin-top: 35px;
 }
 
-
 .redirect {
   background-color: rgb(221, 220, 220);
   height: 100%;
@@ -461,7 +460,7 @@ input[type='text']:focus{
   width: 100%;
 }
 
-.redirect-square{
+.redirect-square {
   background-color: rgb(53, 53, 53);
   color: rgb(174, 172, 172);
   justify-content: center;
@@ -470,53 +469,54 @@ input[type='text']:focus{
   margin: 0 auto;
   height: 500px;
   width: 500px;
-  cursor:default;
+  cursor: default;
 }
 
-.redirect-square-items{
+.redirect-square-items {
   margin: 5%;
 }
-.notification{
+.notification {
   right: 0;
   position: absolute;
 }
 
-.sales-card{
+.sales-card {
   background-color: green;
   margin: 5%;
   border-radius: 5%;
   height: 400px;
-  left: 50%
+  left: 50%;
 }
 
-.sales-card-item{
-  margin: 2%
+.sales-card-item {
+  margin: 2%;
 }
 
 .FormGroup {
-	margin: 10px 150px 20px;
-	padding: 0;
-	border-style: none;
-	background-color: #7795f8;
-	will-change: opacity, transform;
-	box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08), inset 0 1px 0 #829fff;
-	border-radius: 4px;
+  margin: 10px 150px 20px;
+  padding: 0;
+  border-style: none;
+  background-color: #7795f8;
+  will-change: opacity, transform;
+  box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 #829fff;
+  border-radius: 4px;
 }
 
 .FormRow {
-	display: -ms-flexbox;
-	display: flex;
-	-ms-flex-align: center;
-	align-items: center;
-	margin-left: 15px;
-	border-top: 1px solid #819efc;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-left: 15px;
+  border-top: 1px solid #819efc;
 }
 
 .StripeElement--webkit-autofill {
-	background: transparent !important;
+  background: transparent !important;
 }
 
 .StripeElement {
-	width: 100%;
-	padding: 11px 15px 11px 0;
+  width: 100%;
+  padding: 11px 15px 11px 0;
 }
