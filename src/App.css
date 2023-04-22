@@ -12,6 +12,70 @@
   color: rgb(0, 0, 0);
 }
 
+.register-container,
+.login-container,
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Dashboard responsiveness */
+.dash {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.focused-task {
+  flex: 1 1 auto;
+  min-width: 200px;
+  max-width: 1000px;
+  width: 100%;
+  border: 0.15rem solid gray;
+  height: 40rem;
+  border-radius: 5%;
+  top: 0;
+  left: 0;
+  bottom: auto;
+  cursor: default;
+  align-items: center;
+}
+
+@media only screen and (min-width: 1000px) {
+  .dash {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+  }
+
+  .focused-task {
+    flex: 1 1 auto;
+    min-width: 200px;
+    max-width: 1000px;
+    width: 100%;
+    border: 0.15rem solid gray;
+    height: 40rem;
+    border-radius: 5%;
+    top: 0;
+    left: 0;
+    bottom: auto;
+    cursor: default;
+    align-items: center;
+    margin: 50px;
+  }
+}
+
+.full-dash {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .App-link {
   color: #61dafb;
 }
@@ -347,15 +411,16 @@ header h1 {
 }
 
 .profile-container {
-  margin-top: 2%;
-  margin-left: 30%;
-  width: 40%;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  width: auto;
   background-color: rgb(198, 203, 203);
   border-radius: 18px;
   box-shadow: 1px 1px 8px 0 grey;
   height: auto;
-  margin-bottom: 20px;
-  padding: 20px 0 20px 50px;
+  margin: 20px 30px;
+  padding: 20px 10px;
 }
 
 .profile-container table {
