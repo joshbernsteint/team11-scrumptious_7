@@ -65,6 +65,11 @@ export function HomeNavBar(props) {
                 {!spanishTranslation?"Register":"Registrar"}
               </Nav.Link>
               <Nav.Link href = "/inquiry" className={`${styles.navLink}`} target='_blank'>{!spanishTranslation?"Inquiry Form":"Formulario de consulta"}</Nav.Link>
+              {uid && (
+                <Nav.Link href={"/progress/"+uid} className={`${styles.navLink}`}>
+                  Progress
+                </Nav.Link>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>

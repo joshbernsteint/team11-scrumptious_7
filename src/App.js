@@ -27,6 +27,8 @@ import { Redirect } from "./components/Redirect";
 import { Stack, Row, Col } from "react-bootstrap";
 import { alignProperty } from "@mui/material/styles/cssUtils";
 import RequestInspection from "./components/RequestInspection";
+import ManagerProjects from "./components/MangerProjects";
+
 
 function App() {
   const inquiryLink = "https://forms.gle/B8mE2UWJ2zEsiJxE9";
@@ -84,11 +86,11 @@ function App() {
           />
           <Route path="*" element={<Navigate to="/" />} />
           <Route
-            path="/progress"
+            path="/progress/:id"
             element={<UpdateProgressBar spaTranslation={spanishTranslation} />}
           />
           <Route
-            path="/createproject"
+            path="/new-project"
             element={<CreateProject spaTranslation={spanishTranslation} />}
           />
           <Route

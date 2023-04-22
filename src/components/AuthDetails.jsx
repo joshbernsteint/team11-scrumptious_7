@@ -2,7 +2,8 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { auth } from "../firebase";
 import { getDatabase, ref, child, get, update } from "firebase/database";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import ManagerProjects from "./MangerProjects";
 
 //used youtube video for authentication https://www.youtube.com/watch?v=Vv_Oi7zPPTw
 
@@ -82,6 +83,7 @@ const AuthDetails = (props) => {
             <> </>
           )}
           <br />
+          <br/>
           {showProfile ? (
             <button onClick={() => setShowProfile(!showProfile)}>
               {!spanishTranslation? "Hide User Information" : "Ocultar información del usuario"}
@@ -118,11 +120,19 @@ const AuthDetails = (props) => {
                       <td>:</td>
                       <td>{signedInUser.step}</td>
                     </tr>
+                    {signedInUser.userType === 'manager' && 
+                      <tr>
+                        <td>Projects</td>
+                        <td>:</td>
+                        <td><ManagerProjects /></td>
+                      </tr>
+                    }
                   </tbody>
                 </table>
               </div>
             </>
           )}
+          <br/>
           <br />
           <button onClick={userSignOut}>{!spanishTranslation?"Sign Out":"Cerrar sesión"}</button>
         </>
