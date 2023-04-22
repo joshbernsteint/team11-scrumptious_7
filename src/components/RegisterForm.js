@@ -5,7 +5,7 @@ import {ref, set, getDatabase} from "firebase/database";
 import {createUserWithEmailAndPassword } from 'firebase/auth';
 var CryptoJS = require("crypto-js");
 
-export default function RegisterForm() {
+export default function RegisterForm(props) {
     const [user, setUser] = useState(
         {
             firstName: "", 
@@ -17,6 +17,7 @@ export default function RegisterForm() {
     );
     const [errors, setErrors] = useState({});
     const [message, setMessage] = useState("");
+    const spanishTranslation = props.spaTranslation;
     function handleChange(event){
         const {name, value} = event.target
         setUser(prevUserData => {
@@ -52,7 +53,13 @@ export default function RegisterForm() {
                 user.email,
                 user.password
             ).then((userCredential) => {
-                setMessage("Success!")
+                let msg;
+                if(!spanishTranslation){
+                    msg = "Success!"
+                }else{
+                    msg = "¡Realizado!"
+                }
+                setMessage(msg)
                 obj.password = CryptoJS.AES.encrypt(
                 JSON.stringify(user.password),
                 secretPass
@@ -97,13 +104,24 @@ export default function RegisterForm() {
         const errors = {};
 
         //error chack first name input
-        let firstNameCheck = checkName(user.firstName, "First");
+        let nameType;
+        if(!spanishTranslation){
+            nameType = "First"
+        }else{
+            nameType = "Nombre"
+        }
+        let firstNameCheck = checkName(user.firstName, nameType);
         if(firstNameCheck !== ""){
             errors.firstName = firstNameCheck;
         }
 
         //error check last name input
-        let lastNameCheck = checkName(user.lastName, "Last");
+        if(!spanishTranslation){
+            nameType = "Last"
+        }else{
+            nameType = "Apellido"
+        }
+        let lastNameCheck = checkName(user.lastName, nameType);
         if(lastNameCheck !== ""){
             errors.lastName = lastNameCheck;
         }
@@ -128,7 +146,11 @@ export default function RegisterForm() {
 
         //error check password confirmation
         if(user.passwordConfirm !== user.password){
-            errors.passwordConfirm = "Password confirmation does not match password";
+            if(!spanishTranslation){
+                errors.passwordConfirm = "Password confirmation does not match password";
+            }else{
+                errors.passwordConfirm = "La confirmación de contraseña no coincide con la contraseña"
+            }
         }
         return errors;
     }
@@ -136,15 +158,33 @@ export default function RegisterForm() {
     function checkName(name, nameType) {
         let valid_characters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
         if(!name){
-            return nameType + " name is required!";
+            let msg;
+            if(!spanishTranslation){
+                msg = nameType + " name is required!";
+            }else{
+                msg = nameType + " es requerido"
+            }
+            return msg
         }
         if(name.length < 2){
-            return nameType + " name must be at least 2 characters long";
+            let msg;
+            if(!spanishTranslation){
+                msg = nameType + " name must be at least 2 characters long"
+            }else{
+                msg = nameType + " debe tener al menos 2 caracteres"
+            }
+            return msg
         }
         let temp = name.toLowerCase()
         for(let i = 0; i <temp.length; i++){
             if(!valid_characters.includes(temp[i])){
-                return nameType + " name must only contain letters";
+                let msg;
+                if(!spanishTranslation){
+                    msg = nameType + " name must only contain letters";
+                }else{
+                    msg = nameType + " solo debe contener letras"
+                }
+                return msg;
             }
         }
         return ""
@@ -152,28 +192,58 @@ export default function RegisterForm() {
 
     function checkUserType(userType){
         if(userType === ""){
-            return "You must choose Customer, Construction Worker, or Manager";
+            let msg;
+            if(!spanishTranslation){
+                msg = "You must choose Customer, Construction Worker, or Manager";
+            }else{
+                msg = "Debe elegir Cliente, Trabajador de la construcción o Gerente";
+            }
+            return msg;
         }
         return "";
     }
 
     function checkEmail(email){
         if(!email){
-            return "Email is required!";
+            let msg;
+            if(!spanishTranslation){
+                msg = "Email is required!"
+            }else{
+                msg = "Correo electrónico es requerido"
+            }
+            return msg;
         }
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
         if(!regex.test(email)){
-            return "This is not a valid email";
+            let msg;
+            if(!spanishTranslation){
+                msg = "This is not a valid email"
+            }else{
+                msg = "El correo electrónico es invalido"
+            }
+            return msg;
         }
         return "";
     }
 
     function checkPassword(password){
         if(!password){
-            return "Password must be provided!"
+            let msg;
+            if(!spanishTranslation){
+                msg = "Password must be provided!"
+            }else{
+                msg = "Una contraseña es requerida"
+            }
+            return msg
         }
         if(password.length < 6){
-            return "Password must be at least 6 characters long";
+            let msg;
+            if(!spanishTranslation){
+                msg ="Password must be at least 6 characters long"
+            }else{
+                msg = "La contraseña debe contener 6 caracteres como mínimo"
+            }
+            return msg;
         }
 
         let valid_lower_characters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
@@ -196,24 +266,54 @@ export default function RegisterForm() {
             } else if(valid_special_characters.includes(password[i])){
                 has_special = true;
             } else {
-                return "Invalid character in password";
+                let msg;
+                if(!spanishTranslation){
+                    msg = "Invalid character in password"
+                }else{
+                    msg = "Carácter no válido en la contraseña"
+                }
+                return msg;
             }
         }
 
         if(!has_lower){
-            return "Password must contain at least one lowercase character";
+            let msg;
+                if(!spanishTranslation){
+                    msg = "Password must contain at least one lowercase character";
+                }else{
+                    msg = "La contraseña debe contener al menos una letra minúscula"
+                }
+                return msg;
         }
 
         if(!has_upper){
-            return "Password must contain at least one uppercase character";
+            let msg;
+                if(!spanishTranslation){
+                    msg = "Password must contain at least one uppercase character"
+                }else{
+                    msg = "La contraseña debe contener al menos una letra mayúscula"
+                }
+                return msg;
         }
 
         if(!has_num){
-            return "Password must contain at least one number";
+            let msg;
+                if(!spanishTranslation){
+                    msg = "Password must contain at least one number"
+                }else{
+                    msg = "La contraseña debe contener al menos un número"
+                }
+                return msg;
         }
 
         if(!has_special){
-            return "Password must contain at least one special character";
+            let msg;
+                if(!spanishTranslation){
+                    msg = "Password must contain at least one special character"
+                }else{
+                    msg = "La contraseña debe contener al menos un carácter especial"
+                }
+                return msg;
         }
 
         return "";
@@ -224,7 +324,7 @@ export default function RegisterForm() {
             {message && <p aria-label='message'>{message}</p>}
             <form onSubmit={handleRegister} className="form" aria-label="register a user">
                 <div>
-                    <label className='label'>First Name</label>
+                    <label className='label'>{!spanishTranslation?"First Name":"Nombre"}</label>
                     {errors.firstName && <p className='error' aria-label="first-name-error">{errors.firstName}</p>}
                     <input
                         type="text"
@@ -237,7 +337,7 @@ export default function RegisterForm() {
                     />
                 </div>
                 <div>
-                    <label className='label'>Last Name</label>
+                    <label className='label'>{!spanishTranslation?"Last Name":"Apellido"}</label>
                     {errors.lastName && <p className='error' aria-label="last-name-error">{errors.lastName}</p>}
                     <input
                         type="text"
@@ -250,7 +350,7 @@ export default function RegisterForm() {
                     />
                 </div> 
                 <div>
-                    <label className='label'>User Classification </label>
+                    <label className='label'>{!spanishTranslation?"User Classification":"Clasificación del usuario"} </label>
                     {errors.userType && <p className='error' aria-label="user-type-error">{errors.userType}</p>}
                     <select 
                         aria-label='user-type'
@@ -260,15 +360,15 @@ export default function RegisterForm() {
                         name="userType"
                         className='input'
                     >
-                        <option value="">-- Choose --</option>
-                        <option value="customer">Customer</option>
-                        <option value="worker">Construction Worker</option>
-                        <option value="sales-rep">Sales Representative</option>
-                        <option value="manager">Manager</option>
+                        <option value="">{!spanishTranslation?"-- Choose --":"-- Elige --"}</option>
+                        <option value="customer">{!spanishTranslation?"Customer":"Cliente"}</option>
+                        <option value="worker">{!spanishTranslation?"Construction Worker":"Trabajador de la construcción"}</option>
+                        <option value="sales-rep">{!spanishTranslation?"Sales Representative":"Representante de ventas"}</option>
+                        <option value="manager">{!spanishTranslation?"Manager":"Gerente"}</option>
                     </select>
                 </div>
                 <div>
-                    <label className='label'>Email </label>
+                    <label className='label'>{!spanishTranslation?"Email":"Correo electrónico"}</label>
                     {errors.email && <p className='error' aria-label="email-error">{errors.email}</p>}
                     <input
                         type="email"
@@ -281,7 +381,7 @@ export default function RegisterForm() {
                     />
                 </div>
                 <div>
-                    <label className='label'>Password </label>
+                    <label className='label'>{!spanishTranslation?"Password":"Contraseña"} </label>
                     {errors.password && <p className='error' aria-label="password-error">{errors.password}</p>}
                     <input
                         type="password"
@@ -294,7 +394,7 @@ export default function RegisterForm() {
                     />
                 </div>
                     <div>
-                    <label className='label'>Confirm Password </label>
+                    <label className='label'>{!spanishTranslation?"Confirm Password":"Confirmar contraseña"} </label>
                     {errors.passwordConfirm && <p className='error' aria-label="password-confirm-error">{errors.passwordConfirm}</p>}
                     <input
                         type="password"
@@ -306,9 +406,9 @@ export default function RegisterForm() {
                         className='input'
                     />
                 </div>
-                <button>Register</button>
+                <button>{!spanishTranslation?"Register":"Regístrar"}</button>
             </form>
-            <a href="/login">Already have an account? Sign in here</a>
+            <a href="/login">{!spanishTranslation?"Already have an account? Sign in here":"¿Ya tienes una cuenta? Inicia sesión aquí"}</a>
         </div>
     )
 }

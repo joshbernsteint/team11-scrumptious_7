@@ -3,13 +3,13 @@ import RequirePhotos from "./RequirePhotos";
 import CameraAccess from "./CameraAccess";
 import PermissionForm from "./PermissionForm";
 
-function CameraForm() {
+function CameraForm(props) {
   return (
     <div>
       <div className="require-div">
-        <RequirePhotos></RequirePhotos>
-        <CameraAccess></CameraAccess>
-        <PermissionForm></PermissionForm>
+        <RequirePhotos spaTranslation = {props.spaTranslation}></RequirePhotos>
+        <CameraAccess spaTranslation = {props.spaTranslation}> </CameraAccess>
+        <PermissionForm spaTranslation = {props.spaTranslation}></PermissionForm>
       </div>
     </div>
   );

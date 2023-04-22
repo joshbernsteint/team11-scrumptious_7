@@ -2,13 +2,9 @@ import React, { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import EmailChain from "./EmailChain";
-
-
 import { ref, getDatabase, update, child, get } from "firebase/database";
-
 import { Link } from "react-router-dom";
 import { CardActionArea, CardActions, Grid, Typography } from "@mui/material";
-
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function TaskStatus(props) {
@@ -18,7 +14,7 @@ function TaskStatus(props) {
   const [doneList, setDoneList] = useState(null);
   const [signedInUser, setSignedInUser] = useState(null);
   const [authUser, setAuthUser] = useState(null);
-
+  const spanishTranslation = props.spaTranslation;
   const [uid, setUid] = useState(undefined);
   const auth = getAuth();
 
@@ -54,7 +50,7 @@ function TaskStatus(props) {
        getUserFromDb();
     }
   }, [uid, signedInUser]);
-  //check if a user is currently signed in
+
   useEffect(() => {
     const loggedInUser = localStorage.getItem("user");
     if (loggedInUser) {

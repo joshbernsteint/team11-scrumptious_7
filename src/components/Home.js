@@ -13,11 +13,10 @@ function Home(props) {
   const [tasks, setTasks] = useState([]);
   const [signedInUser, setSignedInUser] = useState(null);
   const [authUser, setAuthUser] = useState(null);
-
+  const spanishTranslation = props.spaTranslation;
   const [uid, setUid] = useState(undefined);
   const auth = getAuth();
   const navigate = useNavigate();
-
   const getUserFromDb = async () => {
     const dbRef = ref(getDatabase());
     try {
@@ -128,14 +127,20 @@ function Home(props) {
   return (
     <>
       {tasks.length !== 0 ? (
-        <Stack gap = {5}>
+        <Stack gap={5}>
           <TaskDashboard taskRef={tasks} />
-          <br/>
-          <br/>
-          {(signedInUser && signedInUser.userType === "sales-rep") ? (<SalesRepCard/>) : (<br/>)}
+          <br />
+          <br />
+          {signedInUser && signedInUser.userType === "sales-rep" ? (
+            <SalesRepCard />
+          ) : (
+            <br />
+          )}
         </Stack>
+      ) : spanishTranslation ? (
+        <h1>Cargando</h1>
       ) : (
-        <h1>loading...</h1>
+        <h1>Loading</h1>
       )}
     </>
   );

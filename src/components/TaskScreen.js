@@ -7,7 +7,7 @@ export function TaskScreen(props) {
   const [result, setResult] = useState({});
   const [tasks, setTasks] = useState([]);
   let resultArray = [];
-
+  const spanishTranslation = props.spaTranslation;
   const formatDate = (date) => {
     const temp = date.split(" ");
     const mm = temp[1];
@@ -48,11 +48,11 @@ export function TaskScreen(props) {
     <>
       {tasks.length !== 0 ? (
         <>
-          <TaskStatus tasks={tasks} />
-          <JoinChat tasks={tasks} />
+          <TaskStatus tasks={tasks} spaTranslation={spanishTranslation}/>
+          <JoinChat tasks={tasks} spaTranslation={spanishTranslation}/>
         </>
       ) : (
-        <h1>loading...</h1>
+        spanishTranslation? <h1>cargando...</h1>: <h1>loading...</h1>
       )}
     </>
   );
