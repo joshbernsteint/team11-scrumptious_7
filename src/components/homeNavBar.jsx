@@ -68,7 +68,9 @@ export function HomeNavBar() {
                   Inquiry Form
                 </NavDropdown.Item>
                 {uid && (
-                  <NavDropdown.Item href="/progress">Progress</NavDropdown.Item>
+                  <NavDropdown.Item href={"/progress/" + uid}>
+                    Progress
+                  </NavDropdown.Item>
                 )}
               </NavDropdown>
               <div className={styles.navItems}>
