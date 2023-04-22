@@ -1,32 +1,151 @@
-
-
-.brand{
-    font-size: xx-large;
-    font-weight: 400;
+.dropdown {
+  display: block;
+  /* flex-direction: column; */
+  align-items: center;
+  margin: 2px;
+  margin-right: 30px;
+  background-color: rgb(13, 143, 39);
+  border-radius: 10px;
+  /* border: 2px solid rgb(5, 72, 19); */
+  top: 5px;
+  right: 50px;
+  left: auto;
+  /* padding: 10px; */
 }
-.bar{
+
+.dropdown:active {
+  background-color: rgb(5, 72, 19);
+}
+
+.brand {
+  display: none;
+}
+
+.brandImg {
+  display: flex;
+  font-size: xx-large;
+  font-weight: 400;
+}
+
+.navItems {
+  display: none;
+}
+
+.bar {
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(11, 165, 42);
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.nav {
+  background-color: rgb(11, 165, 42);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: white;
+  max-height: 35px;
+}
+
+@media only screen and (min-width: 600px) {
+  .dropdown {
+    display: block;
+    align-items: center;
+    margin: 2px;
+    margin-right: 30px;
+    background-color: rgb(13, 143, 39);
+    border-radius: 10px;
+    top: 5px;
+    right: 50px;
+    left: auto;
+  }
+
+  .navItems {
+    display: none;
+  }
+
+  .brandImg {
+    display: none;
+  }
+
+  .brand {
+    display: block;
+    font-size: x-large;
+    text-align: center;
+    font-weight: 400;
+  }
+  .bar {
+    display: flex;
     background-color: rgb(11, 165, 42);
     padding-left: 2%;
     padding-right: 2%;
-}
-.nav{
+  }
+  .nav {
     background-color: rgb(11, 165, 42);
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: white;
     max-height: 35px;
+  }
+
+  .navLink {
+    color: black;
+    transition: translate ease-in-out 100ms;
+    height: 40px;
+    font-weight: 200;
+    font-size: medium;
+  }
+
+  .navLink:hover,
+  .navLink:focus {
+    border-bottom: 1px solid white;
+    color: rgb(255, 255, 255);
+    translate: 0 -3px;
+  }
 }
 
-.navLink{
+@media only screen and (min-width: 1200px) {
+  .dropdown {
+    display: none;
+  }
+
+  .navItems {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .brandImg {
+    display: none;
+  }
+
+  .brand {
+    display: block;
+    font-size: xx-large;
+    font-weight: 400;
+  }
+  .bar {
+    display: flex;
+    background-color: rgb(11, 165, 42);
+    padding-left: 2%;
+    padding-right: 2%;
+  }
+  .nav {
+    background-color: rgb(11, 165, 42);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+    max-height: 35px;
+  }
+
+  .navLink {
     color: black;
     transition: translate ease-in-out 100ms;
     height: 40px;
     font-weight: 200;
     font-size: large;
-}
+  }
 
-.navLink:hover,.navLink:focus{
+  .navLink:hover,
+  .navLink:focus {
     border-bottom: 1px solid white;
     color: rgb(255, 255, 255);
     translate: 0 -3px;
+  }
 }
-
