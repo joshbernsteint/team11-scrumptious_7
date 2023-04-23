@@ -77,18 +77,26 @@ const AuthDetails = () => {
         <>
           <p>Welcome back!</p>
           {signedInUser && signedInUser.userType === "manager" ? (
-            <button onClick={reqInsp}>Request an Inspection</button>
+            <button className="btn-norm" onClick={reqInsp}>
+              Request an Inspection
+            </button>
           ) : (
             <> </>
           )}
           <br />
-          <br/>
+          <br />
           {showProfile ? (
-            <button onClick={() => setShowProfile(!showProfile)}>
+            <button
+              className="btn-norm"
+              onClick={() => setShowProfile(!showProfile)}
+            >
               Hide User Information
             </button>
           ) : (
-            <button onClick={() => setShowProfile(!showProfile)}>
+            <button
+              className="btn-norm"
+              onClick={() => setShowProfile(!showProfile)}
+            >
               Show User Information
             </button>
           )}
@@ -119,21 +127,25 @@ const AuthDetails = () => {
                       <td>:</td>
                       <td>{signedInUser.step}</td>
                     </tr>
-                    {signedInUser.userType === 'manager' && 
+                    {signedInUser.userType === "manager" && (
                       <tr>
                         <td>Projects</td>
                         <td>:</td>
-                        <td><ManagerProjects /></td>
+                        <td>
+                          <ManagerProjects />
+                        </td>
                       </tr>
-                    }
+                    )}
                   </tbody>
                 </table>
               </div>
             </>
           )}
-          <br/>
           <br />
-          <button onClick={userSignOut}>Sign Out</button>
+          <br />
+          <button className="btn-norm" onClick={userSignOut}>
+            Sign Out
+          </button>
         </>
       ) : (
         <>

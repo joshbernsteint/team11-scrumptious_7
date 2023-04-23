@@ -18,7 +18,8 @@
 
 .register-container,
 .login-container,
-.profile-container {
+.profile-container,
+.inspection-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -595,4 +596,26 @@ input[type="text"]:focus {
 .StripeElement {
   width: 100%;
   padding: 11px 15px 11px 0;
+}
+
+.btn-norm,
+.eml-btn {
+  background-color: #198754;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.btn-norm:hover,
+.eml-btn:hover {
+  background-color: #1da02f;
+  color: white;
+  transition: all 0.3s ease-in-out;
 }
