@@ -95,7 +95,7 @@ function Home(props) {
           <br />
           <br />
           {signedInUser && signedInUser.userType === "sales-rep" ? (
-            <SalesRepCard />
+            <SalesRepCard spaTranslation={spanishTranslation}/>
           ) : (
             <br />
           )}

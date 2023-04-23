@@ -97,7 +97,7 @@ function App() {
             path="/newTask"
             element={<TaskForm uid={uid} spaTranslation={spanishTranslation} />}
           ></Route>
-          <Route path="/inquiry" element={<Redirect link={inquiryLink} />} />
+          <Route path="/inquiry" element={<Redirect link={inquiryLink} spaTranslation={spanishTranslation}/>} />
         </Routes>
       </Router>
       <footer>

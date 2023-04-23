@@ -8,14 +8,15 @@ const PUBLIC_KEY = "pk_test_51MxhgKCjB4CTACXS4antoJ5AJH3Pf5YXgOBBK9BTzEHW3rgdoCq
 
 const stripeTestPromise = loadStripe(PUBLIC_KEY)
 
-export default function StripeContainer(){
+export default function StripeContainer(props){
+    const spanishTranslation = props.spaTranslation;
     return (
         <div className="App">
             <h1>
-                Enter bank card info:
+                {!spanishTranslation?"Enter bank card info":"Ingrese la información de su tarjeta bancaria"}:
             </h1>
             <Elements stripe={stripeTestPromise}>
-                <PaymentForm/>
+                <PaymentForm spaTranslation={spanishTranslation}/>
             </Elements>
         </div>
     )

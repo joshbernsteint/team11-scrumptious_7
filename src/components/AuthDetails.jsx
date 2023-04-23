@@ -122,9 +122,9 @@ const AuthDetails = (props) => {
                     </tr>
                     {signedInUser.userType === 'manager' && 
                       <tr>
-                        <td>Projects</td>
+                        <td>{!spanishTranslation?"Projects":"Proyectos"}</td>
                         <td>:</td>
-                        <td><ManagerProjects /></td>
+                        <td><ManagerProjects spaTranslation={spanishTranslation}/></td>
                       </tr>
                     }
                   </tbody>

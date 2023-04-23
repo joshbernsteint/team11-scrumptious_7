@@ -119,26 +119,62 @@ function TaskForm(props) {
     } else {
       let errorObj = {};
       if (!title) {
-        errorObj.title = "Title cannot be empty";
+        let msg;
+        if(!spanishTranslation){
+          msg = "Title cannot be empty"
+        }else{
+          msg = "Título no puede estar vacío"
+        }
+        errorObj.title = msg;
       }
       if (!description) {
-        errorObj.description = "Task must have a description ";
+        let msg;
+        if(!spanishTranslation){
+          msg = "Task must have a description "
+        }else{
+          msg = "Descripción no puede estar vacío"
+        }
+        errorObj.description = msg;
       }
 
       if (!assignedTo) {
-        errorObj.assignedTo = "Task must be assigned to someone";
+        let msg;
+        if(!spanishTranslation){
+          msg = "Task must be assigned to someone"
+        }else{
+          msg = "Tienes que asignar a alguien"
+        }
+        errorObj.assignedTo = msg;
       }
 
       if (!dueDate) {
-        errorObj.dueDate = "Select a due date";
+        let msg;
+        if(!spanishTranslation){
+          msg = "Select a due date"
+        }else{
+          msg = "Seleccione una fecha"
+        }
+        errorObj.dueDate = msg;
       }
 
       if (!priority) {
-        errorObj.priority = "Select a priority";
+        let msg;
+        if(!spanishTranslation){
+          msg = "Select a priority"
+        }else{
+          msg = "Seleccione nivel de prioridad"
+        }
+        errorObj.priority = msg;
       }
 
       if (!owner) {
-        errorObj.owner = "Must be a manager to assign new tasks";
+        let msg;
+        if(!spanishTranslation){
+          msg = "Must be a manager to assign new tasks"
+        }else{
+          msg = "Debe ser gerente para crear una tarea"
+        }
+        errorObj.owner = msg;
       }
       setError(errorObj);
     }
