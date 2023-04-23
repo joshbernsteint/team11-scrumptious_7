@@ -6,7 +6,7 @@ import { Popover, OverlayTrigger, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./homeNavBar.module.css";
 import { useEffect, useState } from "react";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
 export function HomeNavBar() {
   const [uid, setUid] = useState(undefined);
@@ -21,6 +21,16 @@ export function HomeNavBar() {
       }
     });
   }, [auth, uid]);
+
+  const userSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("sign out successful");
+        localStorage.clear();
+        window.location.reload(false);
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <>
@@ -60,16 +70,25 @@ export function HomeNavBar() {
                 {uid && (
                   <NavDropdown.Item href="/camera">Forms</NavDropdown.Item>
                 )}
-                <NavDropdown.Item href="/login">Login</NavDropdown.Item>
-                <NavDropdown.Item href="/login/register">
-                  Register
-                </NavDropdown.Item>
+                {!uid && (
+                  <NavDropdown.Item href="/login">Login</NavDropdown.Item>
+                )}
+                {!uid && (
+                  <NavDropdown.Item href="/login/register">
+                    Register
+                  </NavDropdown.Item>
+                )}
                 <NavDropdown.Item href="/inquiry">
                   Inquiry Form
                 </NavDropdown.Item>
                 {uid && (
                   <NavDropdown.Item href={"/progress/" + uid}>
                     Progress
+                  </NavDropdown.Item>
+                )}
+                {uid && (
+                  <NavDropdown.Item onClick={userSignOut}>
+                    Sign Out
                   </NavDropdown.Item>
                 )}
               </NavDropdown>
@@ -89,15 +108,19 @@ export function HomeNavBar() {
                     Forms
                   </Nav.Link>
                 )}
-                <Nav.Link href="/login" className={`${styles.navLink}`}>
-                  Login
-                </Nav.Link>
-                <Nav.Link
-                  href="/login/register"
-                  className={`${styles.navLink}`}
-                >
-                  Register
-                </Nav.Link>
+                {!uid && (
+                  <Nav.Link href="/login" className={`${styles.navLink}`}>
+                    Login
+                  </Nav.Link>
+                )}
+                {!uid && (
+                  <Nav.Link
+                    href="/login/register"
+                    className={`${styles.navLink}`}
+                  >
+                    Register
+                  </Nav.Link>
+                )}
                 <Nav.Link
                   href="/inquiry"
                   className={`${styles.navLink}`}
@@ -111,6 +134,14 @@ export function HomeNavBar() {
                     className={`${styles.navLink}`}
                   >
                     Progress
+                  </Nav.Link>
+                )}
+                {uid && (
+                  <Nav.Link
+                    onClick={userSignOut}
+                    className={`${styles.navLink}`}
+                  >
+                    Sign Out
                   </Nav.Link>
                 )}
               </div>
