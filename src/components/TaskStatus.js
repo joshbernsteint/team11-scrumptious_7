@@ -59,7 +59,7 @@ function TaskStatus(props) {
               <CardContent>
                 <Typography>{!spanishTranslation?"Task Name":"Tarea"}: {task.title}</Typography>
                 <Typography>{!spanishTranslation?"Deadline":"Fecha de vencimiento"}: {task.dueDate}</Typography>
-                <Typography>{!spanishTranslation?"Task Owner":"Dueño de tarea"}: {task.owner}</Typography>
+                <Typography>{!spanishTranslation?"Task Owner":"Dueño de la tarea"}: {task.owner}</Typography>
                 <Typography>{!spanishTranslation?"Assigned To":"Asignado a"}: {task.assignedTo.name}</Typography>
                 <Typography>{!spanishTranslation?"Priority":"Prioridad"}: {task.priority}</Typography>
               </CardContent>

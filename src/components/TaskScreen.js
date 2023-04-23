@@ -8,13 +8,6 @@ export function TaskScreen(props) {
   const [tasks, setTasks] = useState([]);
   let resultArray = [];
   const spanishTranslation = props.spaTranslation;
-  const formatDate = (date) => {
-    const temp = date.split(" ");
-    const mm = temp[1];
-    const dd = temp[2];
-    const yyyy = temp[3];
-    return `${mm} ${dd}, ${yyyy}`;
-  };
 
   useEffect(() => {
     const getAllTasks = async () => {
@@ -37,7 +30,7 @@ export function TaskScreen(props) {
       for (let key in result) {
         let taskObj = result[key];
         taskObj.id = key;
-        taskObj.dueDate = formatDate(result[key].dueDate);
+        taskObj.dueDate = result[key].dueDate;
         resultArray = [...resultArray, taskObj];
       }
       setTasks(resultArray);

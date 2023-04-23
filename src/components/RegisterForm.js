@@ -328,7 +328,7 @@ export default function RegisterForm(props) {
                     {errors.firstName && <p className='error' aria-label="first-name-error">{errors.firstName}</p>}
                     <input
                         type="text"
-                        placeholder="First Name"
+                        placeholder={!spanishTranslation?"First Name":"Primer nombre"}
                         onChange={handleChange}
                         name="firstName"
                         aria-label='first-name'
@@ -342,7 +342,7 @@ export default function RegisterForm(props) {
                     <input
                         type="text"
                         aria-label='last-name'
-                        placeholder="Last Name"
+                        placeholder={!spanishTranslation?"Last Name":"Apellido"}
                         onChange={handleChange}
                         name="lastName"
                         value={user.lastName}
@@ -373,7 +373,7 @@ export default function RegisterForm(props) {
                     <input
                         type="email"
                         aria-label='email'
-                        placeholder="Email"
+                        placeholder={!spanishTranslation?"Email":"Correo eléctronico"}
                         onChange={handleChange}
                         name="email"
                         value={user.email}
@@ -386,7 +386,7 @@ export default function RegisterForm(props) {
                     <input
                         type="password"
                         aria-label='password'
-                        placeholder="Password"
+                        placeholder={!spanishTranslation?"Password":"Contraseña"}
                         onChange={handleChange}
                         name="password"
                         value={user.password}
@@ -399,7 +399,7 @@ export default function RegisterForm(props) {
                     <input
                         type="password"
                         aria-label='password-confirm'
-                        placeholder="Confirm Password"
+                        placeholder={!spanishTranslation?"Confirm Password":"Confirmar contraseña"}
                         onChange={handleChange}
                         name="passwordConfirm"
                         value={user.passwordConfirm}

@@ -3,10 +3,6 @@ import "../App.css";
 import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { ref, set, getDatabase, child, get } from "firebase/database";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import de from "date-fns/locale/de";
 import { v4 as uuid } from "uuid";
 
 function TaskForm(props) {
@@ -26,6 +22,7 @@ function TaskForm(props) {
     dueDate: "",
   });
   const [success, setSuccess] = useState(false);
+  const spanishTranslation = props.spaTranslation;
   let options = null;
 
   const getAllUsers = async () => {
@@ -162,7 +159,7 @@ function TaskForm(props) {
 
   return (
     <div>
-      {success && <p data-tesid="success">Task successfully created!</p>}
+      {success && <p data-tesid="success">{!spanishTranslation?"Task successfully created!":"¡Tarea creada con exito!"}</p>}
       {error.owner && <p data-testid="auth-msg">{error.owner}</p>}
       <form
         onSubmit={handleSubmit}
@@ -171,7 +168,7 @@ function TaskForm(props) {
       >
         <div>
           {error.title && <p data-testid="title-msg" className="error">{error.title}</p>}
-          <label className="">Task Title:</label>
+          <label className="">{!spanishTranslation?"Task Title":"Título de la tarea"}:</label>
           <input
             type="text"
             name="title"
@@ -185,7 +182,7 @@ function TaskForm(props) {
         </div>
         <div>
           {error.description && <p className="error">{error.description}</p>}
-          <label className="">Task Description:</label>
+          <label className="">{!spanishTranslation?"Task Description":"Descripción de la tarea"}:</label>
           <textarea
             className="text-area"
             type="text"
@@ -199,21 +196,14 @@ function TaskForm(props) {
           ></textarea>
         </div>
         <div className="date-picker">
-          {error.dueDate && <p data-testid="date-msg" className="error">{error.dueDate}</p>}
-          <label className="">Deadline:</label>
+          {error.dueDate && <p className="error">{error.dueDate}</p>}
+          <label className="">{!spanishTranslation?"Deadline":"Fecha de vencimiento"}:</label>
           <br />
-          <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={de}>
-            <DatePicker
-              selected={dueDate}
-              format="MM/dd/yyyy"
-              data-testid="date-picker"
-              onChange={(date) => setDueDate(date.toString())}
-            />
-          </LocalizationProvider>
+          <input type="date" name="date" onChange={(e) => setDueDate(e.target.value)}></input>
         </div>
         <div>
           {error.assignedTo && <p className="error">{error.assignedTo}</p>}
-          <label className="">Assign To:</label>
+          <label className="">{!spanishTranslation?"Assign To":"Asignar a"}:</label>
           <select
             name="assignedTo"
             value={assignedTo}
@@ -224,13 +214,13 @@ function TaskForm(props) {
             }}
           >
             <option disabled value="">
-              Choose Assignee
+              {!spanishTranslation?"Choose Assignee":"Eligir una persona"}
             </option>
             {options}
           </select>
 
           {error.priority && <span className="error"> {error.priority}</span>}
-          <label className="priority-select"> Priority</label>
+          <label className="priority-select">{!spanishTranslation?"Priority":"Prioridad"}</label>
           <select
             name="priority"
             value={priority}
@@ -240,7 +230,7 @@ function TaskForm(props) {
             }}
           >
             <option disabled value="">
-              Choose level
+              {!spanishTranslation?"Choose level":"Eligir un nivel"}
             </option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -255,7 +245,7 @@ function TaskForm(props) {
             className="form-btn"
             type="submit"
           >
-            Create
+            {!spanishTranslation?"Create":"Crear"}
           </button>
         </div>
       </form>

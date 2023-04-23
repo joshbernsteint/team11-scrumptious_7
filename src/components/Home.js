@@ -60,43 +60,6 @@ function Home(props) {
 
   let resultArray = [];
 
-  const formatDate = (date) => {
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "June",
-      "July",
-      "Aug",
-      "Sept",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    const monthsNum = [
-      "01",
-      "02",
-      "03",
-      "04",
-      "05",
-      "06",
-      "07",
-      "08",
-      "09",
-      "10",
-      "11",
-      "12",
-    ];
-    const temp = date.split(" ");
-    const mm = monthsNum[months.indexOf(temp[1])];
-
-    const dd = temp[2];
-    const yyyy = temp[3];
-    return `${yyyy}-${mm}-${dd}`;
-  };
-
   useEffect(() => {
     const getAllTasks = async () => {
       const dbRef = ref(getDatabase());
@@ -118,7 +81,7 @@ function Home(props) {
       for (let key in result) {
         let taskObj = result[key];
         taskObj.id = key;
-        taskObj.dueDate = formatDate(result[key].dueDate);
+        taskObj.dueDate = result[key].dueDate;
         resultArray = [...resultArray, taskObj];
       }
       setTasks(resultArray);
@@ -128,7 +91,7 @@ function Home(props) {
     <>
       {tasks.length !== 0 ? (
         <Stack gap={5}>
-          <TaskDashboard taskRef={tasks} />
+          <TaskDashboard taskRef={tasks} spaTranslation={spanishTranslation}/>
           <br />
           <br />
           {signedInUser && signedInUser.userType === "sales-rep" ? (

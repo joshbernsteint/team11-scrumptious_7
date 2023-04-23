@@ -31,14 +31,14 @@ export default function Login(props) {
           <input
             className="input"
             type="email"
-            placeholder="Enter your Email"
+            placeholder={!spanishTranslation?"Enter your Email":"Correo eléctronico"}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           ></input>
           <input
             className="input"
             type="password"
-            placeholder="Enter your Password"
+            placeholder={!spanishTranslation?"Enter your Password":"Contraseña"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           ></input>

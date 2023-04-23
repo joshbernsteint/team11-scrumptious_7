@@ -11,7 +11,7 @@ function CameraForm(props) {
         <RequirePhotos spaTranslation = {props.spaTranslation}></RequirePhotos>
         <CameraAccess spaTranslation = {props.spaTranslation}> </CameraAccess>
         <PermissionForm spaTranslation = {props.spaTranslation}></PermissionForm>
-        <StripeContainer></StripeContainer>
+        <StripeContainer spaTranslation={props.spaTranslation}></StripeContainer>
       </div>
     </div>
   );

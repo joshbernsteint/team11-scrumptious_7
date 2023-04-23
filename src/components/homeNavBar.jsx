@@ -67,7 +67,7 @@ export function HomeNavBar(props) {
               <Nav.Link href = "/inquiry" className={`${styles.navLink}`} target='_blank'>{!spanishTranslation?"Inquiry Form":"Formulario de consulta"}</Nav.Link>
               {uid && (
                 <Nav.Link href={"/progress/"+uid} className={`${styles.navLink}`}>
-                  Progress
+                  {!spanishTranslation?"Progress":"Progreso"}
                 </Nav.Link>
               )}
             </Nav>
