@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 
-function CameraAccess() {
+function CameraAccess(props) {
   const videoRef = useRef(null);
   const photoRef = useRef(null);
   const streamRef = useRef(null);
@@ -11,6 +11,7 @@ function CameraAccess() {
     window.innerWidth,
     window.innerHeight,
   ]);
+  const spanishTranslation = props.spaTranslation;
 
   useEffect(() => {}, [cameraRequest]);
   useEffect(() => {
@@ -40,6 +41,12 @@ function CameraAccess() {
       });
     } catch (e) {
       if (e.constructor.name === "DOMException") {
+        let alertMessage;
+        if(!spanishTranslation){
+          alertMessage = "Please provide camera access to this site."
+        }else{
+          alertMessage = "Proporcione acceso de cámara a este sitio"
+        }
         return alert("Please provide camera access to this site.");
       }
       console.log(e);
@@ -93,20 +100,21 @@ function CameraAccess() {
         <video ref={videoRef}></video>
         <div className="takePhoto">
           {cameraOnRef.current && (
-            <button onClick={takePhoto}>Take Photo</button>
+            <button onClick={takePhoto}>{!spanishTranslation? "Take Photo":"Tomar foto"}</button>
           )}
         </div>
       </div>
 
       <div className="cameraPower">
         <button id="cameraRequest" onClick={clickHandler}>
-          {cameraRequest}
+          {!spanishTranslation && cameraRequest ? cameraRequest : 
+          spanishTranslation && cameraRequest==="close camera"? "Cerrar la camara": "Abrir la camara"}
         </button>
-        {cameraRequest === 'close camera' ? <span className="message">Close camera before leaving page.</span>: <></>}
+        {cameraRequest === 'close camera' ? <span className="message">{!spanishTranslation?"Close camera before leaving page.":"Cerrar la camara antes de salir de la pagina"}</span>: <></>}
       </div>
       <div className={"result" + (hasPhoto ? "hasPhoto" : "")}>
         <canvas ref={photoRef}></canvas>
-        {hasPhoto && <button onClick={closePhoto}>Close Photo</button>}
+        {hasPhoto && <button onClick={closePhoto}>{!spanishTranslation?"Close Photo":"Cerrar foto"}</button>}
       </div>
     </div>
   );

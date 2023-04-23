@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 import '../App.css'
 
-const RequestInspection = () => {
+const RequestInspection = (props) => {
   //Variables for User Information
   const [authUser, setAuthUser] = useState(null);
   const [uid, setUid] = useState("");
@@ -25,6 +25,7 @@ const RequestInspection = () => {
       reply_to: '',
     });
 
+  const spanishTranslation = props.spaTranslation;
   // Define a function to handle form value changes
   const handleChange = (e) => {
     setToSend({ ...toSend, [e.target.name]: e.target.value });
@@ -117,7 +118,7 @@ const RequestInspection = () => {
   <div className = "inspection-container">
   {authUser ? (
   <form className='form' onSubmit={handleSubmit}>
-      <h3 className="inspectionHeader">Send an Inspection Request</h3>
+      <h3 className="inspectionHeader">{!spanishTranslation?"Send an Inspection Request":"Enviar una solicitud de inspección"}</h3>
       {signedInUser && signedInUser.userType==="manager" ?
       (
       <div className='form-body'>
@@ -131,35 +132,35 @@ const RequestInspection = () => {
           value={address} onChange={(e) => setAddress(e.target.value)} />
         <div>
         <label className = "label">
-          Inspection Type:
+          {!spanishTranslation?"Inspection Type:":"Tipo de inspección"}
           <select className = "input" value={type} onChange={(e) => setType(e.target.value)}>
-            <option value="">-- Select --</option>
-            <option value="Electrical">Electrical</option>
-            <option value="Plumbing">Plumbing</option>
-            <option value="Structural">Structural</option>
+            <option value="">{!spanishTranslation?"-- Select --":"-- Elige --"}</option>
+            <option value="Electrical">{!spanishTranslation?"Electrical":"Eléctrica"}</option>
+            <option value="Plumbing">{!spanishTranslation?"Plumbing":"Plomería"}</option>
+            <option value="Structural">{!spanishTranslation?"Structural":"Estructural"}</option>
           </select>
         </label>
         </div>
         <label className = "label">
-          Date: <br />
+          {!spanishTranslation?"Date:":"Fecha:"} <br />
           <input className="input"
           type="date"
           value={date} onChange={(e) => setDate(e.target.value)} />
         </label>
         <br />
         <br />
-        <button type="submit">Submit</button>
+        <button type="submit">{!spanishTranslation?"Submit":"Enviar"}</button>
         </div>
         ) : (
         <>
         <div className="form-body">
-            <p className="label">You do not have permissions for this page.</p>
-            <a className="link-button" href="/">Click here to go back to your tasks dashboard.</a>
+            <p className="label">{!spanishTranslation?"You do not have permissions for this page.":"No tienes permiso de acceso a esta pagina"}</p>
+            <a className="link-button" href="/">{!spanishTranslation?"Click here to go back to your tasks dashboard.":"Regresar a la pagina de inicio"}</a>
         </div>
         </>
         )}
       </form>
-     ) : ( <a className="link-button" href="/login">Click here to login.</a> )
+     ) : ( <a className="link-button" href="/login">{!spanishTranslation?"Click here to login":"Haga clic aquí para iniciar sesión"}.</a> )
      }
      </div>
   );

@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import '../App.css';
 
-function RequirePhotos(){
+function RequirePhotos(props){
     const[file, setFile] = useState()
-
+    const spanishTranslation = props.spaTranslation;
     function handleChange(event){
         setFile(event.target.files[0])
     }
@@ -28,9 +28,9 @@ function RequirePhotos(){
     return (
         <div className="App">
             <form onSubmit={handleSubmit}>
-              <h1>Image Upload</h1>
+              <h1>{!spanishTranslation?"Image Upload":"Subir Imagen"}</h1>
               <input required type="file" onChange={handleChange}/>
-              <button type="submit">Upload</button>
+              <button type="submit">{!spanishTranslation?"Upload":"Subir"}</button>
             </form>
         </div>
       );

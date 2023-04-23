@@ -7,11 +7,12 @@ import ManagerProjects from "./MangerProjects";
 
 //used youtube video for authentication https://www.youtube.com/watch?v=Vv_Oi7zPPTw
 
-const AuthDetails = () => {
+const AuthDetails = (props) => {
   const [authUser, setAuthUser] = useState(null);
   const [uid, setUid] = useState("");
   const [signedInUser, setSignedInUser] = useState(undefined);
   const [showProfile, setShowProfile] = useState(false);
+  const spanishTranslation = props.spaTranslation;
   let navigate = useNavigate();
 
   //Get currently signed in user IF SIGNED IN
@@ -75,10 +76,16 @@ const AuthDetails = () => {
     <div>
       {authUser ? (
         <>
-          <p>Welcome back!</p>
+          {!spanishTranslation ? (
+            <p>Welcome back!</p>
+          ) : (
+            <p>¡Bievenido de Nuevo!</p>
+          )}
           {signedInUser && signedInUser.userType === "manager" ? (
             <button className="btn-norm" onClick={reqInsp}>
-              Request an Inspection
+              {!spanishTranslation
+                ? "Request an Inspection"
+                : "Solicitar una inspección"}
             </button>
           ) : (
             <> </>
@@ -90,14 +97,18 @@ const AuthDetails = () => {
               className="btn-norm"
               onClick={() => setShowProfile(!showProfile)}
             >
-              Hide User Information
+              {!spanishTranslation
+                ? "Hide User Information"
+                : "Ocultar información del usuario"}
             </button>
           ) : (
             <button
               className="btn-norm"
               onClick={() => setShowProfile(!showProfile)}
             >
-              Show User Information
+              {!spanishTranslation
+                ? "Show User Information"
+                : "Mostrar información del usuario"}
             </button>
           )}
           {showProfile && signedInUser && (
@@ -106,33 +117,41 @@ const AuthDetails = () => {
                 <table>
                   <tbody>
                     <tr>
-                      <td>Name</td>
+                      <td>{!spanishTranslation ? "Name" : "Nombre"}</td>
                       <td>:</td>
                       <td>
                         {signedInUser.firstName} {signedInUser.lastName}
                       </td>
                     </tr>
                     <tr>
-                      <td>Email</td>
+                      <td>
+                        {!spanishTranslation ? "Email" : "Correo electrónico"}
+                      </td>
                       <td>:</td>
                       <td>{signedInUser.email}</td>
                     </tr>
                     <tr>
-                      <td>Role</td>
+                      <td>
+                        {!spanishTranslation ? "Role" : "Tipo de usuario"}
+                      </td>
                       <td>:</td>
                       <td>{signedInUser.userType}</td>
                     </tr>
                     <tr>
-                      <td>Step</td>
+                      <td>{!spanishTranslation ? "Step" : "Paso"}</td>
                       <td>:</td>
                       <td>{signedInUser.step}</td>
                     </tr>
                     {signedInUser.userType === "manager" && (
                       <tr>
-                        <td>Projects</td>
+                        <td>
+                          {!spanishTranslation ? "Projects" : "Proyectos"}
+                        </td>
                         <td>:</td>
                         <td>
-                          <ManagerProjects />
+                          <ManagerProjects
+                            spaTranslation={spanishTranslation}
+                          />
                         </td>
                       </tr>
                     )}
@@ -142,16 +161,21 @@ const AuthDetails = () => {
             </>
           )}
           <br />
-          <br />
           <button className="btn-norm" onClick={userSignOut}>
-            Sign Out
+            {!spanishTranslation ? "Sign Out" : "Cerrar sesión"}
           </button>
         </>
       ) : (
         <>
-          <p>You are currently not signed in.</p>
+          <p>
+            {!spanishTranslation
+              ? "You are currently not signed in."
+              : "No has iniciado sesión"}
+          </p>
           <a className="link-button" href="/login">
-            Would you like to sign in? Click here.
+            {!spanishTranslation
+              ? "Would you like to sign in? Click here."
+              : "¿Quiere iniciar sesión?"}
           </a>
         </>
       )}

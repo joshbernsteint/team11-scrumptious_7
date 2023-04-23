@@ -9,9 +9,10 @@ import { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import AuthDetails from "./AuthDetails";
 
-export function HomeNavBar() {
+export function HomeNavBar(props) {
   const [uid, setUid] = useState(undefined);
   const auth = getAuth();
+  const spanishTranslation = props.spaTranslation;
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -45,7 +46,9 @@ export function HomeNavBar() {
               height="50"
               className="d-inline-block align-top"
             />{" "}
-            Scrumptious Solar Services
+            {!spanishTranslation
+              ? "Scrumptious Solar Services"
+              : "Scrumptious Servicios Solares"}
           </Navbar.Brand>
           <Navbar.Brand href="/" className={styles.brandImg}>
             <img
@@ -63,58 +66,76 @@ export function HomeNavBar() {
             style={{ alignItems: "right", justifyContent: "right" }}
           >
             <Nav className={`my-1 my-lg-2 ${styles.nav}`} navbarScroll>
-              <NavDropdown className={`dropdown-menu ${styles.dropdown}`}>
-                {uid && <NavDropdown.Item href="/">Home</NavDropdown.Item>}
+              <NavDropdown
+                title={!spanishTranslation ? "Pages" : "Páginas"}
+                className={`dropdown-menu ${styles.dropdown}`}
+              >
                 {uid && (
-                  <NavDropdown.Item href="/tasks">Tasks</NavDropdown.Item>
+                  <NavDropdown.Item href="/">
+                    {!spanishTranslation ? "Home" : "Inicio"}
+                  </NavDropdown.Item>
                 )}
                 {uid && (
-                  <NavDropdown.Item href="/camera">Forms</NavDropdown.Item>
+                  <NavDropdown.Item href="/tasks">
+                    {!spanishTranslation ? "Tasks" : "Tareas"}
+                  </NavDropdown.Item>
+                )}
+                {uid && (
+                  <NavDropdown.Item href="/camera">
+                    {!spanishTranslation ? "Forms" : "Formularios"}
+                  </NavDropdown.Item>
                 )}
                 {!uid && (
-                  <NavDropdown.Item href="/login">Login</NavDropdown.Item>
+                  <NavDropdown.Item href="/login">
+                    {!spanishTranslation ? "Login" : "Iniciar sesión"}
+                  </NavDropdown.Item>
                 )}
                 {!uid && (
                   <NavDropdown.Item href="/login/register">
-                    Register
+                    {!spanishTranslation ? "Register" : "Registrar"}
                   </NavDropdown.Item>
                 )}
                 <NavDropdown.Item href="/inquiry">
-                  Inquiry Form
+                  {!spanishTranslation
+                    ? "Inquiry Form"
+                    : "Formulario de consulta"}
                 </NavDropdown.Item>
                 {uid && (
                   <NavDropdown.Item href={"/progress/" + uid}>
-                    Progress
+                    {!spanishTranslation ? "Progress" : "Progreso"}
+                  </NavDropdown.Item>
+                )}
+                {uid && <NavDropdown.Divider />}
+                {uid && (
+                  <NavDropdown.Item href={"/profile"}>
+                    {!spanishTranslation ? "Profile" : "Perfil"}
                   </NavDropdown.Item>
                 )}
                 {uid && (
-                  <NavDropdown.Item href={"/profile"}>Profile</NavDropdown.Item>
-                )}
-                {uid && (
                   <NavDropdown.Item onClick={userSignOut}>
-                    Sign Out
+                    {!spanishTranslation ? "Sign Out" : "Cerrar sesión"}
                   </NavDropdown.Item>
                 )}
               </NavDropdown>
               <div className={styles.navItems}>
                 {uid && (
                   <Nav.Link href="/" className={`${styles.navLink}`}>
-                    Home
+                    {!spanishTranslation ? "Home" : "Inicio"}
                   </Nav.Link>
                 )}
                 {uid && (
                   <Nav.Link href="/tasks" className={`${styles.navLink}`}>
-                    Tasks
+                    {!spanishTranslation ? "Tasks" : "Tareas"}
                   </Nav.Link>
                 )}
                 {uid && (
                   <Nav.Link href="/camera" className={`${styles.navLink}`}>
-                    Forms
+                    {!spanishTranslation ? "Forms" : "Formularios"}
                   </Nav.Link>
                 )}
                 {!uid && (
                   <Nav.Link href="/login" className={`${styles.navLink}`}>
-                    Login
+                    {!spanishTranslation ? "Login" : "Iniciar sesión"}
                   </Nav.Link>
                 )}
                 {!uid && (
@@ -122,7 +143,7 @@ export function HomeNavBar() {
                     href="/login/register"
                     className={`${styles.navLink}`}
                   >
-                    Register
+                    {!spanishTranslation ? "Register" : "Registrar"}
                   </Nav.Link>
                 )}
                 <Nav.Link
@@ -130,73 +151,83 @@ export function HomeNavBar() {
                   className={`${styles.navLink}`}
                   target="_blank"
                 >
-                  Inquiry Form
+                  {!spanishTranslation
+                    ? "Inquiry Form"
+                    : "Formulario de consulta"}
                 </Nav.Link>
                 {uid && (
                   <Nav.Link
                     href={"/progress/" + uid}
                     className={`${styles.navLink}`}
                   >
-                    Progress
+                    {!spanishTranslation ? "Progress" : "Progreso"}
                   </Nav.Link>
                 )}
                 {uid && (
-                  <Nav.Link href={"/profile"} className={`${styles.navLink}`}>
-                    Profile
+                  <Nav.Link className={`${styles.navLink}`} href={"/profile"}>
+                    {!spanishTranslation ? "Profile" : "Perfil"}
                   </Nav.Link>
                 )}
                 {uid && (
                   <Nav.Link
-                    onClick={userSignOut}
                     className={`${styles.navLink}`}
+                    onClick={userSignOut}
                   >
-                    Sign Out
+                    {!spanishTranslation ? "Sign Out" : "Cerrar sesión"}
                   </Nav.Link>
                 )}
               </div>
             </Nav>
           </Navbar.Collapse>
-
-          <>
-            {["bottom"].map((placement) => (
-              <OverlayTrigger
-                trigger="click"
-                key={placement}
-                placement={placement}
-                overlay={
-                  <Popover id={`popover-positioned-${placement}`}>
-                    <Popover.Header as="h3">Show user ID</Popover.Header>
-                    <Popover.Body>
-                      {uid && (
-                        <p
-                          style={{
-                            fontFamily: "Verdana, Geneva, Tahoma, sans-serif",
-                          }}
-                        >
-                          <b>User ID:</b> {uid}
-                        </p>
-                      )}
-                    </Popover.Body>
-                  </Popover>
-                }
-              >
-                <Button
-                  variant="success"
-                  style={{
-                    borderRadius: "50%",
-                    height: "50px",
-                    width: "50px",
-                    textAlign: "center",
-                    fontSize: "x-small",
-                    left: "50%",
-                  }}
-                >
-                  <p style={{ margin: "0 auto" }}>Show ID</p>
-                </Button>
-              </OverlayTrigger>
-            ))}
-          </>
         </Container>
+        <>
+          {["bottom"].map((placement) => (
+            <OverlayTrigger
+              trigger="click"
+              key={placement}
+              placement={placement}
+              overlay={
+                <Popover id={`popover-positioned-${placement}`}>
+                  <Popover.Header as="h3">
+                    {!spanishTranslation
+                      ? "Show user ID"
+                      : "Mostrar ID de usuario"}
+                  </Popover.Header>
+                  <Popover.Body>
+                    {uid && (
+                      <p
+                        style={{
+                          fontFamily: "Verdana, Geneva, Tahoma, sans-serif",
+                        }}
+                      >
+                        <b>
+                          {!spanishTranslation ? "User ID:" : "ID de usuario:"}
+                        </b>{" "}
+                        {uid}
+                      </p>
+                    )}
+                  </Popover.Body>
+                </Popover>
+              }
+            >
+              <Button
+                variant="success"
+                style={{
+                  borderRadius: "50%",
+                  height: "60px",
+                  width: "60px",
+                  textAlign: "center",
+                  fontSize: "x-small",
+                  left: "50%",
+                }}
+              >
+                <p style={{ margin: "0 auto" }}>
+                  {!spanishTranslation ? "Show ID" : "Mostrar ID"}
+                </p>
+              </Button>
+            </OverlayTrigger>
+          ))}
+        </>
       </Navbar>
     </>
   );

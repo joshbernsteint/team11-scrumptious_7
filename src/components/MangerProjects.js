@@ -5,7 +5,7 @@ import ProgressBar from "./ProgressBar";
 import '../App.css';
 import { useParams, Link } from "react-router-dom";
 
-function ManagerProjects() {
+function ManagerProjects(props) {
     const [uid, setUid] = useState(undefined);
     const [userType, setUserType] = useState(undefined);
     const [manager, setManager] = useState(false);
@@ -14,6 +14,7 @@ function ManagerProjects() {
     const [users, setUsers] = useState([]);
     const [loadingUser, setLoadingUser] = useState(true);
     const [myUsers, setMyUsers] = useState([]);
+    const spanishTranslation = props.spaTranslation;
     const auth = getAuth();
 
     const getUserFromDb = async () => {
@@ -89,16 +90,16 @@ function ManagerProjects() {
     }, [uid, signedInUser])
 
     if(loading){
-        return <div>Loading...</div>
+        return <div>{!spanishTranslation?"Loading":"Cargando"}...</div>
     } else {
         if(!manager){
-            return <div>You must sign in as a manager to see the projects assigned to you</div>
+            return <div>{!spanishTranslation?"You must sign in as a manager to see the projects assigned to you":"Debes iniciar sesión como gerente."}</div>
         } else {
             return (
                 <div>
                     <ul id="projectList">
                         {myUsers.map((element) => <li><Link to={'/progress/'+element}>{element}</Link></li>)}
-                        <li><Link to="/new-project">New Project</Link></li>
+                        <li><Link to="/new-project">{!spanishTranslation?"New Project":"Proyecto nuevo"}</Link></li>
                     </ul>
                 </div>
             )
