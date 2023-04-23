@@ -28,7 +28,7 @@ test("check if renders Specific Country button", () => {
       <SalesRepCard />
     </Router>
   );
-  const linkElement = screen.getByText("Specific Country");
+  const linkElement = screen.getByText("Specific Country/Region");
   expect(linkElement).toBeInTheDocument();
 });
 
@@ -38,7 +38,7 @@ test("check if renders region page", () => {
       <SalesRepCard />
     </Router>
   );
-  const button = screen.getByText("Specific Country");
+  const button = screen.getByText("Specific Country/Region");
   fireEvent.click(button);
   const linkElement = screen.getByText("Choose a specific page");
   expect(linkElement).toBeInTheDocument();
@@ -50,7 +50,7 @@ test("check if USA button exists", () => {
       <SalesRepCard />
     </Router>
   );
-  const button = screen.getByText("Specific Country");
+  const button = screen.getByText("Specific Country/Region");
   fireEvent.click(button);
   const linkElement = screen.getByText("USA");
   expect(linkElement).toBeInTheDocument();
