@@ -3,7 +3,7 @@ import TaskNotification from "./TaskNotification";
 
 function NotificationBar(props) {
   const list = props.tasks
-  
+  const spanishTranslation = props.spaTranslation
   const priorities = props.pList
   const sorted = list.sort((a,b) =>
   {
@@ -73,6 +73,7 @@ function NotificationBar(props) {
       priority={priorities[parseInt(noti.priority)-1]}
       id={noti.id}
       completed={noti.completed}
+      spaTranslation={spanishTranslation}
     ></TaskNotification>
   ));
   

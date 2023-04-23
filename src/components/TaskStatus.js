@@ -2,13 +2,9 @@ import React, { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import EmailChain from "./EmailChain";
-
-
 import { ref, getDatabase, update, child, get } from "firebase/database";
-
 import { Link } from "react-router-dom";
 import { CardActionArea, CardActions, Grid, Typography } from "@mui/material";
-
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function TaskStatus(props) {
@@ -18,7 +14,7 @@ function TaskStatus(props) {
   const [doneList, setDoneList] = useState(null);
   const [signedInUser, setSignedInUser] = useState(null);
   const [authUser, setAuthUser] = useState(null);
-
+  const spanishTranslation = props.spaTranslation;
   const [uid, setUid] = useState(undefined);
   const auth = getAuth();
 
@@ -29,7 +25,6 @@ function TaskStatus(props) {
       const snapshot = await get(child(dbRef, `users/${uid}`));
       if (snapshot.exists()) {
         setSignedInUser(snapshot.val());
-        localStorage.setItem("user", signedInUser);
       }
     } catch (e) {
       console.log(e);
@@ -54,13 +49,6 @@ function TaskStatus(props) {
        getUserFromDb();
     }
   }, [uid, signedInUser]);
-  //check if a user is currently signed in
-  useEffect(() => {
-    const loggedInUser = localStorage.getItem("user");
-    if (loggedInUser) {
-      setSignedInUser(loggedInUser);
-    }
-  }, []);
 
   const buildTaskCard = (task) => {
     if (task) {
@@ -69,11 +57,11 @@ function TaskStatus(props) {
           <Card>
             <CardActionArea>
               <CardContent>
-                <Typography>Task Name: {task.title}</Typography>
-                <Typography>Deadline: {task.dueDate}</Typography>
-                <Typography>Task Owner: {task.owner}</Typography>
-                <Typography>Assigned To: {task.assignedTo.name}</Typography>
-                <Typography>Priority: {task.priority}</Typography>
+                <Typography>{!spanishTranslation?"Task Name":"Tarea"}: {task.title}</Typography>
+                <Typography>{!spanishTranslation?"Deadline":"Fecha de vencimiento"}: {task.dueDate}</Typography>
+                <Typography>{!spanishTranslation?"Task Owner":"Dueño de la tarea"}: {task.owner}</Typography>
+                <Typography>{!spanishTranslation?"Assigned To":"Asignado a"}: {task.assignedTo.name}</Typography>
+                <Typography>{!spanishTranslation?"Priority":"Prioridad"}: {task.priority}</Typography>
               </CardContent>
             </CardActionArea>
             {(signedInUser && signedInUser.userType == "manager") ? (
@@ -85,13 +73,13 @@ function TaskStatus(props) {
                       if (task.id) handleClick(task.id, true);
                     }}
                   >
-                    Done
+                 {!spanishTranslation?"Done":"Hecho"}
                   </button>
                 </Grid>
               </CardActions>
             ) : null}
             <CardActions>
-              <EmailChain users={[task.assignedTo.uid]}></EmailChain>
+              <EmailChain users={[task.assignedTo.uid]} spaTranslation={spanishTranslation}></EmailChain>
             </CardActions>
           </Card>
         </Grid>
@@ -101,7 +89,7 @@ function TaskStatus(props) {
 
   useEffect(() => {
     updateTaskCards();
-  }, []);
+  }, [props, signedInUser]);
 
   const updateTaskCards = () => {
     setCards(
@@ -131,15 +119,15 @@ function TaskStatus(props) {
       return (
         <li key={task.id}>
           <div>
-            <p>Task Title: {task.title}</p>
-            <p>Completed On: {task.dateCompleted}</p>
+            <p>{!spanishTranslation?"Task Title":"Tarea"}: {task.title}</p>
+            <p>{!spanishTranslation?"Completed On":"Completado en"}: {task.dateCompleted}</p>
           </div>
           <button
             onClick={() => {
               if (task.id) handleClick(task.id, false);
             }}
           >
-            Mark Not Done
+            {!spanishTranslation?"Mark Not Done":"Marcar no hecho"}
           </button>
         </li>
       );
@@ -188,7 +176,7 @@ function TaskStatus(props) {
 
   return (
     <div className="taskStatus">
-      <h2>Tasks</h2>
+      <h2>{!spanishTranslation?"Tasks":"Tareas"}</h2>
       {cards && (
         <Grid
           container
@@ -203,9 +191,9 @@ function TaskStatus(props) {
       )}
       <br />
       
-      {(signedInUser && signedInUser.userType === "manager") ? ( <><h2 className="h2-v1">Completed Tasks</h2>
+      {(signedInUser && signedInUser.userType === "manager") ? ( <><h2 className="h2-v1">{!spanishTranslation?"Completed Tasks":"Tareas completadas"}</h2>
       <ul className="completedTasks">{doneList}</ul><Link to="/newTask">
-        <p>Create a new task here.</p>
+        <p>{!spanishTranslation?"Create a new task here.":"Crear una nueva tarea aquí."}</p>
       </Link></>) : null}
      
     </div>

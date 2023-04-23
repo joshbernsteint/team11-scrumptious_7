@@ -520,3 +520,17 @@ input[type='text']:focus{
 	width: 100%;
 	padding: 11px 15px 11px 0;
 }
+
+.spa-btn, .eng-btn{
+  background-color:#ffffff;
+  border-style: none;
+  color:rgb(96, 95, 95);
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+
+.spa-btn:hover, .eng-btn:hover{
+  color:rgb(21, 21, 208);
+  font-weight: 600;
+}

@@ -13,6 +13,7 @@ const ChatBox = (props) => {
   const [chat, setChat] = useState([]);
   const room = useRef(props.room);
   const socketRef = useRef();
+  const spanishTranslation = props.spaTranslation;
 
   useEffect(() => {
     if (room) {
@@ -120,7 +121,7 @@ const ChatBox = (props) => {
           {/* <h1>Messenger</h1> */}
           <div className={styles.input_chat}>
             <label htmlFor="message">
-              Send a message
+              {!spanishTranslation?"Send a message":"Enviar un mensage"}
               <input
                 aria-label="msg-input"
                 name="message"
@@ -129,7 +130,7 @@ const ChatBox = (props) => {
                 label="Message"
               />
             </label>
-            <button aria-label="message-btn">Send Message</button>
+            <button aria-label="message-btn">{!spanishTranslation?"Send Message":"Enviar mensaje"}</button>
           </div>
         </form>
       </div>

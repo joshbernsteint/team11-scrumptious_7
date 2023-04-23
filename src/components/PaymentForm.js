@@ -22,14 +22,21 @@ const CARD_OPTIONS = {
 	}
 }
 
-function showErrorAlert(){
-    alert("Your payment did not go through, please try again.");
+function showErrorAlert(spanishTranslation){
+    let msg;
+    if(!spanishTranslation){
+        msg = "Your payment did not go through, please try again."
+    }else{
+        msg = "Su pago no se realizó, intente nuevamente"
+    }
+    alert(msg);
 }
 
-export default function PaymentForm(){
+export default function PaymentForm(props){
     const [success, setSuccess] = useState(false)
     const stripe = useStripe()
     const elements = useElements()
+    const spanishTranslation = props.spaTranslation;
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -55,7 +62,7 @@ export default function PaymentForm(){
         }
         else {
             console.log(error.message)
-            showErrorAlert()
+            showErrorAlert(spanishTranslation)
         }
     }
 
@@ -68,11 +75,13 @@ export default function PaymentForm(){
                     <CardElement options={CARD_OPTIONS}/>
                 </div>
             </fieldset>
-            <button>Pay</button>
+            <button>{!spanishTranslation ? "Pay":"Pagar"}</button>
         </form>
         :
         <div>
-           <h6>Your payment has successfully gone through. Scrumptious Solar Services will begin the project.</h6>
+           <h6>{!spanishTranslation ? "Your payment has successfully gone through. Scrumptious Solar Services will begin the project.":
+                "Su pago se ha realizado con éxito. Scrumptious Servicios Solares comenzará el proyecto."}
+            </h6>
         </div>
        }
         </>

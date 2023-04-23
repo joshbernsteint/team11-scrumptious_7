@@ -13,11 +13,10 @@ function Home(props) {
   const [tasks, setTasks] = useState([]);
   const [signedInUser, setSignedInUser] = useState(null);
   const [authUser, setAuthUser] = useState(null);
-
+  const spanishTranslation = props.spaTranslation;
   const [uid, setUid] = useState(undefined);
   const auth = getAuth();
   const navigate = useNavigate();
-
   const getUserFromDb = async () => {
     const dbRef = ref(getDatabase());
     try {
@@ -61,43 +60,6 @@ function Home(props) {
 
   let resultArray = [];
 
-  const formatDate = (date) => {
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "June",
-      "July",
-      "Aug",
-      "Sept",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    const monthsNum = [
-      "01",
-      "02",
-      "03",
-      "04",
-      "05",
-      "06",
-      "07",
-      "08",
-      "09",
-      "10",
-      "11",
-      "12",
-    ];
-    const temp = date.split(" ");
-    const mm = monthsNum[months.indexOf(temp[1])];
-
-    const dd = temp[2];
-    const yyyy = temp[3];
-    return `${yyyy}-${mm}-${dd}`;
-  };
-
   useEffect(() => {
     const getAllTasks = async () => {
       const dbRef = ref(getDatabase());
@@ -119,7 +81,7 @@ function Home(props) {
       for (let key in result) {
         let taskObj = result[key];
         taskObj.id = key;
-        taskObj.dueDate = formatDate(result[key].dueDate);
+        taskObj.dueDate = result[key].dueDate;
         resultArray = [...resultArray, taskObj];
       }
       setTasks(resultArray);
@@ -128,14 +90,20 @@ function Home(props) {
   return (
     <>
       {tasks.length !== 0 ? (
-        <Stack gap = {5}>
-          <TaskDashboard taskRef={tasks} />
-          <br/>
-          <br/>
-          {(signedInUser && signedInUser.userType === "sales-rep") ? (<SalesRepCard/>) : (<br/>)}
+        <Stack gap={5}>
+          <TaskDashboard taskRef={tasks} spaTranslation={spanishTranslation}/>
+          <br />
+          <br />
+          {signedInUser && signedInUser.userType === "sales-rep" ? (
+            <SalesRepCard spaTranslation={spanishTranslation}/>
+          ) : (
+            <br />
+          )}
         </Stack>
+      ) : spanishTranslation ? (
+        <h1>Cargando</h1>
       ) : (
-        <h1>loading...</h1>
+        <h1>Loading</h1>
       )}
     </>
   );
