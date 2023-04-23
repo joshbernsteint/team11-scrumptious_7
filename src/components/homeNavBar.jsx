@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./homeNavBar.module.css";
 import { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import AuthDetails from "./AuthDetails";
 
 export function HomeNavBar() {
   const [uid, setUid] = useState(undefined);
@@ -87,6 +88,9 @@ export function HomeNavBar() {
                   </NavDropdown.Item>
                 )}
                 {uid && (
+                  <NavDropdown.Item href={"/profile"}>Profile</NavDropdown.Item>
+                )}
+                {uid && (
                   <NavDropdown.Item onClick={userSignOut}>
                     Sign Out
                   </NavDropdown.Item>
@@ -134,6 +138,11 @@ export function HomeNavBar() {
                     className={`${styles.navLink}`}
                   >
                     Progress
+                  </Nav.Link>
+                )}
+                {uid && (
+                  <Nav.Link href={"/profile"} className={`${styles.navLink}`}>
+                    Profile
                   </Nav.Link>
                 )}
                 {uid && (
