@@ -3,7 +3,6 @@
   margin: 20px;
   padding: 10px;
   min-height: 30rem;
-  width: 500px;
 }
 
 .render_chat {
@@ -22,13 +21,17 @@
   align-self: center;
   text-align: center;
   justify-content: center;
-  width: auto;
+  min-width: 100px;
+  max-width: 500px;
+  width: 100%;
 }
 
 .input_chat input {
   border: 2px solid #000000;
   border-radius: 5px;
-  width: 300px;
+  min-width: 100px;
+  max-width: 300px;
+  width: 100%;
   margin: 0px 20px 0px 20px;
 }
 

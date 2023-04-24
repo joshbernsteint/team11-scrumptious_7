@@ -643,7 +643,7 @@ input[type="text"]:focus {
   .foot {
     position: sticky;
     bottom: 0;
-    z-index: 100;
+    z-index: 99;
     margin-top: 20px;
     width: 100%;
     height: 60px;

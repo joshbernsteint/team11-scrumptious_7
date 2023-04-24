@@ -187,7 +187,7 @@ export function TaskDashboard(props) {
   }, [props]);
 
   return (
-    <div>
+    <div className="full-dash">
       <Card style={{ width: "100%", height: "40rem", border: "0" }}>
         <Card.Body>
           <h1>
