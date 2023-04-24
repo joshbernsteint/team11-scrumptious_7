@@ -76,21 +76,39 @@ const AuthDetails = (props) => {
     <div>
       {authUser ? (
         <>
-          {!spanishTranslation? <p>Welcome back!</p> : <p>¡Bievenido de Nuevo!</p>}
+          {!spanishTranslation ? (
+            <p>Welcome back!</p>
+          ) : (
+            <p>¡Bievenido de Nuevo!</p>
+          )}
           {signedInUser && signedInUser.userType === "manager" ? (
-            <button onClick={reqInsp}>{!spanishTranslation ? "Request an Inspection":"Solicitar una inspección"}</button>
+            <button className="btn-norm" onClick={reqInsp}>
+              {!spanishTranslation
+                ? "Request an Inspection"
+                : "Solicitar una inspección"}
+            </button>
           ) : (
             <> </>
           )}
           <br />
-          <br/>
+          <br />
           {showProfile ? (
-            <button onClick={() => setShowProfile(!showProfile)}>
-              {!spanishTranslation? "Hide User Information" : "Ocultar información del usuario"}
+            <button
+              className="btn-norm"
+              onClick={() => setShowProfile(!showProfile)}
+            >
+              {!spanishTranslation
+                ? "Hide User Information"
+                : "Ocultar información del usuario"}
             </button>
           ) : (
-            <button onClick={() => setShowProfile(!showProfile)}>
-              {!spanishTranslation? "Show User Information" : "Mostrar información del usuario"}
+            <button
+              className="btn-norm"
+              onClick={() => setShowProfile(!showProfile)}
+            >
+              {!spanishTranslation
+                ? "Show User Information"
+                : "Mostrar información del usuario"}
             </button>
           )}
           {showProfile && signedInUser && (
@@ -99,48 +117,65 @@ const AuthDetails = (props) => {
                 <table>
                   <tbody>
                     <tr>
-                      <td>{!spanishTranslation?"Name":"Nombre"}</td>
+                      <td>{!spanishTranslation ? "Name" : "Nombre"}</td>
                       <td>:</td>
                       <td>
                         {signedInUser.firstName} {signedInUser.lastName}
                       </td>
                     </tr>
                     <tr>
-                      <td>{!spanishTranslation?"Email":"Correo electrónico"}</td>
+                      <td>
+                        {!spanishTranslation ? "Email" : "Correo electrónico"}
+                      </td>
                       <td>:</td>
                       <td>{signedInUser.email}</td>
                     </tr>
                     <tr>
-                      <td>{!spanishTranslation?"Role":"Tipo de usuario"}</td>
+                      <td>
+                        {!spanishTranslation ? "Role" : "Tipo de usuario"}
+                      </td>
                       <td>:</td>
                       <td>{signedInUser.userType}</td>
                     </tr>
                     <tr>
-                      <td>{!spanishTranslation?"Step":"Paso"}</td>
+                      <td>{!spanishTranslation ? "Step" : "Paso"}</td>
                       <td>:</td>
                       <td>{signedInUser.step}</td>
                     </tr>
-                    {signedInUser.userType === 'manager' && 
+                    {signedInUser.userType === "manager" && (
                       <tr>
-                        <td>{!spanishTranslation?"Projects":"Proyectos"}</td>
+                        <td>
+                          {!spanishTranslation ? "Projects" : "Proyectos"}
+                        </td>
                         <td>:</td>
-                        <td><ManagerProjects spaTranslation={spanishTranslation}/></td>
+                        <td>
+                          <ManagerProjects
+                            spaTranslation={spanishTranslation}
+                          />
+                        </td>
                       </tr>
-                    }
+                    )}
                   </tbody>
                 </table>
               </div>
             </>
           )}
-          <br/>
           <br />
-          <button onClick={userSignOut}>{!spanishTranslation?"Sign Out":"Cerrar sesión"}</button>
+          <button className="btn-norm" onClick={userSignOut}>
+            {!spanishTranslation ? "Sign Out" : "Cerrar sesión"}
+          </button>
         </>
       ) : (
         <>
-          <p>{!spanishTranslation?"You are currently not signed in.":"No has iniciado sesión"}</p>
+          <p>
+            {!spanishTranslation
+              ? "You are currently not signed in."
+              : "No has iniciado sesión"}
+          </p>
           <a className="link-button" href="/login">
-            {!spanishTranslation?"Would you like to sign in? Click here.":"¿Quiere iniciar sesión?"}
+            {!spanishTranslation
+              ? "Would you like to sign in? Click here."
+              : "¿Quiere iniciar sesión?"}
           </a>
         </>
       )}

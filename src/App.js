@@ -28,10 +28,15 @@ import { Stack, Row, Col } from "react-bootstrap";
 import { alignProperty } from "@mui/material/styles/cssUtils";
 import RequestInspection from "./components/RequestInspection";
 import ManagerProjects from "./components/MangerProjects";
-
+import Profile from "./components/Profile";
 
 function App() {
   const inquiryLink = "https://forms.gle/B8mE2UWJ2zEsiJxE9";
+
+  const [showNav, setShowNav] = useState(false);
+  const clickHandler = () => {
+    setShowNav(!showNav);
+  };
   const [spanishTranslation, setSpanishTranslation] = useState(false);
   const [uid, setUid] = useState(undefined);
   useEffect(() => {
@@ -69,6 +74,10 @@ function App() {
             path="/tasks"
             element={<TaskScreen spaTranslation={spanishTranslation} />}
           />
+          <Route
+            path="/profile"
+            element={<Profile uid={uid} spaTranslation={spanishTranslation} />}
+          />
           <Route path="/login/:id" element={<h1>Sup</h1>}>
             <Route index element={<h1>Sup</h1>} />
           </Route>
@@ -97,10 +106,18 @@ function App() {
             path="/newTask"
             element={<TaskForm uid={uid} spaTranslation={spanishTranslation} />}
           ></Route>
-          <Route path="/inquiry" element={<Redirect link={inquiryLink} spaTranslation={spanishTranslation}/>} />
+          <Route
+            path="/inquiry"
+            element={
+              <Redirect
+                link={inquiryLink}
+                spaTranslation={spanishTranslation}
+              />
+            }
+          />
         </Routes>
       </Router>
-      <footer>
+      <footer className="foot">
         <button
           className="eng-btn"
           onClick={() => setSpanishTranslation(false)}
