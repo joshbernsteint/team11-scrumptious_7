@@ -7,7 +7,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./homeNavBar.module.css";
 import { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import AuthDetails from "./AuthDetails";
 
 export function HomeNavBar(props) {
   const [uid, setUid] = useState(undefined);

@@ -11,7 +11,7 @@ function UpdateProgressBar(props) {
                     "Collect down payment from customer.", 
                     "Scrumptious Solar Services is currently coordinating with construction crews so that construction may begin.",
                     "Solar panels are currently being installed!", 
-                    "Construction has finished! Inspection compnay will ensure everything involved is working correctly and safe."
+                    "Construction has finished! Inspection company will ensure everything involved is working correctly and safe."
                 ]
     const pasos = [
                     "El cliente debe firmar el papeleo para que el proyecto pueda comenzar formalmente.",
@@ -21,7 +21,7 @@ function UpdateProgressBar(props) {
                     "¡La construcción ha terminado! La compañía de inspección se asegurará de que todo lo involucrado funcione correctamente y de manera segura."
                 ]
     let id = useParams();
-
+    const [showSteps, setShowSteps] = useState(false)
     const [uid, setUid] = useState(undefined);
     const [currentStep, setCurrentStep] = useState(1);
     const [percentage, setPercentage] = useState(0);
@@ -54,6 +54,7 @@ function UpdateProgressBar(props) {
             const snapshot = await get(child(dbRef, `users/${id}`));
             if(snapshot.exists()) {
                 setProjectManager(snapshot.val().projectManager)
+                setCurrentStep(snapshot.val().step)
             }
         } catch(e) {
             console.log(e);
@@ -77,8 +78,7 @@ function UpdateProgressBar(props) {
             getUserFromDb();
         }
         if(signedInUser) {
-            setCurrentStep(signedInUser.step);
-            setPercentage(parseInt(currentStep-1)/steps.length * 100);
+            setPercentage(parseInt(currentStep)/(steps.length + 1) * 100);
             setUserType(signedInUser.userType);
             getprojectManager(id.id);
             if(userType === "manager") {
@@ -101,8 +101,17 @@ function UpdateProgressBar(props) {
         return
     }
 
+    const pushStep = () => {
+        if(currentStep < 6) {
+            updateStep(id.id, currentStep)
+        }
+    }
+
     useEffect(() => {
         let description;
+        if (currentStep > steps.length) {//project is finished
+            description = "";
+            }
         if(!spanishTranslation){
             description = steps[parseInt(currentStep) - 1]
         }else{
@@ -123,26 +132,37 @@ function UpdateProgressBar(props) {
                     { stepDescription ?
                         <div>
                             {manager && <p>{!spanishTranslation?"This project is for user ":"Este proyecto es para "}{id.id}</p>}
+                            {manager &&
+                                <button className = "form-btn" onClick={pushStep}>
+                                {!spanishTranslation?"Push to Next Step":"Empuje a Próximo paso"}</button>}
                             <p>{!spanishTranslation?"This project is currently at step":"Paso actual es número "} {currentStep} {!spanishTranslation?"in the project process":"del proyecto"}.</p>
                             <p>{!spanishTranslation?"Step":"Paso"} {currentStep}: {stepDescription}</p>
                         </div> 
-                        : 
-                        <p>{!spanishTranslation?"All done!":"¡Todo listo!"}</p>
+                        :
+                        <div>
+                            <p>{!spanishTranslation ? "The project for ": "¡Este proyecto es para "}{id.id}</p>
+                            <p>{!spanishTranslation?"is now all done!":"ahora es todo listo!"}</p>
+                        </div>
                     }
                     <ProgressBar bgcolor={"#008000"} completed={completed} />
                     <br/>
-                    <div className="steps">
+                    {showSteps ?
+                    (<div className="steps">
                         <p>{!spanishTranslation?"The total steps in the process are as follows":"Todos los pasos del proyecto son los siguientes"}:</p>
                         <p>{!spanishTranslation?"Step":"Paso"} 1: {!spanishTranslation?steps[0]:pasos[0]}</p>
                         <p>{!spanishTranslation?"Step":"Paso"} 2: {!spanishTranslation?steps[1]:pasos[1]}</p>
                         <p>{!spanishTranslation?"Step":"Paso"} 3: {!spanishTranslation?steps[2]:pasos[2]}</p>
                         <p>{!spanishTranslation?"Step":"Paso"} 4: {!spanishTranslation?steps[3]:pasos[3]}</p>
                         <p>{!spanishTranslation?"Step":"Paso"} 5: {!spanishTranslation?steps[4]:pasos[4]}</p>
-                    </div>
+                        <button className = "form-btn" onClick= {() => setShowSteps(!showSteps)}>
+                            {!spanishTranslation?"Hide steps":"Ocultar pasos"}</button>
+                    </div>) :
+                    (<button className = "form-btn" onClick= {() => setShowSteps(!showSteps)}>
+                        {!spanishTranslation?"Show steps":"Mostrar pasos"}</button>)
+                    }
                     <br/>
                     <br/>
 
-                    {manager && uid === projectManager && <button onClick={() => updateStep(uid, currentStep)}>{!spanishTranslation?"Next Step":"Próximo paso"}</button>}
                 </div>
             );
         }
