@@ -46,28 +46,40 @@ const JoinChat = (props) => {
           className="close-button"
           onClick={() => onClose()}
         >
-          {!open ? !spanishTranslation? "Open Chat":"Abrir el chat" : !spanishTranslation?"Close Chat":"Cerrar el chat"}
+          {!open
+            ? !spanishTranslation
+              ? "Open Chat"
+              : "Abrir el chat"
+            : !spanishTranslation
+            ? "Close Chat"
+            : "Cerrar el chat"}
         </button>
         {open && toggle && (
           <div className={styles.chat_name}>
-            <h1>{!spanishTranslation?"Task":"Tarea"}: {taskName}</h1>
-            <button onClick={() => onLeave()}>{!spanishTranslation?"Leave Chat":"Dejar el chat"}</button>
+            <h1>
+              {!spanishTranslation ? "Task" : "Tarea"}: {taskName}
+            </h1>
+            <button onClick={() => onLeave()}>
+              {!spanishTranslation ? "Leave Chat" : "Dejar el chat"}
+            </button>
           </div>
         )}
       </div>
       {open && !name && (
         <div className={styles.room_header}>
-          <h1>{!spanishTranslation?"Input a name":"Ingrese un nombre"}</h1>
+          <h1>{!spanishTranslation ? "Input a name" : "Ingrese un nombre"}</h1>
           <form onSubmit={changeName} aria-label="name-form">
             <input
               aria-label="name-prompt"
               type="text"
-              placeholder={!spanishTranslation?"Name":"Nombre"}
+              placeholder={!spanishTranslation ? "Name" : "Nombre"}
               name="changeName"
               className={styles.inputOne}
               onChange={(e) => setTemp(e.target.value)}
             />
-            <button aria-label="confirm">{!spanishTranslation?"Confirm":"Confirmar"}</button>
+            <button aria-label="confirm">
+              {!spanishTranslation ? "Confirm" : "Confirmar"}
+            </button>
           </form>
         </div>
       )}
@@ -75,7 +87,9 @@ const JoinChat = (props) => {
         <div>
           {open && !toggle && (
             <div className={styles.join_chat}>
-              <h1>{!spanishTranslation?"Join A Task Chat":"Elige un chat"}</h1>
+              <h1>
+                {!spanishTranslation ? "Join A Task Chat" : "Elige un chat"}
+              </h1>
               {/* <button
                 className={styles.task_chat}
                 onClick={() => onPress("room1", "Submit Roof Hahaha")}
@@ -107,9 +121,19 @@ const JoinChat = (props) => {
             </div>
           )}
           {open && toggle ? (
-            <ChatLog room={room} name={name} spaTranslation={spanishTranslation}/>
+            <ChatLog
+              room={room}
+              name={name}
+              spaTranslation={spanishTranslation}
+            />
           ) : (
-            <p>{open ? !spanishTranslation?"No chat joined...":"No has entrado en un chat" : ""}</p>
+            <p>
+              {open
+                ? !spanishTranslation
+                  ? "No chat joined..."
+                  : "No has entrado en un chat"
+                : ""}
+            </p>
           )}
         </div>
       )}

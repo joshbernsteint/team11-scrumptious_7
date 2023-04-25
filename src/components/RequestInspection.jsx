@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { auth } from "../firebase";
 import { getDatabase, ref, child, get } from "firebase/database";
 import { onAuthStateChanged } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 import '../App.css'
 
@@ -108,8 +107,6 @@ const RequestInspection = (props) => {
           setSignedInUser(loggedInUser);
         }
       }, []);
-  // TODO: Find userType of signed in user
-  // TODO: Do not render form if not manager
 
 
 

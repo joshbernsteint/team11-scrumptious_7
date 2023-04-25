@@ -34,33 +34,38 @@ function PermissionForm(props){
       };
 
     return (
+        <div className="image-container">
+                <form className="form" onSubmit={onSubmit}>{}
+                <h2 className="inspectionHeader">{!spanishTranslation?"Send a Permission Request":"Enviar una solicitud de Permiso"}</h2>
+                <div className="form-body">
+                    <label className="label">
         <div className="App">
-            <header className="App-header">
+            <header className="App">
                 <form onSubmit={onSubmit}>{}
                 <h2>{!spanishTranslation?"Request Permission":"Solicitar Permiso"}</h2>
                     <label >
                     {!spanishTranslation?"Sender":"Remitente"}:
                     </label><br/>
-                    <input type='text' value={toSend.sender} required onChange={(e)=> 
+                    <input className="input" type='text' placeholder="Email to send request from" value={toSend.sender} required onChange={(e)=>
                         handleChange(e, 'sender')} /><br/>
-                    <label >
+                    <label className="label">
                     {!spanishTranslation?"Receiver":"Destinatario"}:
                     </label><br/>
-                    <input type='text' value={toSend.receiver} required onChange={(e)=> 
+                    <input className="input" type='text' placeholder="Email to send request" value={toSend.receiver} required onChange={(e)=>
                         handleChange(e, 'receiver')} /><br/>
-                    <label>
+                    <label className="label">
                     {!spanishTranslation?"Message":"Mensaje"}:
                     </label><br/>
-                    <input type='text' value={toSend.message} required onChange={(e)=> 
+                    <input className="input" type='text' placeholder="Enter the message for your email" value={toSend.message} required onChange={(e)=>
                         handleChange(e, 'message')} /><br/>
-                    <label >
+                    <label className="label">
                     {!spanishTranslation?"Reply To":"Responder a"}:
                     </label><br/>
-                    <input type='text' value={toSend.reply_to} required onChange={(e)=> 
+                    <input className="input" type='text' placeholder="Enter the email to reply to" value={toSend.reply_to} required onChange={(e)=>
                         handleChange(e, 'reply_to')} /><br/>
-                    <button type='submit'>{!spanishTranslation?"Send Email":"Enviar correo eléctronico"}</button>
+                    <button className="form-btn" type='submit'>{!spanishTranslation?"Send Email":"Enviar correo eléctronico"}</button>
+                </div>
                 </form>
-            </header>
         </div>
     )
 }

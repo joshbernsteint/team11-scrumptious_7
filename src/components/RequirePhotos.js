@@ -26,11 +26,13 @@ function RequirePhotos(props){
     }
 
     return (
-        <div className="App">
-            <form onSubmit={handleSubmit}>
-              <h1>{!spanishTranslation?"Image Upload":"Subir Imagen"}</h1>
-              <input required type="file" onChange={handleChange}/>
-              <button type="submit">{!spanishTranslation?"Upload":"Subir"}</button>
+        <div className="image-container">
+            <form className="form" onSubmit={handleSubmit}>
+            <h2 className="inspectionHeader">{!spanishTranslation?"Image Upload":"Subir Imagen"}</h2>
+                <div className="form-body">
+                    <input className="input" required type="file" onChange={handleChange}/>
+                    <button className="form-btn" type="submit">{!spanishTranslation?"Upload":"Subir"}</button>
+                </div>
             </form>
         </div>
       );

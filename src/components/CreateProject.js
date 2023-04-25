@@ -110,6 +110,7 @@ export default function CreateProject(props) {
 
     let updates = {};
     updates["/users/" + uid + "/projectManager"] = project;
+    updates['/users/' + uid + '/step'] = 1;
     update(ref(db), updates);
     return;
   }
