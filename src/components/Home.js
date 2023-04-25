@@ -92,13 +92,6 @@ function Home(props) {
       {tasks.length !== 0 ? (
         <Stack gap={5}>
           <TaskDashboard taskRef={tasks} spaTranslation={spanishTranslation}/>
-          <br />
-          <br />
-          {signedInUser && signedInUser.userType === "sales-rep" ? (
-            <SalesRepCard spaTranslation={spanishTranslation}/>
-          ) : (
-            <br />
-          )}
         </Stack>
       ) : spanishTranslation ? (
         <h1>Cargando</h1>
