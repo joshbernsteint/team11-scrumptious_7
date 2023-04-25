@@ -1,11 +1,21 @@
 import TaskStatus from "./TaskStatus";
 import JoinChat from "./chatLogs/JoinChat";
 import React, { useState, useEffect } from "react";
-import { ref, getDatabase, child, get } from "firebase/database";
+import { ref, getDatabase, child, get, update } from "firebase/database";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../firebase";
+import { Button } from "react-bootstrap";
+
+
+function emailUpdates() {
+
+}
 
 export function TaskScreen(props) {
   const [result, setResult] = useState({});
   const [tasks, setTasks] = useState([]);
+  const [uid, setUid] = useState("");
+  const [giveUpdates, setUpdates] = useState(false);
   let resultArray = [];
   const spanishTranslation = props.spaTranslation;
 
@@ -22,6 +32,30 @@ export function TaskScreen(props) {
       }
     };
     getAllTasks();
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUid(user.uid);
+      }
+    });
+    
+    const getUpdateStatus = async () => {
+      const dbRef = ref(getDatabase());
+      try {
+        const snapshot = await get(child(dbRef, `users/${uid}`));
+        if (snapshot.exists()) {
+          if(snapshot.val().update==null){
+            setUpdates(false);
+          }
+          else{
+            setUpdates(snapshot.val());
+          }
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getUpdateStatus();
   }, []);
 
   useEffect(() => {
@@ -37,11 +71,23 @@ export function TaskScreen(props) {
     }
   }, [result]);
 
+function changeUpdateStatus() {
+  const db = getDatabase();
+        update(ref(db, 'users/' + uid), {
+            updates: !giveUpdates
+        })
+        setUpdates(!giveUpdates)
+}
+
   return (
     <>
       {tasks.length !== 0 ? (
         <>
           <TaskStatus tasks={tasks} spaTranslation={spanishTranslation}/>
+          <>
+            <h3>Recieve Email Updates</h3>
+            <Button variant={giveUpdates ? "success" : "danger"} onClick={() => {changeUpdateStatus();}}><p>{spanishTranslation ? `${giveUpdates ? "Recibir" : "No Recibir"} Nuevos correo electrónicos` : `Email Updates ${giveUpdates ? "enabled" : "disabled"}`}</p></Button>
+          </>
           <JoinChat tasks={tasks} spaTranslation={spanishTranslation}/>
         </>
       ) : (

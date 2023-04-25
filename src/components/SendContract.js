@@ -1,9 +1,4 @@
 import React, {useState} from 'react';
-// import './App.css'
-//import './style.css'
-
-// import {user_database} from './firebase'
-
 export default function SendContract() {
 	
 	function checkEmail(email){

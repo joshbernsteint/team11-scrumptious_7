@@ -1,5 +1,5 @@
 import "../App.css"
-import { Stack,Button } from "react-bootstrap"
+import { Button } from "react-bootstrap"
 
 export function Redirect(props) {
     const spanishTranslation = props.spaTranslation;
