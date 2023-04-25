@@ -87,7 +87,7 @@
 
 .video {
   display: flex;
-  position: fixed;
+  position: absolute;
   top: 40%;
   left: 100px;
   width: 56.92%;

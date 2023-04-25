@@ -35,18 +35,10 @@ function PermissionForm(props){
 
     return (
      
-        <div className="image-container">
-          <form className="form" onSubmit={onSubmit}>{}
-            <h2 className="inspectionHeader">{!spanishTranslation?"Send a Permission Request":"Enviar una solicitud de Permiso"}</h2>
-            <div className="form-body">
-              <label className="label"/>
-            </div>
-          </form>
-          <div className="App">
-            <header className="App">
-            <form onSubmit={onSubmit}>{}
-              <h2>{!spanishTranslation?"Request Permission":"Solicitar Permiso"}</h2>
-              <label >
+      <div className="">
+      <form className="form" onSubmit={onSubmit}>{}
+      <h2>{!spanishTranslation?"Request Permission":"Solicitar Permiso"}</h2>
+              <label className="label">
                 {!spanishTranslation?"Sender":"Remitente"}:
               </label><br/>
                 <input className="input" type='text' placeholder={!spanishTranslation?"Sender's email":"Correo eléctronico del remitente"} value={toSend.sender} required onChange={(e)=>
@@ -67,10 +59,9 @@ function PermissionForm(props){
                 <input className="input" type='text' placeholder={!spanishTranslation?"Enter the email to reply to":"Ingrese el correo electronico para responder"} value={toSend.reply_to} required onChange={(e)=>
                   handleChange(e, 'reply_to')} /><br/>
               <button className="form-btn" type='submit'>{!spanishTranslation?"Send Email":"Enviar correo eléctronico"}</button>        
-            </form>
-            </header>
-                </div>
-        </div>
+           
+      </form>
+      </div>
 
       
     )
