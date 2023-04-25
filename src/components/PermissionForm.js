@@ -35,7 +35,7 @@ function PermissionForm(props){
 
     return (
         <div className="App">
-            <header className="App-header">
+            <header className="App">
                 <form onSubmit={onSubmit}>{}
                 <h2>{!spanishTranslation?"Request Permission":"Solicitar Permiso"}</h2>
                     <label >

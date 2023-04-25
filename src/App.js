@@ -10,24 +10,18 @@ import CameraForm from "./components/CameraForm";
 import RegisterForm from "./components/RegisterForm";
 import Login from "./components/LoginForm";
 import AuthDetails from "./components/AuthDetails";
-import MaterialNotification from "./components/MaterialNotification";
 import React, { useState, useEffect } from "react";
-import NotificationBar from "./components/NotificationBar";
 import UpdateProgressBar from "./components/UpdateProgressBar";
 import { HomeNavBar } from "./components/homeNavBar";
 
 import SendContract from "./components/SendContract";
-import { TaskDashboard } from "./components/TaskDashboard";
 import { TaskScreen } from "./components/TaskScreen";
 import TaskForm from "./components/TaskForm";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import CreateProject from "./components/CreateProject";
 import { Redirect } from "./components/Redirect";
-import { Stack, Row, Col } from "react-bootstrap";
-import { alignProperty } from "@mui/material/styles/cssUtils";
 import RequestInspection from "./components/RequestInspection";
-import ManagerProjects from "./components/MangerProjects";
 import Profile from "./components/Profile";
 
 function App() {
@@ -117,6 +111,7 @@ function App() {
           />
         </Routes>
       </Router>
+      <br/>
       <footer className="foot">
         <button
           className="eng-btn"

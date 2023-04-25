@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import axios from 'axios'
+import { Stack } from "react-bootstrap";
 
 const CARD_OPTIONS = {
 	iconStyle: "solid",
@@ -70,12 +71,14 @@ export default function PaymentForm(props){
         <>
         {!success ?
         <form onSubmit={handleSubmit}>
-            <fieldset className="FormGroup">
+            <Stack direction = "horizontal" gap={1}>
+            <fieldset className="FormGroup" style={{width: "85%",marginRight: "0",height: "3rem",top: "0%",botom: "auto",marginTop: "2%"}}>
                 <div className="FormRow">
                     <CardElement options={CARD_OPTIONS}/>
                 </div>
             </fieldset>
-            <button>{!spanishTranslation ? "Pay":"Pagar"}</button>
+            <button style={{width: "10%",borderRadius: "10%",height:"3rem",top: "0%",bottom: "auto",marginRight: "2%",marginTop: "1%"}}>{!spanishTranslation ? "Pay":"Pagar"}</button>
+            </Stack>
         </form>
         :
         <div>

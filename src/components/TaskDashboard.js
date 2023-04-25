@@ -302,7 +302,6 @@ export function TaskDashboard(props) {
               {notBar}
             </Stack>
           </div>
-          {/* <Button href="/progress" variant='primary' style={{width: "15%", alignContent: "center"}}>See overall Progress</Button> */}
         </Card.Body>
       </Card>
     </div>
