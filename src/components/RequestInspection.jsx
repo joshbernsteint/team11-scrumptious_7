@@ -121,11 +121,11 @@ const RequestInspection = (props) => {
       <div className='form-body'>
           <input type="email"
           className="input"
-          placeholder="Email to send request"
+          placeholder={!spanishTranslation?"Email to send request":"Correo eléctronico del remitente"}
           value={email} onChange={(e) => setEmail(e.target.value)} />
           <input type="text"
           className='input'
-          placeholder="Enter the project address"
+          placeholder={!spanishTranslation?"Enter the project address":"Ingrese la dirección del proyecto"}
           value={address} onChange={(e) => setAddress(e.target.value)} />
         <div>
         <label className = "label">
