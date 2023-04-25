@@ -55,3 +55,13 @@ test("check if USA button exists", () => {
   const linkElement = screen.getByText("USA");
   expect(linkElement).toBeInTheDocument();
 });
+
+test("translate to spanish in salesRepCard", () => {
+  render(
+    <Router>
+      <SalesRepCard spaTranslation={true}/>
+    </Router>
+  );
+  const input = screen.getByText("Página del representante de ventas");
+  expect(input).toBeInTheDocument();
+})

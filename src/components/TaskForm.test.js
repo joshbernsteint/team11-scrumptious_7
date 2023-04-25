@@ -20,3 +20,9 @@ test("non-manager user cannot assign task", () => {
   const msg = screen.getByTestId("auth-msg");
   expect(msg).toBeInTheDocument();
 });
+
+test("translate to spanish in taskForm", () => {
+  render (<TaskForm spaTranslation={true}/>);
+  const input = screen.getByText("Título de la tarea:");
+  expect(input).toBeInTheDocument();
+})

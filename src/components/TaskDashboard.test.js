@@ -128,3 +128,9 @@ test("Push different filter buttons, all tasks are still there", () => {
     expect(screen.getByLabelText(MyTasks[i].id)).toBeInTheDocument();
   }
 });
+
+test("Traslate to spanish in taskDashboard", () => {
+  render(<TaskDashboard taskRef={MyTasks} spaTranslation={true}/>);
+  const input = screen.getByText("Información de tareas");
+  expect(input).toBeInTheDocument()
+})
