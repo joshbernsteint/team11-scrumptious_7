@@ -4,7 +4,7 @@ import PermissionForm from "./PermissionForm";
 
 test("check if there is button to send email", () => {
     render(<PermissionForm/>);
-    const input = screen.getByText("Send Email");
+    const input = screen.getByLabelText("send_email_button");
     expect(input).toBeInTheDocument();
   });
 

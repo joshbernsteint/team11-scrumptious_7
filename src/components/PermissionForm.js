@@ -34,39 +34,35 @@ function PermissionForm(props){
       };
 
     return (
-        <div className="image-container">
-                <form className="form" onSubmit={onSubmit}>{}
-                <h2 className="inspectionHeader">{!spanishTranslation?"Send a Permission Request":"Enviar una solicitud de Permiso"}</h2>
-                <div className="form-body">
-                    <label className="label">
-        <div className="App">
-            <header className="App">
-                <form onSubmit={onSubmit}>{}
-                <h2>{!spanishTranslation?"Request Permission":"Solicitar Permiso"}</h2>
-                    <label >
-                    {!spanishTranslation?"Sender":"Remitente"}:
-                    </label><br/>
-                    <input className="input" type='text' placeholder="Email to send request from" value={toSend.sender} required onChange={(e)=>
-                        handleChange(e, 'sender')} /><br/>
-                    <label className="label">
-                    {!spanishTranslation?"Receiver":"Destinatario"}:
-                    </label><br/>
-                    <input className="input" type='text' placeholder="Email to send request" value={toSend.receiver} required onChange={(e)=>
-                        handleChange(e, 'receiver')} /><br/>
-                    <label className="label">
-                    {!spanishTranslation?"Message":"Mensaje"}:
-                    </label><br/>
-                    <input className="input" type='text' placeholder="Enter the message for your email" value={toSend.message} required onChange={(e)=>
-                        handleChange(e, 'message')} /><br/>
-                    <label className="label">
-                    {!spanishTranslation?"Reply To":"Responder a"}:
-                    </label><br/>
-                    <input className="input" type='text' placeholder="Enter the email to reply to" value={toSend.reply_to} required onChange={(e)=>
-                        handleChange(e, 'reply_to')} /><br/>
-                    <button className="form-btn" type='submit'>{!spanishTranslation?"Send Email":"Enviar correo eléctronico"}</button>
-                </div>
-                </form>
-        </div>
+      <div className="image-container">
+              <form className="form" onSubmit={onSubmit}>{}
+              <h2 className="inspectionHeader">{!spanishTranslation?"Send a Permission Request":"Enviar una solicitud de Permiso"}</h2>
+              <div className="form-body">
+                  <label className="label">
+                  {!spanishTranslation?"Sender":"Remitente"}:
+                  </label><br/>
+                  <input className="input" type='text' placeholder="Email to send request from" value={toSend.sender} required onChange={(e)=>
+                      handleChange(e, 'sender')} /><br/>
+                  <label className="label">
+                  {!spanishTranslation?"Receiver":"Destinatario"}:
+                  </label><br/>
+                  <input className="input" type='text' placeholder="Email to send request" value={toSend.receiver} required onChange={(e)=>
+                      handleChange(e, 'receiver')} /><br/>
+                  <label className="label">
+                  {!spanishTranslation?"Message":"Mensaje"}:
+                  </label><br/>
+                  <input className="input" type='text' placeholder="Enter the message for your email" value={toSend.message} required onChange={(e)=>
+                      handleChange(e, 'message')} /><br/>
+                  <label className="label">
+                  {!spanishTranslation?"Reply To":"Responder a"}:
+                  </label><br/>
+                  <input className="input" type='text' placeholder="Enter the email to reply to" value={toSend.reply_to} required onChange={(e)=>
+                      handleChange(e, 'reply_to')} /><br/>
+                  <button type='submit' aria-label="send_email_button">{!spanishTranslation?"Send Email":"Enviar correo eléctronico"}</button>
+                  <button className="form-btn" type='submit'>{!spanishTranslation?"Send Email":"Enviar correo eléctronico"}</button>
+              </div>
+              </form>
+      </div>
     )
 }
 
