@@ -290,7 +290,7 @@ export function TaskDashboard(props) {
                               dir: e.currentTarget.value,
                               spaTranslation: spanishTranslation,
                             })
-                          );
+                            );
                         }}
                       >
                         <img src={dir.image} style={{ height: "20px" }} />

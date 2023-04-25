@@ -60,7 +60,6 @@ function TaskNotification(props) {
     tempMonth = monthT;
     while(tempMonth - monthN !== 0){
       daysDue += monthLengths[tempMonth - 1];
-      console.log(tempMonth-1)
       tempMonth -= 1;
     }
     daysDue += caltime -1;
