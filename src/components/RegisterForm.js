@@ -96,7 +96,8 @@ export default function RegisterForm(props) {
             password: password,
             uid: uid,
             step: 1,
-            projectManager: ''
+            projectManager: '',
+            updates: false
         })
     }
 

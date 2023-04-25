@@ -39,6 +39,11 @@ function PermissionForm(props){
                 <h2 className="inspectionHeader">{!spanishTranslation?"Send a Permission Request":"Enviar una solicitud de Permiso"}</h2>
                 <div className="form-body">
                     <label className="label">
+        <div className="App">
+            <header className="App">
+                <form onSubmit={onSubmit}>{}
+                <h2>{!spanishTranslation?"Request Permission":"Solicitar Permiso"}</h2>
+                    <label >
                     {!spanishTranslation?"Sender":"Remitente"}:
                     </label><br/>
                     <input className="input" type='text' placeholder="Email to send request from" value={toSend.sender} required onChange={(e)=>

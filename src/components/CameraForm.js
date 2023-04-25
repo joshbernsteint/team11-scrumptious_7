@@ -3,6 +3,7 @@ import RequirePhotos from "./RequirePhotos";
 import CameraAccess from "./CameraAccess";
 import PermissionForm from "./PermissionForm";
 import StripeContainer from "./StripeContainer";
+import { Stack } from "react-bootstrap";
 
 function CameraForm(props) {
   const [showCamera, setShowCamera] = useState(true);
