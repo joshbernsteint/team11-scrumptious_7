@@ -6,7 +6,7 @@ function CameraAccess(props) {
   const streamRef = useRef(null);
   const cameraOnRef = useRef(false);
   const [hasPhoto, setHasPhoto] = useState(false);
-  const [cameraRequest, setCameraRequest] = useState("open camera");
+  const [cameraRequest, setCameraRequest] = useState("Open Camera");
   const [windowSize, setWindowSize] = useState([
     window.innerWidth,
     window.innerHeight,
@@ -59,7 +59,7 @@ function CameraAccess(props) {
     } catch (e) {
       console.log(e);
     }
-    setCameraRequest("close camera");
+    setCameraRequest("Close Camera");
   };
 
   const stopStream = async (stream) => {
@@ -72,7 +72,7 @@ function CameraAccess(props) {
     video.srcObject = null;
     cameraOnRef.current = false;
     streamRef.current = null;
-    setCameraRequest("open camera");
+    setCameraRequest("Open Camera");
   };
 
   const takePhoto = () => {
@@ -95,7 +95,7 @@ function CameraAccess(props) {
   };
 
   return (
-    <div className="camera">
+    <div className="form">
       <div className="video">
         <video ref={videoRef}></video>
         <div className="takePhoto">
@@ -106,11 +106,11 @@ function CameraAccess(props) {
       </div>
 
       <div className="cameraPower">
-        <button id="cameraRequest" onClick={clickHandler}>
+        <button className="form-btn" id="cameraRequest" onClick={clickHandler}>
           {!spanishTranslation && cameraRequest ? cameraRequest : 
-          spanishTranslation && cameraRequest==="close camera"? "Cerrar la camara": "Abrir la camara"}
+          spanishTranslation && cameraRequest==="Close Camera"? "Cerrar la camara": "Abrir la camara"}
         </button>
-        {cameraRequest === 'close camera' ? <span className="message">{!spanishTranslation?"Close camera before leaving page.":"Cerrar la camara antes de salir de la pagina"}</span>: <></>}
+        {cameraRequest === 'Close Camera' ? <span className="message">{!spanishTranslation?"Close camera before leaving page.":"Cerrar la camara antes de salir de la pagina"}</span>: <></>}
       </div>
       <div className={"result" + (hasPhoto ? "hasPhoto" : "")}>
         <canvas ref={photoRef}></canvas>

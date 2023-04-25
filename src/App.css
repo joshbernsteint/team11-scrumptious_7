@@ -85,21 +85,6 @@
   color: #61dafb;
 }
 
-.camera {
-  display: flex;
-}
-
-.cameraPower {
-  position: absolute;
-  bottom: 60%;
-  left: 45%;
-  display: flex;
-}
-#cameraRequest {
-  right: 40%;
-  font-size: 20px;
-}
-
 .video {
   display: flex;
   position: fixed;
@@ -198,12 +183,13 @@
   margin-left: 15px;
 }
 .form {
+  text-align: center;
   background-color: #76b852;
   border-radius: 5px;
   max-width: 550px;
   min-width: 100px;
   width: auto;
-  margin: 20px 10px;
+  margin: auto;
   padding: 10px;
   /* height: 600px; */
 }
@@ -231,13 +217,8 @@
 }
 
 .form-body {
-  text-align: left;
-  padding: 20px 10px;
-}
-
-.login-container .form-body,
-.inspection-container .form-body {
   text-align: center;
+  padding: 20px 10px;
 }
 
 .form-body > * {
