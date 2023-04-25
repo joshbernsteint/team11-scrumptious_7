@@ -23,6 +23,7 @@ import CreateProject from "./components/CreateProject";
 import { Redirect } from "./components/Redirect";
 import RequestInspection from "./components/RequestInspection";
 import Profile from "./components/Profile";
+import { SalesRepCard } from "./components/SalesRepCard";
 
 function App() {
   const inquiryLink = "https://forms.gle/B8mE2UWJ2zEsiJxE9";
@@ -99,6 +100,10 @@ function App() {
           <Route
             path="/newTask"
             element={<TaskForm uid={uid} spaTranslation={spanishTranslation} />}
+          ></Route>
+          <Route
+            path="/sales"
+            element={<SalesRepCard spaTranslation={spanishTranslation} />}
           ></Route>
           <Route
             path="/inquiry"

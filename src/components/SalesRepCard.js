@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Stack, Button, Modal } from "react-bootstrap"
 import "../App.css"
 
+
 export function SalesRepCard(props) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const spanishTranslation = props.spaTranslation;
     return (
-        <Stack className="sales-card">
+        <Stack className="sales-card" style={{zIndex: "10"}}>
             <h1 className="sales-card-item"><u>{!spanishTranslation?"Sales Rep Homepage":"Página del representante de ventas"}</u></h1>
             <Stack direction="horizontal" gap={2}>
                 <Stack style={{alignItems: "center", margin: "2%",borderRadius: "10%",width: "60%"}}>

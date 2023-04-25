@@ -4,12 +4,15 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Popover, OverlayTrigger, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { getDatabase, ref, child, get, update } from "firebase/database";
 import styles from "./homeNavBar.module.css";
 import { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
 export function HomeNavBar(props) {
+  const [signedInUser, setSignedInUser] = useState(null);
   const [uid, setUid] = useState(undefined);
+  
   const auth = getAuth();
   const spanishTranslation = props.spaTranslation;
 
@@ -32,6 +35,26 @@ export function HomeNavBar(props) {
       })
       .catch((error) => console.log(error));
   };
+
+  const getUserFromDb = async () => {
+    const dbRef = ref(getDatabase());
+    try{
+        const snapshot = await get(child(dbRef, `users/${uid}`));
+        if(snapshot.exists()) {
+            setSignedInUser(snapshot.val())
+        }
+    } catch(e) {
+        console.log(e);
+        console.log("user not found")
+    }
+}
+
+useEffect(() => {
+  if(uid){
+    getUserFromDb();
+  }
+},[uid]);
+
 
   return (
     <>
@@ -84,6 +107,11 @@ export function HomeNavBar(props) {
                     {!spanishTranslation ? "Forms" : "Formularios"}
                   </NavDropdown.Item>
                 )}
+                {uid && signedInUser && signedInUser.userType === "sales-rep" && (
+                  <NavDropdown.Item href="/sales">
+                    {!spanishTranslation ? "Sales" : "Ventas"}
+                  </NavDropdown.Item>
+                )}
                 {!uid && (
                   <NavDropdown.Item href="/login">
                     {!spanishTranslation ? "Login" : "Iniciar sesión"}
@@ -130,6 +158,11 @@ export function HomeNavBar(props) {
                 {uid && (
                   <Nav.Link href="/camera" className={`${styles.navLink}`}>
                     {!spanishTranslation ? "Forms" : "Formularios"}
+                  </Nav.Link>
+                )}
+                {uid && signedInUser && signedInUser.userType === "sales-rep" && (
+                  <Nav.Link href="/sales" className={`${styles.navLink}`}>
+                    {!spanishTranslation ? "Sales" : "Ventas"}
                   </Nav.Link>
                 )}
                 {!uid && (
