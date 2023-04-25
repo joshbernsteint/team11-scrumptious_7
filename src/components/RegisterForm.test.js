@@ -120,3 +120,9 @@ test("should show error when password does not match password confirm", () => {
     const passwordConfirmError = screen.getByLabelText("password-confirm-error");
     expect(passwordConfirmError).toBeInTheDocument();
 })
+
+test("translate to spanish in registerForm", () => {
+    render(<RegisterForm spaTranslation={true}/>);
+    const input = screen.getByText("Nombre");
+    expect(input).toBeInTheDocument();
+})

@@ -31,3 +31,9 @@ test("check if there is button to send email", () => {
     const input = screen.getByText("Reply To:");
     expect(input).toBeInTheDocument();
   });
+
+  test("translate to spanish in permissionForm", () => {
+    render(<PermissionForm spaTranslation={true}/>);
+    const input = screen.getByText("Solicitar Permiso");
+    expect(input).toBeInTheDocument();
+  })
