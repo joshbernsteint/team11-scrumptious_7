@@ -32,6 +32,7 @@ function UpdateProgressBar(props) {
     const [loading, setLoading] = useState(true);
     const [completed, setCompleted] = useState(0); 
     const [projectManager, setProjectManager] = useState("");
+    const [customerUser, setCustomer] = useState("");
     const spanishTranslation = props.spaTranslation;
     const auth = getAuth();
 
@@ -46,6 +47,15 @@ function UpdateProgressBar(props) {
             console.log(e);
             console.log("user not found")
         }
+
+        const all_snapshot = await get(child(dbRef,"users/"));
+        all_snapshot.forEach((child) => {
+            const child_val = child.val();
+            if(child_val.projectManager === uid){
+                setCustomer(child_val);
+            }
+        });
+
     }
     
     const getprojectManager = async (id) => {
@@ -104,6 +114,7 @@ function UpdateProgressBar(props) {
     const pushStep = () => {
         if(currentStep < 6) {
             updateStep(id.id, currentStep)
+            updateStep(customerUser.uid,currentStep)
         }
     }
 
@@ -121,7 +132,7 @@ function UpdateProgressBar(props) {
         setCompleted(percentage.toFixed(2));
     }, [percentage, currentStep, props]);
 
-    if((uid === id.id || manager === true) && projectManager !== ""){
+    if((uid === id.id || manager === true)){
         if(loading){
             return <div><h2>{!spanishTranslation?"loading":"cargando"}...</h2></div>
         }else{

@@ -7,9 +7,6 @@ import { auth } from "../firebase";
 import { Button } from "react-bootstrap";
 
 
-function emailUpdates() {
-
-}
 
 export function TaskScreen(props) {
   const [result, setResult] = useState({});
