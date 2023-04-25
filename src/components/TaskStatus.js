@@ -5,6 +5,7 @@ import EmailChain from "./EmailChain";
 import { ref, getDatabase, update, child, get } from "firebase/database";
 import { Link } from "react-router-dom";
 import { CardActionArea, CardActions, Grid, Typography } from "@mui/material";
+import emailjs from '@emailjs/browser'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function TaskStatus(props) {
@@ -14,6 +15,7 @@ function TaskStatus(props) {
   const [doneList, setDoneList] = useState(null);
   const [signedInUser, setSignedInUser] = useState(null);
   const [authUser, setAuthUser] = useState(null);
+  const updateSet = new Set();
   const spanishTranslation = props.spaTranslation;
   const [uid, setUid] = useState(undefined);
   const auth = getAuth();
@@ -47,6 +49,15 @@ function TaskStatus(props) {
   useEffect(() => {
     if (uid) {
        getUserFromDb();
+       const get_updates = async () => {
+        const users_snapshot = await get(child(ref(getDatabase()),"users/"));
+        users_snapshot.forEach((childSnap) => {
+        const childVal = childSnap.val();
+        if(childVal.projectManager === uid){
+          updateSet.add(childVal);
+        }
+      })};
+      get_updates();
     }
   }, [uid, signedInUser]);
 
@@ -137,6 +148,28 @@ function TaskStatus(props) {
     const db = getDatabase();
     const dbRef = ref(db);
     let taskStatus = false;
+    const sendEmail = (user, message) => {
+      emailjs
+        .send(
+          "service_mwt8t37",
+          "template_2xeuico",
+          {
+            to_name: user.name,
+            to_email: user.email,
+            message: message,
+            from_name: "Management Team",
+          },
+          "PkhGQLnUZHu0EHURj"
+        )
+        .then(
+          function (response) {
+            console.log("SUCCESS!", response.status, response.text);
+          },
+          function (error) {
+            console.log("FAILED...", error);
+          }
+        );
+    };
     try {
       const snapshot = await get(child(dbRef, `tasks/${id}`));
       if (snapshot.exists()) {
@@ -160,6 +193,9 @@ function TaskStatus(props) {
     let updatedTasks = tasks;
     for (let i = 0; tasks.length; i++) {
       if (tasks[i].id === id) {
+        Array.from(updateSet).map((userEmail) => {
+          sendEmail(userEmail,`Task ${id} has been completed.\n You can opt out of these emails by going on the portal > Tasks > Click the email updates button`)
+        });
         updatedTasks[i].completed = !taskStatus;
         updatedTasks[i].dateCompleted = dateString;
         break;

@@ -86,7 +86,7 @@ function changeUpdateStatus() {
           <TaskStatus tasks={tasks} spaTranslation={spanishTranslation}/>
           <>
             <h3>Recieve Email Updates</h3>
-            <Button variant={giveUpdates ? "success" : "danger"} onClick={() => {changeUpdateStatus();}}><t>{spanishTranslation ? "spanish" : `Email Updates ${giveUpdates ? "enabled" : "disabled"}`}</t></Button>
+            <Button variant={giveUpdates ? "success" : "danger"} onClick={() => {changeUpdateStatus();}}><p>{spanishTranslation ? `${giveUpdates ? "Recibir" : "No Recibir"} Nuevos correo electrónicos` : `Email Updates ${giveUpdates ? "enabled" : "disabled"}`}</p></Button>
           </>
           <JoinChat tasks={tasks} spaTranslation={spanishTranslation}/>
         </>
